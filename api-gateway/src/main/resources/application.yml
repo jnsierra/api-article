@@ -1,0 +1,19 @@
+server:
+  port: 5002
+---
+spring:
+  cloud:
+    gateway:
+      #default-filters:
+      #  - name: api-gateway
+      routes:
+        - id: ms-audit
+          uri: http://localhost:5000/
+          predicates:
+            - Path=/api-audit/**
+          #filters:
+           # - name: SCGWPreFilter
+           # - name: SCGWPostFilter
+
+
+
