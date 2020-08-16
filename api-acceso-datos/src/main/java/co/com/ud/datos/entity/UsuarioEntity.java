@@ -1,5 +1,7 @@
 package co.com.ud.datos.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -7,6 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "usuario")
+@Data
 public class UsuarioEntity {
 
     @Id
