@@ -1,0 +1,19 @@
+server:
+  servlet:
+    context-path: /api-datos
+  port: 5003
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:santander
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  liquibase:
+    change-log: classpath:/db/db.changelog.xml
+  jpa:
+    properties:
+      hibernate:
+        dialect:  org.hibernate.dialect.H2Dialect
+    show-sql: true
+    generate-ddl: false

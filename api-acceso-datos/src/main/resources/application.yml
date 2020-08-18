@@ -1,22 +1,3 @@
-server:
-  servlet:
-    context-path: /api-datos
-  port: 5003
-
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.0.15:5432/articulos
-    username: postgres
-    password: 12345678
-  liquibase:
-    change-log: classpath:/db/db.changelog.xml
-  jpa:
-    properties:
-      hibernate:
-        dialect:  org.hibernate.dialect.PostgreSQLDialect
-        jdbc:
-          lob:
-            non_contextual_creation: true
-    show-sql: true
-    generate-ddl: false
+  profiles:
+    active: dev
