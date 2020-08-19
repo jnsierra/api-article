@@ -1,0 +1,5 @@
+co\com\ud\acceptance\steps\CommonSteps.class
+co\com\ud\acceptance\worlds\World.class
+co\com\ud\acceptance\steps\UsuariosSteps.class
+co\com\ud\acceptance\AcceptanceIT.class
+co\com\ud\acceptance\steps\StepRoot.class
