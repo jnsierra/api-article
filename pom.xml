@@ -51,7 +51,7 @@
         <module>api-gateway</module>
         <module>api-acceso-datos</module>
         <module>api-utiles</module>
-        <module>api-test-acceptance</module>
+        <!--module>api-test-acceptance</module-->
     </modules>
     <build>
     </build>
