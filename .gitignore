@@ -29,3 +29,4 @@ hs_err_pid*
 /api-gateway/target/*
 /api-acceso-datos/target/*
 /api-utiles/target/*
+/api-test-acceptance/target/*
