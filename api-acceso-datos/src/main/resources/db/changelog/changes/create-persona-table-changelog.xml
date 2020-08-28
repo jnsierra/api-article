@@ -5,29 +5,25 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="admin" id="1">
-        <createTable tableName="usuario">
+        <createTable tableName="persona">
             <column name="id" type="INT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="email" type="VARCHAR(255)">
+            <column name="nombres" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="password" type="VARCHAR(255)">
+            <column name="apellidos" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="cambio_contra" type="VARCHAR(255)"/>
-            <column name="persona_id" type="INT">
+            <column name="fecha_nacimiento" type="DATE">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="usuario"/>
+            <dropTable tableName="persona"/>
         </rollback>
     </changeSet>
     <changeSet id="2" author="admin">
-        <createSequence sequenceName="usuario_seq" startValue="1" incrementBy="1" />
+        <createSequence sequenceName="persona_seq" startValue="1" incrementBy="1" />
     </changeSet>
 </databaseChangeLog>

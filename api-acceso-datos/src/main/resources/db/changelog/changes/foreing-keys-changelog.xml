@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="">
+        <addForeignKeyConstraint baseTableName="permiso" baseColumnNames="role_id" constraintName="fk_permiso_role" referencedTableName="role"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="2" author="">
+        <addForeignKeyConstraint baseTableName="usuario" baseColumnNames="persona_id" constraintName="fk_persona_usuario" referencedTableName="persona"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="3" author="">
+        <addForeignKeyConstraint baseTableName="usuario_role" baseColumnNames="usuario_id" constraintName="fk_usuario_usuario_role" referencedTableName="usuario"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="4" author="">
+        <addForeignKeyConstraint baseTableName="usuario_role" baseColumnNames="role_id" constraintName="fk_usuario_role_role" referencedTableName="role"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
