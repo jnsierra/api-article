@@ -19,4 +19,4 @@ spring:
           lob:
             non_contextual_creation: true
     show-sql: true
-    generate-ddl: true
+    generate-ddl: false
