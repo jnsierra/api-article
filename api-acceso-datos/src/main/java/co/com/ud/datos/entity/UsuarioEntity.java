@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 
 import javax.management.relation.Role;
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import java.util.Set;
 @Data @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Audited
 public class UsuarioEntity extends Auditable<String> {
 
     @Id

@@ -22,9 +22,9 @@
             <column name="persona_id" type="INT">
                 <constraints nullable="false"/>
             </column>
-
             <column name="tipo_usuario_id" type="INT">
-
+                <constraints nullable="false"/>
+            </column>
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
