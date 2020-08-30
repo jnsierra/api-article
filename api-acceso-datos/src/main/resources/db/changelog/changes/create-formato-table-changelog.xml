@@ -25,6 +25,18 @@
             <column name="extencion" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <rollback>
             <dropTable tableName="formato"/>

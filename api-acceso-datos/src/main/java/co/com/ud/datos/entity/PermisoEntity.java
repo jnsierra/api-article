@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PermisoEntity {
+public class PermisoEntity extends Auditable<String>{
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
