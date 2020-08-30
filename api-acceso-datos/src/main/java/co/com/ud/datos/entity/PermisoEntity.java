@@ -15,9 +15,9 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Audited
-public class PermisoEntity {
 
+@Audited
+public class PermisoEntity extends Auditable<String>{
     @Id
     @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permiso_generator")

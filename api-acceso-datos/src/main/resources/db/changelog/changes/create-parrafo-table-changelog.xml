@@ -5,26 +5,20 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="admin" id="1">
-        <createTable tableName="usuario">
+        <createTable tableName="parrafo">
             <column name="id" type="INT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="email" type="VARCHAR(255)">
+            <column name="id_articulo" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="password" type="VARCHAR(255)">
+            <column name="orden" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(255)">
+            <column name="estado" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="cambio_contra" type="VARCHAR(255)"/>
-            <column name="persona_id" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="tipo_usuario_id" type="INT">
-                <constraints nullable="false"/>
-            </column>
+            <column name="contenido" type="VARCHAR(255)"/>
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -39,10 +33,10 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="usuario"/>
+            <dropTable tableName="parrafo"/>
         </rollback>
     </changeSet>
     <changeSet id="2" author="admin">
-        <createSequence sequenceName="usuario_seq" startValue="1" incrementBy="1" />
+        <createSequence sequenceName="parrafo_seq" startValue="1" incrementBy="1" />
     </changeSet>
 </databaseChangeLog>

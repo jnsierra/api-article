@@ -9,6 +9,14 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <include file="/db/changelog/changes/create-role-table-changelog.xml" />
     <include file="/db/changelog/changes/create-persona-table-changelog.xml" />
     <include file="/db/changelog/changes/create-user-role-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-tipo-user-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-idea-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-revision-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-aprobacion-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-articulo-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-parrafo-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-formato-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-control-lectura-table-changelog.xml" />
     <include file="/db/changelog/changes/foreing-keys-changelog.xml" />
 
 </databaseChangeLog>

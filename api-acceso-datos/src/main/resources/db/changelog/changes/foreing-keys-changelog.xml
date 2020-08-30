@@ -20,4 +20,40 @@
         <addForeignKeyConstraint baseTableName="usuario_role" baseColumnNames="role_id" constraintName="fk_usuario_role_role" referencedTableName="role"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="5" author="">
+        <addForeignKeyConstraint baseTableName="usuario" baseColumnNames="tipo_usuario_id" constraintName="fk_usuario_tipo_usuario" referencedTableName="tipo_usuario"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="6" author="">
+        <addForeignKeyConstraint baseTableName="idea" baseColumnNames="id_usuario" constraintName="fk_usuario_idea" referencedTableName="usuario"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="7" author="">
+        <addForeignKeyConstraint baseTableName="revision" baseColumnNames="id_usuario" constraintName="fk_revision_usuario" referencedTableName="usuario"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="8" author="">
+        <addForeignKeyConstraint baseTableName="revision" baseColumnNames="id_idea" constraintName="fk_revision_idea" referencedTableName="idea"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="9" author="">
+        <addForeignKeyConstraint baseTableName="aprobacion" baseColumnNames="id_revision" constraintName="fk_revision_aprovacion" referencedTableName="revision"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="10" author="">
+        <addForeignKeyConstraint baseTableName="articulo" baseColumnNames="id_aprobacion" constraintName="fk_aprobacion_articulo" referencedTableName="aprobacion"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="11" author="">
+        <addForeignKeyConstraint baseTableName="parrafo" baseColumnNames="id_articulo" constraintName="fk_parrafo_articulo" referencedTableName="articulo"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="12" author="">
+        <addForeignKeyConstraint baseTableName="formato" baseColumnNames="id_articulo" constraintName="fk_formato_articulo" referencedTableName="articulo"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="13" author="">
+        <addForeignKeyConstraint baseTableName="control_lectura" baseColumnNames="id_articulo" constraintName="fk_control_lectura_articulo" referencedTableName="articulo"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>
