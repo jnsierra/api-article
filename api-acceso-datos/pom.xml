@@ -111,6 +111,7 @@
                                         <exclude>co.com.ud.datos.entity.*</exclude>
                                         <exclude>co.com.ud.datos.config.*</exclude>
                                         <exclude>co.com.ud.datos.AppDatos</exclude>
+                                        <exclude>co.com.ud.datos.audit.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
