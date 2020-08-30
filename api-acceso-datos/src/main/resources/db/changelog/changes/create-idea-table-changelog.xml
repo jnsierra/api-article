@@ -5,32 +5,31 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="admin" id="1">
-        <createTable tableName="usuario">
+        <createTable tableName="idea">
             <column name="id" type="INT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="email" type="VARCHAR(255)">
+            <column name="id_usuario" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="password" type="VARCHAR(255)">
+            <column name="id_profesor" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(255)">
+            <column name="contenido" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="cambio_contra" type="VARCHAR(255)"/>
-            <column name="persona_id" type="INT">
+            <column name="estado" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="tipo_usuario_id" type="INT">
+            <column name="titulo" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="usuario"/>
+            <dropTable tableName="idea"/>
         </rollback>
     </changeSet>
     <changeSet id="2" author="admin">
-        <createSequence sequenceName="usuario_seq" startValue="1" incrementBy="1" />
+        <createSequence sequenceName="idea_seq" startValue="1" incrementBy="1" />
     </changeSet>
 </databaseChangeLog>
