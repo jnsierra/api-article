@@ -3,6 +3,7 @@ package co.com.ud.datos.controller;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.service.UsuarioService;
 import co.com.ud.utiles.dto.UsuarioDto;
+import org.hibernate.envers.Audited;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import org.modelmapper.ModelMapper;
 
 @RestController
 @RequestMapping("/v.1/usuarios")
+@Audited
 public class UsuarioController {
 
 
