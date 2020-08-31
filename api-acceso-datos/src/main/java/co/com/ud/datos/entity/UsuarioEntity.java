@@ -60,4 +60,7 @@ public class UsuarioEntity extends Auditable<String> {
     @JoinTable(name = "usuario_role", joinColumns = @JoinColumn(name = "usuario_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private TipoUsuarioEntity tipoUsuario;
+
 }

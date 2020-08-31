@@ -16,5 +16,6 @@ public class UsuarioDto {
     private String nombre;
     private String cambioContra;
     private Long personaId;
+    private Long tipoUsuarioId;
 
 }

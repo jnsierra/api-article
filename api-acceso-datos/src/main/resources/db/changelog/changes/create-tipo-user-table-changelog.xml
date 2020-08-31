@@ -9,7 +9,10 @@
             <column name="id" type="INT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="email" type="VARCHAR(255)">
+            <column name="tipo" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descripcion" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="VARCHAR(255)">

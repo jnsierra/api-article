@@ -8,15 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v.1/usuarios")
-@Audited
 public class UsuarioController {
 
 
@@ -33,6 +31,11 @@ public class UsuarioController {
     public ResponseEntity<UsuarioDto> save(@RequestBody(required = true) UsuarioDto usuarioDto) {
         UsuarioEntity usuarioEntity = usuarioService.save(mapper.map(usuarioDto, UsuarioEntity.class));
         return new ResponseEntity<>(mapper.map(usuarioEntity, UsuarioDto.class), HttpStatus.CREATED);
+    }
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UsuarioDto[]> get(){
+        List<UsuarioEntity> usuarios = usuarioService.getAll();
+        return new ResponseEntity<>(mapper.map(usuarios, UsuarioDto[].class), HttpStatus.OK);
     }
 
 }

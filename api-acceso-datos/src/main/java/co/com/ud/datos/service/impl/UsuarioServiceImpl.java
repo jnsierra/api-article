@@ -6,6 +6,8 @@ import co.com.ud.datos.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
@@ -19,6 +21,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioEntity save(UsuarioEntity usuario) {
         return usuarioRepository.save(usuario);
+    }
+
+    @Override
+    public List<UsuarioEntity> getAll() {
+        return usuarioRepository.findAll();
     }
 
 }
