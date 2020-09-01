@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v.1/usuarios")
@@ -36,5 +37,15 @@ public class UsuarioController {
     public ResponseEntity<UsuarioDto[]> get(){
         List<UsuarioEntity> usuarios = usuarioService.getAll();
         return new ResponseEntity<>(mapper.map(usuarios, UsuarioDto[].class), HttpStatus.OK);
+    }
+    @GetMapping(value = "/by/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UsuarioDto> getUserByEmailAndPass(@RequestParam(name = "correo", required = true) String correo,
+                                                            @RequestParam(name = "contrasenia", required = true) String contrasenia){
+        Optional<UsuarioEntity> usuario = usuarioService.getUserFindEmailAndPass(correo, contrasenia);
+        if(usuario.isPresent()){
+            return new ResponseEntity<>(mapper.map(usuario, UsuarioDto.class), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 }

@@ -61,6 +61,7 @@
         <module>api-acceso-datos</module>
         <module>api-utiles</module>
         <module>api-business</module>
+        <module>api-rest-client</module>
         <!--module>api-test-acceptance</module-->
     </modules>
     <build>
