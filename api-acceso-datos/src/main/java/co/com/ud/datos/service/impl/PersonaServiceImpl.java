@@ -1,7 +1,6 @@
 package co.com.ud.datos.service.impl;
 
 import co.com.ud.datos.entity.PersonaEntity;
-import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.repository.IPersonaRepository;
 import co.com.ud.datos.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;

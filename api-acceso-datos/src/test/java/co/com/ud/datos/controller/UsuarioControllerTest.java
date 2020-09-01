@@ -14,6 +14,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 public class UsuarioControllerTest {
 
@@ -51,6 +54,25 @@ public class UsuarioControllerTest {
         ResponseEntity<UsuarioDto> response = usuarioController.save(usarioDto);
 
         Assert.assertNotNull(response);
+    }
+    @Test
+    public void testGet(){
+        UsuarioEntity usuarioResponse = UsuarioEntity.builder()
+                .id(1L)
+                .nombre("Jesus Nicolas")
+                .cambioContra("S")
+                .contrasena("12345678")
+                .correo("jnsierrac@gmail.com")
+                .build();
+        List<UsuarioEntity> listResponse = new ArrayList<>();
+        listResponse.add(usuarioResponse);
+
+        Mockito.doReturn(listResponse).when(usuarioService).getAll();
+
+        ResponseEntity<UsuarioDto[]> response = usuarioController.get();
+
+        Assert.assertNotNull(response);
 
     }
+
 }

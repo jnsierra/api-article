@@ -1,0 +1,4 @@
+server:
+  servlet:
+    context-path: /business
+  port: 5000
