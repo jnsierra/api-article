@@ -1,4 +1,4 @@
-package co.com.ud.rest.client;
+package co.com.ud.business.rest.client;
 
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.springframework.cloud.openfeign.FeignClient;

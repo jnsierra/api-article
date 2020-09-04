@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="admin" id="2" dbms="postgresql">
+        <insert tableName="tipo_usuario">
+            <column name="id" value="0"></column>
+            <column name="tipo" value="ADMIN"></column>
+            <column name="descripcion" value="Administracion del aplictivo"></column>
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+    </changeSet>
+    <changeSet author="admin" id="1" dbms="postgresql">
+        <insert tableName="persona">
+            <column name="id" value="0"></column>
+            <column name="nombres" value="Jesus Nicolas"></column>
+            <column name="apellidos" value="Jesus Nicolas"></column>
+            <column name="fecha_nacimiento" value="${now}"></column>
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+    </changeSet>
+    <changeSet author="admin" id="3" dbms="postgresql">
+        <insert tableName="usuario">
+            <column name="id" value="0"></column>
+            <column name="email" value="jnsierrac@gmail.com"></column>
+            <column name="password" value="12345678"></column>
+            <column name="name" value="jesus"></column>
+            <column name="tipo_usuario_id" value="0"></column>
+            <column name="persona_id" value="0"></column>
+            <column name="cambio_contra" value="N"></column>
+
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

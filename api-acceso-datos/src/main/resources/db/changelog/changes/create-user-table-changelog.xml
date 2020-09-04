@@ -45,4 +45,8 @@
     <changeSet id="2" author="admin">
         <createSequence sequenceName="usuario_seq" startValue="1" incrementBy="1" />
     </changeSet>
+    <changeSet id="3" author="admin">
+        <addUniqueConstraint tableName="usuario" columnNames="email" />
+    </changeSet>
+
 </databaseChangeLog>

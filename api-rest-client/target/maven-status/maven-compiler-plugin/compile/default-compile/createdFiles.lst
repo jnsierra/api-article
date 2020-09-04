@@ -1,1 +1,2 @@
-co\com\ud\rest\client\UsuarioCliente.class
+co\com\ud\business\rest\client\UsuarioCliente.class
+co\com\ud\business\rest\config\FeignConfig.class

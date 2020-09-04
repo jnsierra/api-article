@@ -28,8 +28,17 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>co.com.ud</groupId>
             <artifactId>api-utiles</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>co.com.ud</groupId>
+            <artifactId>api-rest-client</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
