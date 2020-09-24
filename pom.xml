@@ -58,6 +58,7 @@
         <module>api-utiles</module>
         <module>api-business</module>
         <module>api-rest-client</module>
+        <module>api-security</module>
         <!--module>api-test-acceptance</module-->
     </modules>
     <build>
