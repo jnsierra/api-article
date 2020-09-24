@@ -5,17 +5,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="admin" id="1">
-        <createTable tableName="permiso">
-            <column name="id" type="INT">
+        <createTable tableName="role_permiso">
+            <column name="role_id" type="INT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="codigo" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="descripcion" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="nombre" type="VARCHAR(255)">
+            <column name="permiso_id" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="VARCHAR(255)">
@@ -32,11 +26,7 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="permiso"/>
+            <dropTable tableName="role_permiso"/>
         </rollback>
     </changeSet>
-    <changeSet id="2" author="admin">
-        <createSequence sequenceName="permiso_seq" startValue="1" incrementBy="1" />
-    </changeSet>
-
 </databaseChangeLog>

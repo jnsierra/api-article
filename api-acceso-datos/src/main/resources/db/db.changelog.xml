@@ -17,6 +17,7 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <include file="/db/changelog/changes/create-parrafo-table-changelog.xml" />
     <include file="/db/changelog/changes/create-formato-table-changelog.xml" />
     <include file="/db/changelog/changes/create-control-lectura-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-role-permiso-table-changelog.xml" />
     <include file="/db/changelog/changes/foreing-keys-changelog.xml" />
     <include file="/db/changelog/changes/inserts-changelog.xml" />
 </databaseChangeLog>

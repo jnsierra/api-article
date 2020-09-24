@@ -34,7 +34,8 @@ public class RoleEntity extends Auditable<String>{
     @Column(name = "codigo", nullable = false)
     private String codigo;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "role_permiso", joinColumns = @JoinColumn(name = "role_id"),inverseJoinColumns = @JoinColumn(name = "permiso_id"))
     private Set<PermisoEntity> permisos = new HashSet<>();
 
 
