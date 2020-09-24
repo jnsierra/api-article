@@ -13,4 +13,6 @@ public interface UsuarioService {
 
     Optional<UsuarioEntity> getUserFindEmailAndPass(String email, String pass);
 
+    Optional<UsuarioEntity> getFiltersUniques(String email, String pass);
+
 }

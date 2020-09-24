@@ -16,4 +16,11 @@ public interface IUsuarioRepository extends JpaRepository<UsuarioEntity, Long>, 
      * @return
      */
     Optional<UsuarioEntity> findByCorreoAndContrasenaAllIgnoreCase(String correo, String contrasena);
+
+    /**
+     * Metodo con el cual consulto por medio del email
+     * @param correo
+     * @return
+     */
+    Optional<UsuarioEntity> findByCorreoAllIgnoreCase(String correo);
 }

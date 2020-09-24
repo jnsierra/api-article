@@ -28,6 +28,8 @@ public class LoginController {
     public ResponseEntity<TokenDto> login(@RequestBody UsuarioDto usuarioDto) {
         Boolean validaLogin = loginService.validaLogin(usuarioDto.getCorreo(), usuarioDto.getContrasena());
         if(Boolean.TRUE.equals(validaLogin)){
+            //Genero el token en la aplicacion
+
             return new ResponseEntity<TokenDto>(TokenDto.builder().token("Ya").build(), HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
