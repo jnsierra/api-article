@@ -18,9 +18,6 @@
             <column name="nombre" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="role_id" type="INT">
-                <constraints nullable="false"/>
-            </column>
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>

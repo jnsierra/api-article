@@ -35,4 +35,5 @@
     <changeSet id="2" author="admin">
         <createSequence sequenceName="tipo_usuario_seq" startValue="1" incrementBy="1" />
     </changeSet>
+
 </databaseChangeLog>

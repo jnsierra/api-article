@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -26,6 +28,26 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public List<UsuarioEntity> getAll() {
         return usuarioRepository.findAll();
+    }
+
+    @Override
+    public Optional<UsuarioEntity> getUserFindEmailAndPass(String email, String pass) {
+        return usuarioRepository.findByCorreoAndContrasenaAllIgnoreCase(email,pass);
+    }
+
+    @Override
+    public Optional<UsuarioEntity> getFiltersUniques(String email, String pass) {
+        if( Objects.nonNull(email)  &&  Objects.nonNull(pass) ){
+            if( !email.isEmpty() && !pass.isEmpty()){
+                return usuarioRepository.findByCorreoAndContrasenaAllIgnoreCase(email,pass);
+            }
+        }else if ( Objects.nonNull(email)  &&  Objects.isNull(pass) ){
+            if( !email.isEmpty() ){
+                Optional<UsuarioEntity> respuesta = usuarioRepository.findByCorreoAllIgnoreCase(email);
+                return respuesta;
+            }
+        }
+        return Optional.empty();
     }
 
 }

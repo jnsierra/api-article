@@ -1,4 +1,17 @@
 server:
   servlet:
-    context-path: /business
+    context-path: /api-business
   port: 5000
+
+
+logging:
+  level:
+    co:
+      com:
+        ud:
+          business:
+            rest:
+              client: DEBUG
+
+jwt:
+  secret: a6e21884876f43819523c31033fa697e

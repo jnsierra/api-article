@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "permiso")
@@ -33,7 +34,6 @@ public class PermisoEntity extends Auditable<String>{
     @Column(name = "codigo", nullable = false)
     private String codigo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id",nullable = false)
-    private RoleEntity role;
+    @ManyToMany(mappedBy = "permisos")
+    private Set<RoleEntity> roles;
 }

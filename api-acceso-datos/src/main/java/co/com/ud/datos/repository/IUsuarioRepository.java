@@ -5,6 +5,22 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface IUsuarioRepository extends JpaRepository<UsuarioEntity, Long>, CrudRepository<UsuarioEntity, Long> {
+    /**
+     * Metodo con el cual consulto usuario y contrasenia de un usuario
+     * @param correo
+     * @param contrasena
+     * @return
+     */
+    Optional<UsuarioEntity> findByCorreoAndContrasenaAllIgnoreCase(String correo, String contrasena);
+
+    /**
+     * Metodo con el cual consulto por medio del email
+     * @param correo
+     * @return
+     */
+    Optional<UsuarioEntity> findByCorreoAllIgnoreCase(String correo);
 }
