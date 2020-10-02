@@ -3,6 +3,11 @@ server:
     context-path: /api-business
   port: 5000
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka
+
 
 logging:
   level:
@@ -15,3 +20,7 @@ logging:
 
 jwt:
   secret: a6e21884876f43819523c31033fa697e
+
+spring:
+  application:
+    name: business-api
