@@ -7,6 +7,8 @@ import co.com.ud.utiles.dto.UsuarioDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.TextCodec;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,8 @@ public class TokenServiceImpl implements TokenService {
     private final UsuarioCliente usuarioCliente;
     public static Integer seconds = Integer.valueOf("3600") ;
     private final String secret;
+
+
 
     @Autowired
     public TokenServiceImpl(UsuarioCliente usuarioCliente,@Value("${jwt.secret}")String secret) {

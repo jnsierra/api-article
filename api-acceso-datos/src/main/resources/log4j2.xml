@@ -7,7 +7,7 @@
         <RollingFile name="LogToFile" fileName="/logs/logs-api-acceso-datos.log"
                      filePattern="/logs/logs-api-acceso-datos_%d{yyyy-MM-dd}-%i.log">
             <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex</Pattern>
+                <Pattern>%5p %d{yyyy-MM-dd HH:mm:ss.SSS}  ${hostName} --- [%15.15t] %-40.40c{1.} : %m|%n%ex</Pattern>
             </PatternLayout>
             <Policies>
                 <SizeBasedTriggeringPolicy size="10MB" />

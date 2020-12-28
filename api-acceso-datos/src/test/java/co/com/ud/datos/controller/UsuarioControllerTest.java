@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @SpringBootTest
@@ -87,7 +88,7 @@ public class UsuarioControllerTest {
 
         Mockito.doReturn(Optional.of(usuarioResponse)).when(usuarioService).getUserFindEmailAndPass("jnsierrac@gmail.com","12345678");
 
-        ResponseEntity<UsuarioDto> response = usuarioController.getUserByEmailAndPass("jnsierrac@gmail.com", "12345678");
+        ResponseEntity<UsuarioDto> response = usuarioController.getUserByEmailAndPass("jnsierrac@gmail.com", "12345678", null);
 
         Assert.assertNotNull(response);
     }
@@ -96,7 +97,7 @@ public class UsuarioControllerTest {
     public void testGetUserByEmailAndPassNOT_FOUND(){
         Mockito.doReturn(Optional.empty()).when(usuarioService).getUserFindEmailAndPass("jnsierrac@gmail.com","12345678");
 
-        ResponseEntity<UsuarioDto> response = usuarioController.getUserByEmailAndPass("jnsierrac@gmail.com", "12345678");
+        ResponseEntity<UsuarioDto> response = usuarioController.getUserByEmailAndPass("jnsierrac@gmail.com", "12345678", null);
 
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());

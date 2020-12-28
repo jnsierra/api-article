@@ -25,19 +25,32 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-    show-sql: true
+    show-sql: false
     generate-ddl: false
   org:
     hibernate:
       envers:
         audit_strategy: org.hibernate.envers.strategy.ValidityAuditStrategy
         audit_strategy_validity_store_revend_timestamp: true
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://localhost:9411
 
 #show sql values
+#logging:
+#  level:
+#    org:
+#      hibernate:
+#        type:
+#          descriptor:
+#            sql: trace
 logging:
   level:
     org:
-      hibernate:
-        type:
-          descriptor:
-            sql: trace
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: DEBUG
+

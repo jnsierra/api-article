@@ -30,3 +30,5 @@ hs_err_pid*
 /api-acceso-datos/target/*
 /api-utiles/target/*
 /api-test-acceptance/target/*
+/api-business/target/*
+/api-service-discovery/target/*
