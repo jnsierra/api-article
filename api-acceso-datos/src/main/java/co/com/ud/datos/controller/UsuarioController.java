@@ -22,8 +22,6 @@ public class UsuarioController {
 
     private final ModelMapper mapper;
     private final UsuarioService usuarioService;
-    @Value("${configuracion.texto}")
-    private String texto;
 
     @Autowired
     public UsuarioController(ModelMapper mapper, UsuarioService usuarioService) {
