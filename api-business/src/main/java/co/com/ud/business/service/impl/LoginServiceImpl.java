@@ -31,9 +31,9 @@ public class LoginServiceImpl implements LoginService {
             if (validateStateUser()) {
                 if (validatePassword(correo, pass)) {
                     if(validateChagePass()){
-                        return LOGIN_ACTION.SUCCESS;
+                        return LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD;
                     }
-                    return LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD;
+                    return LOGIN_ACTION.SUCCESS;
                 }
                 return LOGIN_ACTION.PASSWORD_INCORRECT;
             }

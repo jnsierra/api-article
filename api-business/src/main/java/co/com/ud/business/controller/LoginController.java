@@ -46,17 +46,17 @@ public class LoginController {
 
         LOGIN_ACTION respuestaLogin = loginService.validaLogin(usuarioDto.getCorreo(), usuarioDto.getContrasena());
         tracer.currentSpan().tag("login.action", respuestaLogin.toString());
+        logger.info("LOGIN|{}|{}|{}",respuestaLogin.toString(), usuarioDto.getCorreo(), request.getRemoteAddr());
 
-        if (LOGIN_ACTION.SUCCESS.equals(respuestaLogin) && LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD.equals(respuestaLogin)) {
+        if (LOGIN_ACTION.SUCCESS.equals(respuestaLogin) || LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD.equals(respuestaLogin)) {
             //Genero el token en la aplicacion
             Optional<TokenDto> token = tokenService.generateTokenUser(usuarioDto.getCorreo());
             if (token.isPresent()) {
-                logger.info("LOGIN|{}|{}|{}",respuestaLogin.toString(), usuarioDto.getCorreo(), request.getRemoteAddr());
+                token.get().setLoginAction(respuestaLogin);
                 return new ResponseEntity<TokenDto>(token.get(), HttpStatus.OK);
             }
         }
 
-        logger.info("LOGIN|{}|{}|{}",respuestaLogin.toString(), usuarioDto.getCorreo(), request.getRemoteAddr());
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }
