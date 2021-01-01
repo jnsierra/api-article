@@ -2,9 +2,12 @@ package co.com.ud.datos.repository;
 
 import co.com.ud.datos.entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
@@ -23,4 +26,12 @@ public interface IUsuarioRepository extends JpaRepository<UsuarioEntity, Long>, 
      * @return
      */
     Optional<UsuarioEntity> findByCorreoAllIgnoreCase(String correo);
+
+    @Modifying
+    @Transactional
+    Integer updateIntentos(@Param("id") Long id,@Param("intentos") Integer intentos);
+
+    @Modifying
+    @Transactional
+    Integer inactivarUsuario(@Param("id") Long id);
 }

@@ -37,6 +37,8 @@
             <column name="tipo_usuario_id" value="0"></column>
             <column name="persona_id" value="0"></column>
             <column name="cambio_contra" value="N"></column>
+            <column name="intentos" value="0"></column>
+            <column name="estado" value="ACTIVO"></column>
 
 
             <column name="created_by" value="jsierra"></column>

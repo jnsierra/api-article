@@ -1,11 +1,13 @@
 package co.com.ud.datos.entity;
 
+import co.com.ud.utiles.enumeracion.USER_STATE;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
+import javax.inject.Named;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -15,10 +17,15 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Usuario")
-@Data @Builder
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Audited
+@NamedQueries({
+        @NamedQuery(name = "UsuarioEntity.updateIntentos", query = "update UsuarioEntity usu set usu.intentos = :intentos WHERE usu.id = :id"),
+        @NamedQuery(name = "UsuarioEntity.inactivarUsuario", query = "update UsuarioEntity usu set usu.estado = 'INACTIVO' WHERE usu.id = :id ")
+})
 public class UsuarioEntity extends Auditable<String> {
 
     @Id
@@ -52,14 +59,21 @@ public class UsuarioEntity extends Auditable<String> {
     private String cambioContra;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "persona_id",nullable = false)
+    @JoinColumn(name = "persona_id", nullable = false)
     private PersonaEntity persona;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "usuario_role", joinColumns = @JoinColumn(name = "usuario_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "usuario_role", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     private TipoUsuarioEntity tipoUsuario;
+
+    @Column(name = "intentos")
+    private Integer intentos;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado")
+    private USER_STATE estado;
 
 }

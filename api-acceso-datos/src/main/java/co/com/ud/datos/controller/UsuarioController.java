@@ -5,7 +5,6 @@ import co.com.ud.datos.service.UsuarioService;
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +50,15 @@ public class UsuarioController {
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+    }
+
+    @PutMapping(value = "/{correo}/intentos", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> updateIntentosUser(@PathVariable("correo")String correo){
+        Optional<Boolean> respuesta =  usuarioService.updateIntentosLoginUsuario(correo);
+        if(respuesta.isPresent()){
+            return new ResponseEntity<Boolean>(respuesta.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<Boolean>(Boolean.FALSE, HttpStatus.OK);
     }
 
 

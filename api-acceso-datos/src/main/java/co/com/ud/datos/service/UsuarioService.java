@@ -15,4 +15,6 @@ public interface UsuarioService {
 
     Optional<UsuarioEntity> getFiltersUniques(String email, String pass);
 
+    Optional<Boolean> updateIntentosLoginUsuario(String email);
+
 }

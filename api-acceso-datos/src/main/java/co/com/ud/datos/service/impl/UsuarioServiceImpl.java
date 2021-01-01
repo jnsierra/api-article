@@ -50,4 +50,19 @@ public class UsuarioServiceImpl implements UsuarioService {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<Boolean> updateIntentosLoginUsuario(String email) {
+        Optional<UsuarioEntity> respuesta = usuarioRepository.findByCorreoAllIgnoreCase(email);
+        if(respuesta.isPresent()){
+            Integer intentoActual = respuesta.get().getIntentos();
+            usuarioRepository.updateIntentos(respuesta.get().getId(), respuesta.get().getIntentos() + 1 );
+            if(intentoActual >= 3){
+                usuarioRepository.inactivarUsuario(respuesta.get().getId());
+            }
+            return Optional.of(Boolean.TRUE);
+        }
+        return Optional.empty();
+    }
+
+
 }
