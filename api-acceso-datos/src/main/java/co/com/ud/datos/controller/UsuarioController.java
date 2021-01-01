@@ -5,6 +5,7 @@ import co.com.ud.datos.service.UsuarioService;
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class UsuarioController {
 
     private final ModelMapper mapper;
     private final UsuarioService usuarioService;
+    @Value("${configuracion.texto}")
+    private String texto;
 
     @Autowired
     public UsuarioController(ModelMapper mapper, UsuarioService usuarioService) {

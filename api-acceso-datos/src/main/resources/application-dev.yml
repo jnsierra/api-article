@@ -9,8 +9,6 @@ eureka:
       defaultZone: http://localhost:1111/eureka
 
 spring:
-  application:
-    name: acceso-datos
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://databasearticulos:5432/articuloss
