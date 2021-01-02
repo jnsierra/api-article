@@ -7,6 +7,7 @@ import co.com.ud.business.service.TokenService;
 import co.com.ud.business.service.impl.TokenServiceImpl;
 import co.com.ud.utiles.dto.TokenDto;
 import co.com.ud.utiles.dto.UsuarioDto;
+import co.com.ud.utiles.enumeracion.LOGIN_ACTION;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,17 +40,28 @@ public class LoginController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TokenDto> login(@RequestBody UsuarioDto usuarioDto, HttpServletRequest request) {
-        tracer.currentSpan().tag("login.actual", usuarioDto.getCorreo());
-        Boolean validaLogin = loginService.validaLogin(usuarioDto.getCorreo(), usuarioDto.getContrasena());
-        if (Boolean.TRUE.equals(validaLogin)) {
+        try {
+            tracer.currentSpan().tag("login.user", usuarioDto.getCorreo());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        LOGIN_ACTION respuestaLogin = loginService.validaLogin(usuarioDto.getCorreo(), usuarioDto.getContrasena());
+        try {
+            tracer.currentSpan().tag("login.action", respuestaLogin.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        logger.info("LOGIN|{}|{}|{}",respuestaLogin.toString(), usuarioDto.getCorreo(), request.getRemoteAddr());
+
+        if (LOGIN_ACTION.SUCCESS.equals(respuestaLogin) || LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD.equals(respuestaLogin)) {
             //Genero el token en la aplicacion
             Optional<TokenDto> token = tokenService.generateTokenUser(usuarioDto.getCorreo());
             if (token.isPresent()) {
-                logger.info("{}|{}|{}","LOGINSUCCESS",usuarioDto.getCorreo(),request.getRemoteAddr());
+                token.get().setLoginAction(respuestaLogin);
                 return new ResponseEntity<TokenDto>(token.get(), HttpStatus.OK);
             }
         }
-        logger.info("{}|{}|{}","LOGINFAILED",usuarioDto.getCorreo(),request.getRemoteAddr());
+
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }

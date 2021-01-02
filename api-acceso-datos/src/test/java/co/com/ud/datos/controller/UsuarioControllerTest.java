@@ -1,6 +1,7 @@
 package co.com.ud.datos.controller;
 
 
+import brave.Response;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.service.UsuarioService;
 import co.com.ud.utiles.dto.UsuarioDto;
@@ -17,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @SpringBootTest
@@ -86,7 +86,7 @@ public class UsuarioControllerTest {
                 .correo("jnsierrac@gmail.com")
                 .build();
 
-        Mockito.doReturn(Optional.of(usuarioResponse)).when(usuarioService).getUserFindEmailAndPass("jnsierrac@gmail.com","12345678");
+        Mockito.doReturn(Optional.of(usuarioResponse)).when(usuarioService).getFiltersUniques("jnsierrac@gmail.com","12345678");
 
         ResponseEntity<UsuarioDto> response = usuarioController.getUserByEmailAndPass("jnsierrac@gmail.com", "12345678", null);
 
@@ -101,6 +101,26 @@ public class UsuarioControllerTest {
 
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testUpdateIntentosUserFAILED(){
+        Mockito.doReturn(Optional.of(Boolean.FALSE)).when(usuarioService).updateIntentosLoginUsuario("jnsierra@gmail.com");
+
+        ResponseEntity<Boolean> rta = usuarioController.updateIntentosUser("jnsierrac@gmail.com");
+
+        Assert.assertNotNull(rta);
+        Assert.assertFalse(rta.getBody());
+    }
+
+    @Test
+    public void testUpdateIntentosUserSUCCESS(){
+        Mockito.doReturn(Optional.of(Boolean.TRUE)).when(usuarioService).updateIntentosLoginUsuario(Mockito.any());
+
+        ResponseEntity<Boolean> rta = usuarioController.updateIntentosUser("jnsierrac@gmail.com");
+
+        Assert.assertNotNull(rta);
+        Assert.assertTrue(rta.getBody());
     }
 
 }

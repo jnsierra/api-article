@@ -1,6 +1,8 @@
 package co.com.ud.business.service;
 
+import co.com.ud.utiles.enumeracion.LOGIN_ACTION;
+
 public interface LoginService {
 
-    Boolean validaLogin(String correo, String pass);
+    LOGIN_ACTION validaLogin(String correo, String pass);
 }

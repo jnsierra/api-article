@@ -16,7 +16,6 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Audited
 public class PermisoEntity extends Auditable<String>{
     @Id

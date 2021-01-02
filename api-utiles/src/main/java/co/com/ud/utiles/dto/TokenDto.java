@@ -1,5 +1,6 @@
 package co.com.ud.utiles.dto;
 
+import co.com.ud.utiles.enumeracion.LOGIN_ACTION;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ public class TokenDto {
 	private String token;
 	private Integer time;
 	private String mensaje;
+	private LOGIN_ACTION loginAction;
 	
 	
 	public static TokenDto of(String token, Integer time) {

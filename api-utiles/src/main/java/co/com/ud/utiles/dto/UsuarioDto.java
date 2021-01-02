@@ -1,5 +1,6 @@
 package co.com.ud.utiles.dto;
 
+import co.com.ud.utiles.enumeracion.USER_STATE;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,5 +18,6 @@ public class UsuarioDto {
     private String cambioContra;
     private Long personaId;
     private Long tipoUsuarioId;
+    private USER_STATE estado;
 
 }
