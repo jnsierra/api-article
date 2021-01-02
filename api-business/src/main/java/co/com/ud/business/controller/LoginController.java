@@ -1,7 +1,6 @@
 package co.com.ud.business.controller;
 
 
-import brave.Span;
 import brave.Tracer;
 import co.com.ud.business.service.LoginService;
 import co.com.ud.business.service.TokenService;
@@ -9,7 +8,6 @@ import co.com.ud.business.service.impl.TokenServiceImpl;
 import co.com.ud.utiles.dto.TokenDto;
 import co.com.ud.utiles.dto.UsuarioDto;
 import co.com.ud.utiles.enumeracion.LOGIN_ACTION;
-import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +40,17 @@ public class LoginController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TokenDto> login(@RequestBody UsuarioDto usuarioDto, HttpServletRequest request) {
-        tracer.currentSpan().tag("login.user", usuarioDto.getCorreo());
-
+        try {
+            tracer.currentSpan().tag("login.user", usuarioDto.getCorreo());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         LOGIN_ACTION respuestaLogin = loginService.validaLogin(usuarioDto.getCorreo(), usuarioDto.getContrasena());
-        tracer.currentSpan().tag("login.action", respuestaLogin.toString());
+        try {
+            tracer.currentSpan().tag("login.action", respuestaLogin.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         logger.info("LOGIN|{}|{}|{}",respuestaLogin.toString(), usuarioDto.getCorreo(), request.getRemoteAddr());
 
         if (LOGIN_ACTION.SUCCESS.equals(respuestaLogin) || LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD.equals(respuestaLogin)) {
