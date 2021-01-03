@@ -11,6 +11,7 @@ import co.com.ud.utiles.enumeracion.LOGIN_ACTION;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,9 @@ public class LoginController {
     private final Tracer tracer;
 
     @Autowired
+    private Environment env;
+
+    @Autowired
     public LoginController(LoginService loginService, TokenService tokenService, Tracer tracer) {
         this.loginService = loginService;
         this.tokenService = tokenService;
@@ -40,17 +44,9 @@ public class LoginController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TokenDto> login(@RequestBody UsuarioDto usuarioDto, HttpServletRequest request) {
-        try {
-            tracer.currentSpan().tag("login.user", usuarioDto.getCorreo());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
         LOGIN_ACTION respuestaLogin = loginService.validaLogin(usuarioDto.getCorreo(), usuarioDto.getContrasena());
-        try {
-            tracer.currentSpan().tag("login.action", respuestaLogin.toString());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
         logger.info("LOGIN|{}|{}|{}",respuestaLogin.toString(), usuarioDto.getCorreo(), request.getRemoteAddr());
 
         if (LOGIN_ACTION.SUCCESS.equals(respuestaLogin) || LOGIN_ACTION.SUCCESS_CHANGE_PASSWORD.equals(respuestaLogin)) {
