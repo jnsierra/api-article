@@ -3,6 +3,6 @@ spring:
     name: api-acceso-datos
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://192.168.0.11:8888
   profiles:
     active: dev

@@ -5,6 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: file:///C:/configuraciones/api-article-configurations
+          uri: https://github.com/jnsierra/api-article-configurations.git
+          #uri: file:///C:/configuraciones/api-article-configurations
 server:
   port: 8888
