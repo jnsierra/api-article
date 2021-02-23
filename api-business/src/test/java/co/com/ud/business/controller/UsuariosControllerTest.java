@@ -1,6 +1,7 @@
 package co.com.ud.business.controller;
 
 
+import co.com.ud.business.service.PersonaService;
 import co.com.ud.business.service.UsuarioService;
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.junit.Assert;
@@ -23,12 +24,14 @@ public class UsuariosControllerTest {
 
     @Mock
     private UsuarioService usuarioService;
+    @Mock
+    private PersonaService personaService;
     private UsuariosController usuariosController;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.usuariosController = new UsuariosController(usuarioService);
+        this.usuariosController = new UsuariosController(usuarioService, personaService);
     }
 
     @Test
@@ -104,6 +107,24 @@ public class UsuariosControllerTest {
         ResponseEntity<UsuarioDto> response = usuariosController.getUserById(0L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+    @Test
+    public void save(){
+        UsuarioDto usuario = UsuarioDto.builder()
+                .nombre("Luisa Maria")
+                .correo("jnsierrac@gmail.com")
+                .contrasena("123456")
+                .build();
+        UsuarioDto usuarioResponse = UsuarioDto.builder()
+                .nombre("Luisa Maria")
+                .correo("jnsierrac@gmail.com")
+                .contrasena("123456")
+                .build();
+        Mockito.doReturn(Optional.of(usuarioResponse)).when(usuarioService).save(Mockito.any());
+
+        ResponseEntity<UsuarioDto> response = usuariosController.save(usuario);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
 

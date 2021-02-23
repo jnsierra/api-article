@@ -3,6 +3,7 @@ package co.com.ud.business.service.impl;
 import co.com.ud.business.rest.client.UsuarioCliente;
 import co.com.ud.business.service.UsuarioService;
 import co.com.ud.utiles.dto.UsuarioDto;
+import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         ResponseEntity<UsuarioDto> response = usuarioCliente.getUserById(id);
         if( HttpStatus.OK.equals(response.getStatusCode()) ){
             return Optional.of( response.getBody() );
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<UsuarioDto> save(UsuarioDto usuario) {
+        usuario.setIntentos(0);
+        usuario.setEstado(USER_STATE.INACTIVO);
+        ResponseEntity<UsuarioDto> response = usuarioCliente.save(usuario);
+        if(HttpStatus.CREATED.equals(response.getStatusCode())){
+            return Optional.of(response.getBody());
         }
         return Optional.empty();
     }

@@ -12,4 +12,6 @@ public interface UsuarioService {
     List<UsuarioDto> getUsers();
 
     Optional<UsuarioDto> getUserById(Long id);
+
+    Optional<UsuarioDto> save(UsuarioDto usuario);
 }

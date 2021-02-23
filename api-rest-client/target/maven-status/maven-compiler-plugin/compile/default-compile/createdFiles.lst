@@ -2,4 +2,5 @@ co\com\ud\business\dto\UsuariosFeingDto.class
 co\com\ud\business\dto\MsAccesoDatosDto.class
 co\com\ud\business\rest\client\UsuarioCliente.class
 co\com\ud\business\dto\FeingParamsDto.class
+co\com\ud\business\rest\client\PersonaCliente.class
 co\com\ud\business\rest\config\FeignConfig.class

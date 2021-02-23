@@ -23,7 +23,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="tipo_usuario_id" type="INT">
-                <constraints nullable="false"/>
+
             </column>
             <column name="intentos" type="INT">
                 <constraints nullable="false"/>

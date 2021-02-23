@@ -1,6 +1,7 @@
 package co.com.ud.datos.service.impl;
 
 import co.com.ud.datos.entity.UsuarioEntity;
+import co.com.ud.datos.repository.IPersonaRepository;
 import co.com.ud.datos.repository.IUsuarioRepository;
 import co.com.ud.datos.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,12 @@ import java.util.Optional;
 public class UsuarioServiceImpl implements UsuarioService {
 
     private final IUsuarioRepository usuarioRepository;
+    private final IPersonaRepository personaRepository;
 
     @Autowired
-    public UsuarioServiceImpl(IUsuarioRepository usuarioRepository) {
+    public UsuarioServiceImpl(IUsuarioRepository usuarioRepository,IPersonaRepository personaRepository ) {
         this.usuarioRepository = usuarioRepository;
+        this.personaRepository = personaRepository;
     }
 
     @Override

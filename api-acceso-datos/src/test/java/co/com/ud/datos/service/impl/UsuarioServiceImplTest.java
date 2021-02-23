@@ -1,7 +1,10 @@
 package co.com.ud.datos.service.impl;
 
+import co.com.ud.datos.entity.PersonaEntity;
 import co.com.ud.datos.entity.UsuarioEntity;
+import co.com.ud.datos.repository.IPersonaRepository;
 import co.com.ud.datos.repository.IUsuarioRepository;
+import co.com.ud.utiles.dto.PersonaDto;
 import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,11 +25,13 @@ public class UsuarioServiceImplTest {
 
     @Mock
     private IUsuarioRepository usuarioRepository;
+    @Mock
+    private IPersonaRepository personaRepository;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        usuarioService = new UsuarioServiceImpl(usuarioRepository);
+        usuarioService = new UsuarioServiceImpl(usuarioRepository, personaRepository);
     }
 
     @Test
@@ -143,6 +148,8 @@ public class UsuarioServiceImplTest {
                 .correo("jnsierrac@gmail.com")
                 .intentos(0)
                 .build();
+
+
         Mockito.doReturn(Optional.of(usuarioResponse)).when(usuarioRepository).findByCorreoAllIgnoreCase("jnsierrac@gmail.com");
         Optional<Boolean> rta = usuarioService.updateIntentosLoginUsuario("jnsierrac@gmail.com");
         Assert.assertEquals(Boolean.TRUE, rta.isPresent());

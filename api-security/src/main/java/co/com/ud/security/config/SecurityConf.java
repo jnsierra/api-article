@@ -25,10 +25,11 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .addFilterAfter(getJwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/login/")
+                .antMatchers(HttpMethod.POST, "/login/","/v.1/usuarios/")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
+        //http.authorizeRequests().antMatchers("/v.1/usuarios/").permitAll().anyRequest().authenticated();
     }
 
     @Bean

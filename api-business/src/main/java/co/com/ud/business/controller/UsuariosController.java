@@ -1,6 +1,8 @@
 package co.com.ud.business.controller;
 
+import co.com.ud.business.service.PersonaService;
 import co.com.ud.business.service.UsuarioService;
+import co.com.ud.utiles.dto.PersonaDto;
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +18,12 @@ import java.util.Optional;
 public class UsuariosController {
 
     private UsuarioService usuarioService;
+    private PersonaService personaService;
 
     @Autowired
-    public UsuariosController(UsuarioService usuarioService) {
+    public UsuariosController(UsuarioService usuarioService, PersonaService personaService) {
         this.usuarioService = usuarioService;
+        this.personaService = personaService;
     }
 
     @GetMapping("/by/")
@@ -44,6 +48,20 @@ public class UsuariosController {
         Optional<UsuarioDto> usuario = usuarioService.getUserById(id);
         if(usuario.isPresent()){
             return new ResponseEntity<>(usuario.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UsuarioDto> save(@RequestBody(required = true) UsuarioDto usuario){
+        //Creamos la entidad Persona
+        Optional<PersonaDto> persona = personaService.save(usuario.getPersona());
+        if(persona.isPresent()){
+            usuario.setPersona(persona.get());
+            Optional<UsuarioDto> usuarioResponse = usuarioService.save(usuario);
+            if(usuarioResponse.isPresent()){
+                return new ResponseEntity<>(usuarioResponse.get(), HttpStatus.CREATED);
+            }
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

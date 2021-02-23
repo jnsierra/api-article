@@ -93,10 +93,28 @@ public class UsuarioServiceImplTest {
 
     @Test
     public void getUserByIdEMPTY(){
-
         Mockito.doReturn(new ResponseEntity<UsuarioDto>(HttpStatus.NO_CONTENT)).when(usuarioCliente).getUserById(0L);
         Optional<UsuarioDto> response = usuarioService.getUserById(0L);
         Assert.assertNotNull(response);
         Assert.assertFalse(response.isPresent());
+    }
+    @Test
+    public void save(){
+        UsuarioDto usuario = UsuarioDto.builder()
+                .nombre("Luisa Maria")
+                .correo("jnsierrac@gmail.com")
+                .contrasena("123456")
+                .build();
+        UsuarioDto usuarioResponse = UsuarioDto.builder()
+                .nombre("Luisa Maria")
+                .correo("jnsierrac@gmail.com")
+                .contrasena("123456")
+                .build();
+        Mockito.doReturn( new ResponseEntity<>(usuarioResponse, HttpStatus.OK) ).when(usuarioCliente).save(Mockito.any());
+
+        Optional<UsuarioDto> response = usuarioService.save(usuario);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+
     }
 }

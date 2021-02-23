@@ -16,8 +16,9 @@ public class UsuarioDto {
     private String contrasena;
     private String nombre;
     private String cambioContra;
-    private Long personaId;
+    private Integer intentos;
     private USER_STATE estado;
     private TipoUsuarioDto tipoUsuario;
+    private PersonaDto persona;
 
 }
