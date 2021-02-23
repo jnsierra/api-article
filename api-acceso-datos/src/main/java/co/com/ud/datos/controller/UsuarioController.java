@@ -61,5 +61,13 @@ public class UsuarioController {
         return new ResponseEntity<Boolean>(Boolean.FALSE, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{id}/")
+    public ResponseEntity<UsuarioDto> getUserById(@PathVariable("id")Long id){
+        Optional<UsuarioEntity> usuario = usuarioService.getUserById(id);
+        if(usuario.isPresent()){
+            return new ResponseEntity<>(mapper.map(usuario.get(), UsuarioDto.class),HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }

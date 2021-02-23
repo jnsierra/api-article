@@ -64,5 +64,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<UsuarioEntity> getUserById(Long id) {
+        Optional<UsuarioEntity> usuario = usuarioRepository.findById(id);
+        return usuario;
+    }
+
 
 }

@@ -17,4 +17,5 @@ public interface UsuarioService {
 
     Optional<Boolean> updateIntentosLoginUsuario(String email);
 
+    Optional<UsuarioEntity> getUserById(Long id);
 }

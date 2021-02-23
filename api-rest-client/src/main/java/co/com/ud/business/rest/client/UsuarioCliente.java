@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 //@FeignClient(name = "usuario", url = "http://localhost:5003/api-datos/v.1/usuarios")
@@ -17,5 +18,11 @@ public interface UsuarioCliente {
 
     @GetMapping(value = "/by/", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<UsuarioDto> getUserByEmail(@RequestParam(name = "correo", required = true) String correo);
+
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<UsuarioDto[]> get();
+
+    @GetMapping(value = "/{id}/", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<UsuarioDto> getUserById(@PathVariable("id")Long id);
 
 }

@@ -1,9 +1,9 @@
 package co.com.ud.datos.controller;
 
 
-import brave.Response;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.service.UsuarioService;
+import co.com.ud.utiles.dto.TipoUsuarioDto;
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.junit.Assert;
 import org.junit.Before;
@@ -44,6 +44,7 @@ public class UsuarioControllerTest {
                 .cambioContra("S")
                 .contrasena("12345678")
                 .correo("jnsierrac@gmail.com")
+                .tipoUsuario(TipoUsuarioDto.builder().id(0L).build())
                 .build();
         UsuarioEntity usuarioResponse = UsuarioEntity.builder()
                 .id(1L)
