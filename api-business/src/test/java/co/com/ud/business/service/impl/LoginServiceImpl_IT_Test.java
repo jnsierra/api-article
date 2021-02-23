@@ -1,14 +1,12 @@
 package co.com.ud.business.service.impl;
 
 import co.com.ud.business.dto.FeingParamsDto;
-import co.com.ud.business.rest.client.UsuarioCliente;
 import co.com.ud.utiles.enumeracion.LOGIN_ACTION;
 import com.github.tomakehurst.wiremock.WireMockServer;
-
-import com.github.tomakehurst.wiremock.core.Options;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import lombok.Getter;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.*;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
 @SpringBootTest
 @ActiveProfiles("test")

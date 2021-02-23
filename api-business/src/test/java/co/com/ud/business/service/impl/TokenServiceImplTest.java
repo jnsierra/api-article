@@ -1,6 +1,5 @@
 package co.com.ud.business.service.impl;
 
-import brave.Response;
 import co.com.ud.business.rest.client.UsuarioCliente;
 import co.com.ud.utiles.dto.TokenDto;
 import co.com.ud.utiles.dto.UsuarioDto;

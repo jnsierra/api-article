@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,4 +31,23 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return Optional.empty();
     }
+
+    @Override
+    public List<UsuarioDto> getUsers() {
+        ResponseEntity<UsuarioDto[]> response = usuarioCliente.get();
+        if( HttpStatus.OK.equals(response.getStatusCode()) && response.getBody().length != 0){
+            return Arrays.asList(response.getBody());
+        }
+        return new ArrayList<>();
+    }
+
+    @Override
+    public Optional<UsuarioDto> getUserById(Long id) {
+        ResponseEntity<UsuarioDto> response = usuarioCliente.getUserById(id);
+        if( HttpStatus.OK.equals(response.getStatusCode()) ){
+            return Optional.of( response.getBody() );
+        }
+        return Optional.empty();
+    }
+
 }
