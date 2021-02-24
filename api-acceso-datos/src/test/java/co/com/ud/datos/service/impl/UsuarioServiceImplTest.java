@@ -1,10 +1,8 @@
 package co.com.ud.datos.service.impl;
 
-import co.com.ud.datos.entity.PersonaEntity;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.repository.IPersonaRepository;
 import co.com.ud.datos.repository.IUsuarioRepository;
-import co.com.ud.utiles.dto.PersonaDto;
 import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.junit.Assert;
 import org.junit.Before;

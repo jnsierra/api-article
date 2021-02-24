@@ -4,9 +4,10 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
+
     <changeSet author="admin" id="1">
         <createTable tableName="usuario">
-            <column name="id" type="INT">
+            <column name="id" type="INT" >
                 <constraints primaryKey="true"/>
             </column>
             <column name="email" type="VARCHAR(255)">
