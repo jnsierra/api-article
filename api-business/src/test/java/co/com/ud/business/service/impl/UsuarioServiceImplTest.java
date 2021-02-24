@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,7 +109,7 @@ public class UsuarioServiceImplTest {
                 .correo("jnsierrac@gmail.com")
                 .contrasena("123456")
                 .build();
-        Mockito.doReturn( new ResponseEntity<>(usuarioResponse, HttpStatus.OK) ).when(usuarioCliente).save(Mockito.any());
+        Mockito.doReturn( new ResponseEntity<>(usuarioResponse, HttpStatus.CREATED) ).when(usuarioCliente).save(Mockito.any());
 
         Optional<UsuarioDto> response = usuarioService.save(usuario);
         Assert.assertNotNull(response);
