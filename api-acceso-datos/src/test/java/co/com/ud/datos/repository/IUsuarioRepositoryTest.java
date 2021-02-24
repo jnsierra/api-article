@@ -28,7 +28,7 @@ public class IUsuarioRepositoryTest {
                 .nombre("Jesus Nicolas")
                 .cambioContra("S")
                 .persona(PersonaEntity.builder().id(0L).build())
-                .tipoUsuario(TipoUsuarioEntity.builder().id(0L).build())
+                .tipoUsuario(TipoUsuarioEntity.builder().id(1L).build())
                 .intentos(0)
                 .estado(USER_STATE.ACTIVO)
                 .build();
@@ -44,7 +44,7 @@ public class IUsuarioRepositoryTest {
                 .nombre("Jesus Nicolas")
                 .cambioContra("S")
                 .persona(PersonaEntity.builder().id(0L).build())
-                .tipoUsuario(TipoUsuarioEntity.builder().id(0L).build())
+                .tipoUsuario(TipoUsuarioEntity.builder().id(1L).build())
                 .intentos(0)
                 .estado(USER_STATE.ACTIVO)
                 .build();

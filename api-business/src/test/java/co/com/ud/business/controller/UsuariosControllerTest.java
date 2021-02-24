@@ -3,6 +3,7 @@ package co.com.ud.business.controller;
 
 import co.com.ud.business.service.PersonaService;
 import co.com.ud.business.service.UsuarioService;
+import co.com.ud.utiles.dto.PersonaDto;
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +121,13 @@ public class UsuariosControllerTest {
                 .contrasena("123456")
                 .build();
         Mockito.doReturn(Optional.of(usuarioResponse)).when(usuarioService).save(Mockito.any());
+
+        PersonaDto persona = PersonaDto.builder()
+                .id(0L)
+                .nombres("Luisa Maria")
+                .apellidos("Canon Mora")
+                .build();
+        Mockito.doReturn(Optional.of(persona)).when(personaService).save(Mockito.any());
 
         ResponseEntity<UsuarioDto> response = usuariosController.save(usuario);
         Assert.assertNotNull(response);
