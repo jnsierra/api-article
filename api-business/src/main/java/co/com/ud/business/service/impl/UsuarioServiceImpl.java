@@ -2,6 +2,7 @@ package co.com.ud.business.service.impl;
 
 import co.com.ud.business.rest.client.UsuarioCliente;
 import co.com.ud.business.service.UsuarioService;
+import co.com.ud.utiles.dto.TipoUsuarioDto;
 import co.com.ud.utiles.dto.UsuarioDto;
 import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Optional<UsuarioDto> save(UsuarioDto usuario) {
         usuario.setIntentos(0);
         usuario.setEstado(USER_STATE.INACTIVO);
+        //Por default el tipo de usuario es ALUMNO
+        usuario.setTipoUsuario(TipoUsuarioDto.builder().id(3L).build());
         ResponseEntity<UsuarioDto> response = usuarioCliente.save(usuario);
         if(HttpStatus.CREATED.equals(response.getStatusCode())){
             return Optional.of(response.getBody());

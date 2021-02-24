@@ -5,8 +5,28 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet author="admin" id="2" >
         <insert tableName="tipo_usuario">
-            <column name="id" value="0"></column>
+            <column name="id" valueComputed="(SELECT nextval('tipo_usuario_seq') )"></column>
             <column name="tipo" value="ADMIN"></column>
+            <column name="descripcion" value="Administracion del aplictivo"></column>
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+        <insert tableName="tipo_usuario">
+            <column name="id" valueComputed="(SELECT nextval('tipo_usuario_seq') )"></column>
+            <column name="tipo" value="PROFESOR"></column>
+            <column name="descripcion" value="Administracion del aplictivo"></column>
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+        <insert tableName="tipo_usuario">
+            <column name="id" valueComputed="(SELECT nextval('tipo_usuario_seq') )"></column>
+            <column name="tipo" value="ALUMNO"></column>
             <column name="descripcion" value="Administracion del aplictivo"></column>
 
             <column name="created_by" value="jsierra"></column>
@@ -30,11 +50,11 @@
     </changeSet>
     <changeSet author="admin" id="3" >
         <insert tableName="usuario">
-            <column name="id" value="0"></column>
+            <column name="id" valueComputed="(SELECT nextval('usuario_seq') )"></column>
             <column name="email" value="jnsierrac@gmail.com"></column>
             <column name="password" value="12345678"></column>
             <column name="name" value="jesus"></column>
-            <column name="tipo_usuario_id" value="0"></column>
+            <column name="tipo_usuario_id" value="1"></column>
             <column name="persona_id" value="0"></column>
             <column name="cambio_contra" value="N"></column>
             <column name="intentos" value="0"></column>
@@ -62,7 +82,7 @@
     </changeSet>
     <changeSet author="admin" id="5" >
         <insert tableName="usuario_role">
-            <column name="usuario_id" value="0"></column>
+            <column name="usuario_id" value="1"></column>
             <column name="role_id" value="0"></column>
 
             <column name="created_by" value="jsierra"></column>
