@@ -31,6 +31,9 @@
             <column name="last_modified_date" type="datetime">
                 <constraints nullable="false"/>
             </column>
+            <column name="documento" type="INT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
         <rollback>
             <dropTable tableName="persona"/>
@@ -38,6 +41,9 @@
     </changeSet>
     <changeSet id="2" author="admin">
         <createSequence sequenceName="persona_seq" startValue="1" incrementBy="1" />
+    </changeSet>
+    <changeSet id="3" author="admin">
+        <addUniqueConstraint tableName="persona" columnNames="documento" />
     </changeSet>
 
 </databaseChangeLog>

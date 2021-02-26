@@ -35,4 +35,7 @@ public class PersonaEntity extends Auditable<String>{
 
     @Column(name = "fecha_nacimiento",nullable = false)
     private Date fechaNacimiento;
+
+    @Column(name = "documento",nullable = false)
+    private Long documento;
 }

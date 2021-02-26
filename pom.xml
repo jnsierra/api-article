@@ -78,6 +78,7 @@
         <module>api-security</module>
         <module>api-service-discovery</module>
         <module>api-server-config</module>
+        <module>api-mail</module>
         <!--module>api-test-acceptance</module-->
     </modules>
     <build>

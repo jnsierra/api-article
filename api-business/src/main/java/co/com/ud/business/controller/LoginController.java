@@ -58,6 +58,6 @@ public class LoginController {
             }
         }
 
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(TokenDto.builder().mensaje("Error de usuario o contraseña").build(),HttpStatus.UNAUTHORIZED);
     }
 }

@@ -20,4 +20,6 @@ public class PersonaDto {
     private String apellidos;
 
     private Date fechaNacimiento;
+
+    private String documento;
 }
