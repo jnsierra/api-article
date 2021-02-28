@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//@FeignClient(name = "usuario", url = "http://localhost:5003/api-datos/v.1/usuarios")
 @FeignClient(name = "${endpoint.ms-acceso-datos.usuarios.name}",
         url = "${endpoint.ms-acceso-datos.protocol}${endpoint.ms-acceso-datos.host}:${endpoint.ms-acceso-datos.port}${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.usuarios.version}${endpoint.ms-acceso-datos.usuarios.url}")
 public interface UsuarioCliente {

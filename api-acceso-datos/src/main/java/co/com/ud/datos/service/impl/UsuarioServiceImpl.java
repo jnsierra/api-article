@@ -4,6 +4,7 @@ import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.repository.IPersonaRepository;
 import co.com.ud.datos.repository.IUsuarioRepository;
 import co.com.ud.datos.service.UsuarioService;
+import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,5 +74,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
 
-
+    @Override
+    public Optional<Boolean> modifyEstadoTipoUsuario(Long id, USER_STATE estado, Long idTipoUsuario) {
+        Integer actulizados = usuarioRepository.modificarEstadoUsuario(id, estado);
+        if(actulizados == 0){
+            return Optional.of(Boolean.FALSE);
+        }
+        //Buscamos el usuario
+        Optional<UsuarioEntity> usuario = getUserById(id);
+        if (usuario.isPresent()){
+            usuario.get().getTipoUsuario().setId(idTipoUsuario);
+        }
+        return Optional.of(Boolean.TRUE);
+    }
 }

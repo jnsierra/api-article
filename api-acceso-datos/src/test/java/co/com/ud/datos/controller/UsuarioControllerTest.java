@@ -5,6 +5,7 @@ import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.service.UsuarioService;
 import co.com.ud.utiles.dto.TipoUsuarioDto;
 import co.com.ud.utiles.dto.UsuarioDto;
+import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -122,6 +123,25 @@ public class UsuarioControllerTest {
 
         Assert.assertNotNull(rta);
         Assert.assertTrue(rta.getBody());
+    }
+    @Test
+    public void testuUpdateEstadoTipoUsuarioSUCCESS(){
+        Mockito.doReturn(Optional.of(Boolean.TRUE)).when(usuarioService).modifyEstadoTipoUsuario(Mockito.any(), Mockito.any(), Mockito.any());
+
+        ResponseEntity<Boolean> response = usuarioController.updateEstadoTipoUsuario(1L, USER_STATE.ACTIVO, 1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+
+    }
+
+    @Test
+    public void testuUpdateEstadoTipoUsuarioFAILED(){
+        Mockito.doReturn(Optional.of(Boolean.FALSE)).when(usuarioService).modifyEstadoTipoUsuario(Mockito.any(), Mockito.any(), Mockito.any());
+
+        ResponseEntity<Boolean> response = usuarioController.updateEstadoTipoUsuario(1L, USER_STATE.ACTIVO, 1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+
     }
 
 }

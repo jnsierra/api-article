@@ -1,6 +1,7 @@
 package co.com.ud.datos.repository;
 
 import co.com.ud.datos.entity.UsuarioEntity;
+import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
@@ -34,4 +35,8 @@ public interface IUsuarioRepository extends JpaRepository<UsuarioEntity, Long>, 
     @Modifying
     @Transactional
     Integer inactivarUsuario(@Param("id") Long id);
+
+    @Modifying
+    @Transactional
+    Integer modificarEstadoUsuario(@Param("id") Long id,@Param("estado") USER_STATE estado);
 }
