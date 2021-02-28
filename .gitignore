@@ -33,3 +33,5 @@ hs_err_pid*
 /api-business/target/*
 /api-service-discovery/target/*
 /api-mail/target/*
+/api-rest-client/target/*
+/api-server-config/target/*
