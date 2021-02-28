@@ -21,7 +21,7 @@
             <column name="estado" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="titulo" type="INT">
+            <column name="titulo" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="VARCHAR(255)">

@@ -9,13 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v.1/idea")
+@RequestMapping("/v.1/ideas")
 public class IdeaControler {
 
     private final IdeaService ideaService;
@@ -28,7 +29,7 @@ public class IdeaControler {
     }
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<IdeaDto> save(IdeaDto idea){
+    public ResponseEntity<IdeaDto> save(@RequestBody IdeaDto idea){
         Optional<IdeaEntity> ideaEntity = ideaService.save(mapper.map(idea, IdeaEntity.class));
         if(ideaEntity.isPresent()){
             return new ResponseEntity<>( mapper.map(ideaEntity.get(), IdeaDto.class),   HttpStatus.CREATED);
