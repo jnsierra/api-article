@@ -1,5 +1,6 @@
 package co.com.ud.datos.service.impl;
 
+import co.com.ud.datos.entity.TipoUsuarioEntity;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.repository.IPersonaRepository;
 import co.com.ud.datos.repository.IUsuarioRepository;
@@ -83,8 +84,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         //Buscamos el usuario
         Optional<UsuarioEntity> usuario = getUserById(id);
         if (usuario.isPresent()){
-            usuario.get().getTipoUsuario().setId(idTipoUsuario);
+            usuario.get().setTipoUsuario(TipoUsuarioEntity.builder().id(idTipoUsuario).build());
         }
+        usuarioRepository.saveAndFlush(usuario.get());
         return Optional.of(Boolean.TRUE);
     }
 }
