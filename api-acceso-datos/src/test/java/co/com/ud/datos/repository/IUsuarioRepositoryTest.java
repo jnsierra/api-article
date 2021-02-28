@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
@@ -73,5 +75,24 @@ public class IUsuarioRepositoryTest {
         Assert.assertTrue(Boolean.TRUE);
         Integer actualizados = usuarioRepository.modificarEstadoUsuario(response.getId(), USER_STATE.INACTIVO);
         Assert.assertEquals(actualizados, Integer.valueOf(1));
+    }
+
+    @Test
+    public void testFindByTipoUsuario(){
+        UsuarioEntity usuarioEntity = UsuarioEntity.builder()
+                .correo("usuario1@outlook.com")
+                .contrasena("12345678")
+                .nombre("Jesus Nicolas")
+                .cambioContra("S")
+                .persona(PersonaEntity.builder().id(0L).build())
+                .tipoUsuario(TipoUsuarioEntity.builder().id(1L).build())
+                .intentos(0)
+                .estado(USER_STATE.ACTIVO)
+                .build();
+        UsuarioEntity response = usuarioRepository.save(usuarioEntity);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(Boolean.TRUE);
+        List<UsuarioEntity> responseService = usuarioRepository.findByTipoUsuario("PROFESOR");
+        Assert.assertNotNull(responseService);
     }
 }

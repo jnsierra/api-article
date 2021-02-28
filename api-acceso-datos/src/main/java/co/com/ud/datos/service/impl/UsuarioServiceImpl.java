@@ -89,4 +89,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioRepository.saveAndFlush(usuario.get());
         return Optional.of(Boolean.TRUE);
     }
+
+    @Override
+    public List<UsuarioEntity> getUserByTipoUsuario(String tipoUsuario) {
+        return usuarioRepository.findByTipoUsuario(tipoUsuario);
+    }
 }

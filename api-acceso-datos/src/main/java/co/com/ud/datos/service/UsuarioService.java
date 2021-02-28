@@ -21,4 +21,6 @@ public interface UsuarioService {
     Optional<UsuarioEntity> getUserById(Long id);
 
     Optional<Boolean> modifyEstadoTipoUsuario(Long id, USER_STATE estado, Long idTipoUsuario);
+
+    List<UsuarioEntity> getUserByTipoUsuario(String tipoUsuario);
 }

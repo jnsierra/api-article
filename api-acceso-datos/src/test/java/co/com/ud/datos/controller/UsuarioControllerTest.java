@@ -90,7 +90,7 @@ public class UsuarioControllerTest {
 
         Mockito.doReturn(Optional.of(usuarioResponse)).when(usuarioService).getFiltersUniques("jnsierrac@gmail.com","12345678");
 
-        ResponseEntity<UsuarioDto> response = usuarioController.getUserByEmailAndPass("jnsierrac@gmail.com", "12345678", null);
+        ResponseEntity<UsuarioDto[]> response = usuarioController.getUserByFilters("jnsierrac@gmail.com", "12345678", null);
 
         Assert.assertNotNull(response);
     }
@@ -99,7 +99,7 @@ public class UsuarioControllerTest {
     public void testGetUserByEmailAndPassNOT_FOUND(){
         Mockito.doReturn(Optional.empty()).when(usuarioService).getUserFindEmailAndPass("jnsierrac@gmail.com","12345678");
 
-        ResponseEntity<UsuarioDto> response = usuarioController.getUserByEmailAndPass("jnsierrac@gmail.com", "12345678", null);
+        ResponseEntity<UsuarioDto[]> response = usuarioController.getUserByFilters("jnsierrac@gmail.com", "12345678", null);
 
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
@@ -135,13 +135,27 @@ public class UsuarioControllerTest {
     }
 
     @Test
-    public void testuUpdateEstadoTipoUsuarioFAILED(){
+    public void testUpdateEstadoTipoUsuarioFAILED(){
         Mockito.doReturn(Optional.of(Boolean.FALSE)).when(usuarioService).modifyEstadoTipoUsuario(Mockito.any(), Mockito.any(), Mockito.any());
 
         ResponseEntity<Boolean> response = usuarioController.updateEstadoTipoUsuario(1L, USER_STATE.ACTIVO, 1L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
 
+    @Test
+    public void testGetUserById(){
+        UsuarioEntity usuarioResponse = UsuarioEntity.builder()
+                .id(1L)
+                .nombre("Jesus Nicolas")
+                .cambioContra("S")
+                .contrasena("12345678")
+                .correo("jnsierrac@gmail.com")
+                .build();
+        Mockito.doReturn(Optional.of(usuarioResponse)).when(usuarioService).getUserById(Mockito.any());
+
+        ResponseEntity<UsuarioDto> respuesta = usuarioController.getUserById(1L);
+        Assert.assertNotNull(respuesta);
     }
 
 }

@@ -50,9 +50,9 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     private Boolean validateUser(String correo) {
-        ResponseEntity<UsuarioDto> response = usuarioCliente.getUserByEmail(correo);
+        ResponseEntity<UsuarioDto[]> response = usuarioCliente.getUserByEmail(correo);
         if (HttpStatus.OK.equals(response.getStatusCode())) {
-            setUsuarioDto(response.getBody());
+            setUsuarioDto(response.getBody()[0]);
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
@@ -66,7 +66,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     private Boolean validatePassword(String correo, String pass) {
-        ResponseEntity<UsuarioDto> response = usuarioCliente.getUserByEmailAndPass(correo, pass);
+        ResponseEntity<UsuarioDto[]> response = usuarioCliente.getUserByEmailAndPass(correo, pass);
         if (HttpStatus.OK.equals(response.getStatusCode())) {
             return Boolean.TRUE;
         }

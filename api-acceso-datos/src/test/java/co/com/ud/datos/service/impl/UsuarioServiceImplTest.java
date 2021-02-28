@@ -176,12 +176,29 @@ public class UsuarioServiceImplTest {
     }
 
     @Test
-    public void testmodifyEstadoUsuarioFAILED(){
+    public void testModifyEstadoUsuarioFAILED(){
         Mockito.doReturn(0).when(usuarioRepository).modificarEstadoUsuario(Mockito.any(), Mockito.any());
 
         Optional<Boolean> response = usuarioService.modifyEstadoTipoUsuario(1L, USER_STATE.INACTIVO, 1L);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
         Assert.assertFalse(response.get());
+    }
+
+    @Test
+    public void testFindByTipoUsuario(){
+        UsuarioEntity usuarioRequest = UsuarioEntity.builder()
+                .nombre("Usuario 1")
+                .cambioContra("S")
+                .contrasena("12345678")
+                .correo("usuario1@gmail.com")
+                .estado(USER_STATE.ACTIVO)
+                .build();
+        List<UsuarioEntity> response = new ArrayList<>();
+        response.add(usuarioRequest);
+        Mockito.doReturn(response).when(usuarioRepository).findByTipoUsuario(Mockito.any());
+
+        List<UsuarioEntity> responseService = usuarioService.getUserByTipoUsuario("PROFESOR");
+        Assert.assertNotNull(responseService);
     }
 }

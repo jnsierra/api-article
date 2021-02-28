@@ -33,9 +33,11 @@ public class LoginServiceImplTest {
                 .estado(USER_STATE.ACTIVO)
                 .cambioContra("N")
                 .build();
+        UsuarioDto[] arrayUsu = new UsuarioDto[1];
+        arrayUsu[0] = usuarioDto;
 
-        Mockito.doReturn(new ResponseEntity<>(usuarioDto, HttpStatus.OK)).when(usuarioCliente).getUserByEmailAndPass(Mockito.any(), Mockito.any());
-        Mockito.doReturn(new ResponseEntity<>(usuarioDto, HttpStatus.OK)).when(usuarioCliente).getUserByEmail(Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(arrayUsu, HttpStatus.OK)).when(usuarioCliente).getUserByEmailAndPass(Mockito.any(), Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(arrayUsu, HttpStatus.OK)).when(usuarioCliente).getUserByEmail(Mockito.any());
 
         LOGIN_ACTION rta = loginService.validaLogin("jnsierrac@gmail.com", "123456");
         Assert.assertNotNull(rta);
@@ -48,9 +50,11 @@ public class LoginServiceImplTest {
                 .estado(USER_STATE.ACTIVO)
                 .cambioContra("S")
                 .build();
+        UsuarioDto[] arrayUsu = new UsuarioDto[1];
+        arrayUsu[0] = usuarioDto;
 
-        Mockito.doReturn(new ResponseEntity<>(usuarioDto, HttpStatus.OK)).when(usuarioCliente).getUserByEmailAndPass(Mockito.any(), Mockito.any());
-        Mockito.doReturn(new ResponseEntity<>(usuarioDto, HttpStatus.OK)).when(usuarioCliente).getUserByEmail(Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(arrayUsu, HttpStatus.OK)).when(usuarioCliente).getUserByEmailAndPass(Mockito.any(), Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(arrayUsu, HttpStatus.OK)).when(usuarioCliente).getUserByEmail(Mockito.any());
 
         LOGIN_ACTION rta = loginService.validaLogin("jnsierrac@gmail.com", "123456");
         Assert.assertNotNull(rta);
@@ -63,9 +67,11 @@ public class LoginServiceImplTest {
                 .estado(USER_STATE.ACTIVO)
                 .cambioContra("S")
                 .build();
+        UsuarioDto[] arrayUsu = new UsuarioDto[1];
+        arrayUsu[0] = usuarioDto;
 
         Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(usuarioCliente).getUserByEmailAndPass(Mockito.any(), Mockito.any());
-        Mockito.doReturn(new ResponseEntity<>(usuarioDto, HttpStatus.OK)).when(usuarioCliente).getUserByEmail(Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(arrayUsu, HttpStatus.OK)).when(usuarioCliente).getUserByEmail(Mockito.any());
 
         LOGIN_ACTION rta = loginService.validaLogin("jnsierrac@gmail.com", "123456");
         Assert.assertNotNull(rta);
@@ -78,9 +84,11 @@ public class LoginServiceImplTest {
                 .estado(USER_STATE.INACTIVO)
                 .cambioContra("S")
                 .build();
+        UsuarioDto[] arrayUsu = new UsuarioDto[1];
+        arrayUsu[0] = usuarioDto;
 
         Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(usuarioCliente).getUserByEmailAndPass(Mockito.any(), Mockito.any());
-        Mockito.doReturn(new ResponseEntity<>(usuarioDto, HttpStatus.OK)).when(usuarioCliente).getUserByEmail(Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(arrayUsu, HttpStatus.OK)).when(usuarioCliente).getUserByEmail(Mockito.any());
 
         LOGIN_ACTION rta = loginService.validaLogin("jnsierrac@gmail.com", "123456");
         Assert.assertNotNull(rta);

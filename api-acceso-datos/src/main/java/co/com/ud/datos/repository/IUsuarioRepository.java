@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -39,4 +40,6 @@ public interface IUsuarioRepository extends JpaRepository<UsuarioEntity, Long>, 
     @Modifying
     @Transactional
     Integer modificarEstadoUsuario(@Param("id") Long id,@Param("estado") USER_STATE estado);
+
+    List<UsuarioEntity> findByTipoUsuario(@Param("tipoUsuario") String tipoUsuario);
 }

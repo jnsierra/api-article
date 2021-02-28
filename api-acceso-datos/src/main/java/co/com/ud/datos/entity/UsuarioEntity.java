@@ -24,8 +24,8 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = "UsuarioEntity.updateIntentos", query = "update UsuarioEntity usu set usu.intentos = :intentos WHERE usu.id = :id"),
         @NamedQuery(name = "UsuarioEntity.inactivarUsuario", query = "update UsuarioEntity usu set usu.estado = 'INACTIVO' WHERE usu.id = :id "),
-        @NamedQuery(name = "UsuarioEntity.modificarEstadoUsuario", query = "update UsuarioEntity usu set usu.estado = :estado where usu.id = :id ")
-
+        @NamedQuery(name = "UsuarioEntity.modificarEstadoUsuario", query = "update UsuarioEntity usu set usu.estado = :estado where usu.id = :id "),
+        @NamedQuery(name = "UsuarioEntity.findByTipoUsuario", query = "from UsuarioEntity usuario inner join usuario.tipoUsuario as tipoU WHERE tipoU.tipo = :tipoUsuario")
 })
 public class UsuarioEntity extends Auditable<String> {
 
@@ -76,5 +76,8 @@ public class UsuarioEntity extends Auditable<String> {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private USER_STATE estado;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL, mappedBy = "usuario")
+    private IdeaEntity idea;
 
 }

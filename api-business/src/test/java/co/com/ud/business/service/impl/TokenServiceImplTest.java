@@ -34,7 +34,9 @@ public class TokenServiceImplTest {
     @Test
     public void generateTokenUserSUCCESS(){
         UsuarioDto usuarioDto = UsuarioDto.builder().id(0L).build();
-        Mockito.doReturn(new ResponseEntity<>(usuarioDto, HttpStatus.OK)).when(usuarioCliente).getUserByEmailAndPass(Mockito.any(), Mockito.any());
+        UsuarioDto[] arrayUsu = new UsuarioDto[1];
+        arrayUsu[0] = usuarioDto;
+        Mockito.doReturn(new ResponseEntity<>(arrayUsu, HttpStatus.OK)).when(usuarioCliente).getUserByEmailAndPass(Mockito.any(), Mockito.any());
 
         Optional<TokenDto> rta = tokenService.generateTokenUser("jnsierrac@gmail.com");
         Assert.assertNotNull(rta);

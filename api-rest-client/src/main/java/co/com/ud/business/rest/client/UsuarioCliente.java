@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 public interface UsuarioCliente {
 
     @GetMapping(value = "/by/", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<UsuarioDto> getUserByEmailAndPass(@RequestParam(name = "correo", required = true) String correo, @RequestParam(name = "contrasenia", required = false) String contrasenia);
+    ResponseEntity<UsuarioDto[]> getUserByEmailAndPass(@RequestParam(name = "correo", required = true) String correo, @RequestParam(name = "contrasenia", required = false) String contrasenia);
 
     @GetMapping(value = "/by/", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<UsuarioDto> getUserByEmail(@RequestParam(name = "correo", required = true) String correo);
+    ResponseEntity<UsuarioDto[]> getUserByEmail(@RequestParam(name = "correo", required = true) String correo);
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<UsuarioDto[]> get();

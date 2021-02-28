@@ -32,3 +32,7 @@ hs_err_pid*
 /api-test-acceptance/target/*
 /api-business/target/*
 /api-service-discovery/target/*
+/api-mail/target/*
+/api-rest-client/target/*
+/api-server-config/target/*
+/api-security/target/*

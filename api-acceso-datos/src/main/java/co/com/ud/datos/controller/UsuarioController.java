@@ -11,8 +11,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -42,15 +43,23 @@ public class UsuarioController {
     }
 
     @GetMapping(value = "/by/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDto> getUserByEmailAndPass(@RequestParam(name = "correo", required = true) String correo
+    public ResponseEntity<UsuarioDto[]> getUserByFilters(@RequestParam(name = "correo", required = false) String correo
             , @RequestParam(name = "contrasenia", required = false) String contrasenia
-            , @RequestHeader Map cabeceras) {
-        Optional<UsuarioEntity> usuario = usuarioService.getFiltersUniques(correo, contrasenia);
-        if (usuario.isPresent()) {
-            return new ResponseEntity<>(mapper.map(usuario.get(), UsuarioDto.class), HttpStatus.OK);
-        } else {
+            , @RequestParam(name = "tipoUsuario", required = false) String tipoUsuario) {
+        List<UsuarioEntity> usuarios = new ArrayList<>();
+        if(Objects.nonNull(correo) && Objects.isNull(tipoUsuario)){
+            Optional<UsuarioEntity> usuario = usuarioService.getFiltersUniques(correo, contrasenia);
+            if (usuario.isPresent()) {
+                usuarios.add(usuario.get());
+            }
+        }else if(Objects.nonNull(tipoUsuario)){
+            usuarios = usuarioService.getUserByTipoUsuario(tipoUsuario);
+        }
+        if(usuarios.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(mapper.map(usuarios, UsuarioDto[].class), HttpStatus.OK);
+
     }
 
     @PutMapping(value = "/{correo}/intentos", produces = MediaType.APPLICATION_JSON_VALUE)
