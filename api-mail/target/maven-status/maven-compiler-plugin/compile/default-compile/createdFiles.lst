@@ -1,4 +1,0 @@
-co\com\ud\mail\AppMail.class
-co\com\ud\mail\service\EmailService.class
-co\com\ud\mail\service\impl\EmailServiceImpl.class
-co\com\ud\mail\config\MailConfig.class
