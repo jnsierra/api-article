@@ -1,6 +1,7 @@
 package co.com.ud.datos.service;
 
 import co.com.ud.datos.entity.UsuarioEntity;
+import co.com.ud.utiles.enumeracion.USER_STATE;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +19,6 @@ public interface UsuarioService {
     Optional<Boolean> updateIntentosLoginUsuario(String email);
 
     Optional<UsuarioEntity> getUserById(Long id);
+
+    Optional<Boolean> modifyEstadoUsuario(Long id, USER_STATE estado, Long idTipoUsuario);
 }

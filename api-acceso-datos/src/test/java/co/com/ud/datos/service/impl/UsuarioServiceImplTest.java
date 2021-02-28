@@ -1,5 +1,6 @@
 package co.com.ud.datos.service.impl;
 
+import co.com.ud.datos.entity.TipoUsuarioEntity;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.repository.IPersonaRepository;
 import co.com.ud.datos.repository.IUsuarioRepository;
@@ -153,5 +154,34 @@ public class UsuarioServiceImplTest {
         Assert.assertEquals(Boolean.TRUE, rta.isPresent());
     }
 
+    @Test
+    public void testmodifyEstadoUsuarioSUCCESS(){
+        UsuarioEntity usuarioResponse = UsuarioEntity.builder()
+                .id(1L)
+                .nombre("Jesus Nicolas")
+                .cambioContra("S")
+                .contrasena("12345678")
+                .correo("jnsierrac@gmail.com")
+                .tipoUsuario(TipoUsuarioEntity.builder().build())
+                .intentos(0)
+                .build();
+        Mockito.doReturn(1).when(usuarioRepository).modificarEstadoUsuario(Mockito.any(), Mockito.any());
+        Mockito.doReturn(Optional.of(usuarioResponse)).when(usuarioRepository).findById(1L);
 
+
+        Optional<Boolean> response = usuarioService.modifyEstadoUsuario(1L, USER_STATE.INACTIVO, 1L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+        Assert.assertTrue(response.get());
+    }
+
+    @Test
+    public void testmodifyEstadoUsuarioFAILED(){
+        Mockito.doReturn(0).when(usuarioRepository).modificarEstadoUsuario(Mockito.any(), Mockito.any());
+
+        Optional<Boolean> response = usuarioService.modifyEstadoUsuario(1L, USER_STATE.INACTIVO, 1L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+        Assert.assertFalse(response.get());
+    }
 }

@@ -116,6 +116,8 @@
                                         <exclude>co.com.ud.datos.audit.*</exclude>
                                         <!--Exclusiones para bussines-->
                                         <exclude>co.com.ud.business.AppBusiness</exclude>
+                                        <!--Exclusionaes para mail-->
+                                        <exclude>co.com.ud.mail.AppMail</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>

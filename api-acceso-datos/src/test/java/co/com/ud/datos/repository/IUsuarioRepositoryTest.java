@@ -55,4 +55,23 @@ public class IUsuarioRepositoryTest {
         Integer actualizados = usuarioRepository.updateIntentos(response.getId(), 2);
         Assert.assertEquals(actualizados, Integer.valueOf(1));
     }
+    @Test
+    public void testModificarEstado(){
+        UsuarioEntity usuarioEntity = UsuarioEntity.builder()
+                .correo("jnsierrac@outlook.com.co")
+                .contrasena("12345678")
+                .nombre("Jesus Nicolas")
+                .cambioContra("S")
+                .persona(PersonaEntity.builder().id(0L).build())
+                .tipoUsuario(TipoUsuarioEntity.builder().id(1L).build())
+                .intentos(0)
+                .estado(USER_STATE.ACTIVO)
+                .build();
+        //Inserto el usuario
+        UsuarioEntity response = usuarioRepository.save(usuarioEntity);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(Boolean.TRUE);
+        Integer actualizados = usuarioRepository.modificarEstadoUsuario(response.getId(), USER_STATE.INACTIVO);
+        Assert.assertEquals(actualizados, Integer.valueOf(1));
+    }
 }

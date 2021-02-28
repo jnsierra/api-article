@@ -23,7 +23,9 @@ import java.util.Set;
 @Audited
 @NamedQueries({
         @NamedQuery(name = "UsuarioEntity.updateIntentos", query = "update UsuarioEntity usu set usu.intentos = :intentos WHERE usu.id = :id"),
-        @NamedQuery(name = "UsuarioEntity.inactivarUsuario", query = "update UsuarioEntity usu set usu.estado = 'INACTIVO' WHERE usu.id = :id ")
+        @NamedQuery(name = "UsuarioEntity.inactivarUsuario", query = "update UsuarioEntity usu set usu.estado = 'INACTIVO' WHERE usu.id = :id "),
+        @NamedQuery(name = "UsuarioEntity.modificarEstadoUsuario", query = "update UsuarioEntity usu set usu.estado = :estado where usu.id = :id ")
+
 })
 public class UsuarioEntity extends Auditable<String> {
 
