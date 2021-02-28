@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: co.com.ud.mail.service.impl.EmailServiceImplTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.154 s - in co.com.ud.mail.service.impl.EmailServiceImplTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.368 s - in co.com.ud.mail.service.impl.EmailServiceImplTest

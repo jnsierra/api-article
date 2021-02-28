@@ -75,7 +75,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Optional<Boolean> modifyEstadoUsuario(Long id, USER_STATE estado, Long idTipoUsuario) {
+    public Optional<Boolean> modifyEstadoTipoUsuario(Long id, USER_STATE estado, Long idTipoUsuario) {
         Integer actulizados = usuarioRepository.modificarEstadoUsuario(id, estado);
         if(actulizados == 0){
             return Optional.of(Boolean.FALSE);

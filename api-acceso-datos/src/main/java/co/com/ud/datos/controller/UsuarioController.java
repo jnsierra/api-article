@@ -3,6 +3,7 @@ package co.com.ud.datos.controller;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.service.UsuarioService;
 import co.com.ud.utiles.dto.UsuarioDto;
+import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,6 +68,16 @@ public class UsuarioController {
         if(usuario.isPresent()){
             return new ResponseEntity<>(mapper.map(usuario.get(), UsuarioDto.class),HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping(value = "/")
+    public ResponseEntity<Boolean> updateEstadoTipoUsuario(@RequestParam("id") Long id, @RequestParam("estado")USER_STATE estado,
+                                                           @RequestParam("tipoUsuario") Long tipoUsuario){
+        Optional<Boolean> response = usuarioService.modifyEstadoTipoUsuario(id, estado, tipoUsuario);
+
+        if(response.isPresent() && Boolean.TRUE.equals(response.get()))
+            return new ResponseEntity<>(response.get(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
