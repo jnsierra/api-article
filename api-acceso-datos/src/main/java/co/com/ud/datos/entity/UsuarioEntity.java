@@ -77,4 +77,7 @@ public class UsuarioEntity extends Auditable<String> {
     @Column(name = "estado")
     private USER_STATE estado;
 
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL, mappedBy = "usuario")
+    private IdeaEntity idea;
+
 }

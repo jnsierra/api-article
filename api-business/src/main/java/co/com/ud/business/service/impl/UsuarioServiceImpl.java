@@ -27,9 +27,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Optional<UsuarioDto> getUsuarioByCorreo(String correo) {
-        ResponseEntity<UsuarioDto> response = usuarioCliente.getUserByEmail(correo);
+        ResponseEntity<UsuarioDto[]> response = usuarioCliente.getUserByEmail(correo);
         if (HttpStatus.OK.equals(response.getStatusCode())) {
-            return Optional.of(response.getBody());
+            return Optional.of(response.getBody()[0]);
         }
         return Optional.empty();
     }

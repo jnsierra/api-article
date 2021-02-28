@@ -65,9 +65,9 @@ public class TokenServiceImpl implements TokenService {
      * @return
      */
     private Optional<UsuarioDto> getUser(String email){
-        ResponseEntity<UsuarioDto> user = usuarioCliente.getUserByEmailAndPass(email, null);
+        ResponseEntity<UsuarioDto[]> user = usuarioCliente.getUserByEmailAndPass(email, null);
         if(HttpStatus.OK.equals(user.getStatusCode())){
-            return Optional.of(user.getBody());
+            return Optional.of(user.getBody()[0]);
         }
 
         return Optional.empty();

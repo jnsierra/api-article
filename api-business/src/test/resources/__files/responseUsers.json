@@ -1,4 +1,4 @@
-{
+[{
   "id": 0,
   "correo": "jnsierrac@gmail.com",
   "contrasena": "12345678",
@@ -7,4 +7,4 @@
   "personaId": 0,
   "tipoUsuarioId": 0,
   "estado": "ACTIVO"
-}
+}]

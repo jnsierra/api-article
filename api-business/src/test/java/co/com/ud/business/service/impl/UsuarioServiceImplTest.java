@@ -38,8 +38,10 @@ public class UsuarioServiceImplTest {
                 .id(0L)
                 .correo("jnsierrac@gmail.com")
                 .build();
+        UsuarioDto[] arrayUsu = new UsuarioDto[1];
+        arrayUsu[0] = response;
 
-        Mockito.doReturn(new ResponseEntity<>(response, HttpStatus.OK) ).when(usuarioCliente).getUserByEmail("jnsierrac@gmail.com");
+        Mockito.doReturn(new ResponseEntity<>(arrayUsu, HttpStatus.OK) ).when(usuarioCliente).getUserByEmail("jnsierrac@gmail.com");
 
         Optional<UsuarioDto> usuario = usuarioService.getUsuarioByCorreo("jnsierrac@gmail.com");
         Assert.assertNotNull(usuario);
