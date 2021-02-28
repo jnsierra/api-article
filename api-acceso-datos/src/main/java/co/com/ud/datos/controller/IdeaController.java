@@ -8,22 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/v.1/ideas")
-public class IdeaControler {
+public class IdeaController {
 
     private final IdeaService ideaService;
     private final ModelMapper mapper;
 
     @Autowired
-    public IdeaControler(IdeaService ideaService, ModelMapper mapper) {
+    public IdeaController(IdeaService ideaService, ModelMapper mapper) {
         this.ideaService = ideaService;
         this.mapper = mapper;
     }
@@ -34,6 +33,14 @@ public class IdeaControler {
         if(ideaEntity.isPresent()){
             return new ResponseEntity<>( mapper.map(ideaEntity.get(), IdeaDto.class),   HttpStatus.CREATED);
         }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/by/usuarios/")
+    public ResponseEntity<IdeaDto[]> getIdeasByUsuario(@RequestParam(name = "id", required = false) Long idUsuario){
+        List<IdeaEntity> ideas = ideaService.findByUsuarioId(idUsuario);
+        if(Objects.nonNull(ideas) && !ideas.isEmpty())
+            return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

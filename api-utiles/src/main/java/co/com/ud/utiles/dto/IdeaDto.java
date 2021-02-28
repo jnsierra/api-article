@@ -22,4 +22,6 @@ public class IdeaDto {
     private String estado;
 
     private String titulo;
+
+    private String nombreProf;
 }

@@ -6,6 +6,7 @@ import co.com.ud.datos.service.IdeaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +23,11 @@ public class IdeaServiceImpl implements IdeaService {
     public Optional<IdeaEntity> save(IdeaEntity idea) {
         IdeaEntity ideaEntity = ideaRepository.save(idea);
         return Optional.of(ideaEntity);
+    }
+
+    @Override
+    public List<IdeaEntity> findByUsuarioId(Long id) {
+        return ideaRepository.findByUsuarioId(id);
     }
 
 }

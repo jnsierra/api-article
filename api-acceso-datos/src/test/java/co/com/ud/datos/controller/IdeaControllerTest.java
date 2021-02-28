@@ -20,7 +20,7 @@ import java.util.Optional;
 @SpringBootTest
 public class IdeaControllerTest {
 
-    private IdeaControler ideaControler;
+    private IdeaController ideaControler;
     @Mock
     private IdeaServiceImpl ideaServiceImpl;
 
@@ -30,7 +30,7 @@ public class IdeaControllerTest {
     public void setUp(){
         MockitoAnnotations.initMocks(this);
         this.mapper = new ModelMapper();
-        this.ideaControler = new IdeaControler(ideaServiceImpl, mapper);
+        this.ideaControler = new IdeaController(ideaServiceImpl, mapper);
     }
 
     @Test
