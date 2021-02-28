@@ -35,3 +35,4 @@ hs_err_pid*
 /api-mail/target/*
 /api-rest-client/target/*
 /api-server-config/target/*
+/api-security/target/*
