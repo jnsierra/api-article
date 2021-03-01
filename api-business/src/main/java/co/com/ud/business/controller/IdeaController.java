@@ -33,7 +33,6 @@ public class IdeaController {
         if(Objects.nonNull(ideas) && !ideas.isEmpty()){
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         }
-
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
