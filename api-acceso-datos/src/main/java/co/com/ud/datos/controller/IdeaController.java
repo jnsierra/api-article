@@ -43,4 +43,24 @@ public class IdeaController {
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping(value = "/by/profesor/{idProfesor}/")
+    public ResponseEntity<IdeaDto[]> getIdeasByProfesorAndEstado(@PathVariable(name = "idProfesor", required = false) Long idProfesor
+            , @RequestParam(name = "estado", required = false) String estado){
+        List<IdeaEntity> ideas = ideaService.findByProfesorIdAndEstado(idProfesor, estado);
+        if(Objects.nonNull(ideas) && !ideas.isEmpty())
+            return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping(value = "/estado/{idIdea}/{estado}/{idUsuario}/")
+    public ResponseEntity<Boolean> updateStatusIdeaByIdAndUsuario(@PathVariable(name = "idIdea") Long id
+            , @PathVariable(name = "estado") String estado
+            , @PathVariable(name = "idUsuario") Long idUsuario){
+        Optional<Boolean> rta = ideaService.modificarIdProfAutorizaAndEstadoAndFechaAutoriza(id, idUsuario, estado);
+        if(rta.isPresent()){
+            return new ResponseEntity<>(rta.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

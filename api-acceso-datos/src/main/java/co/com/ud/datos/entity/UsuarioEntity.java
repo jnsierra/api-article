@@ -11,7 +11,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -77,7 +79,17 @@ public class UsuarioEntity extends Auditable<String> {
     @Column(name = "estado")
     private USER_STATE estado;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL, mappedBy = "usuario")
-    private IdeaEntity idea;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario", orphanRemoval = true)
+    private List<IdeaEntity> ideas = new ArrayList<IdeaEntity>();
+
+    public void addIdea(IdeaEntity idea) {
+        ideas.add(idea);
+        idea.setUsuario(this);
+    }
+
+    public void removeIdea(IdeaEntity idea) {
+        ideas.remove(idea);
+        idea.setUsuario(null);
+    }
 
 }

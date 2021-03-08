@@ -24,6 +24,11 @@
             <column name="titulo" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="id_prof_autoriza" type="INT">
+            </column>
+            <column name="fecha_aprob" type="datetime">
+            </column>
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>

@@ -6,6 +6,7 @@ import co.com.ud.datos.service.IdeaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,20 @@ public class IdeaServiceImpl implements IdeaService {
     @Override
     public List<IdeaEntity> findByUsuarioId(Long id) {
         return ideaRepository.findByUsuarioId(id);
+    }
+
+    @Override
+    public List<IdeaEntity> findByProfesorIdAndEstado(Long idProfesor, String estado) {
+        return ideaRepository.findByProfesorIdAndEstado(idProfesor, estado);
+    }
+
+    @Override
+    public Optional<Boolean> modificarIdProfAutorizaAndEstadoAndFechaAutoriza(Long idIdea, Long idProf, String estado) {
+        Integer registro = ideaRepository.modificarIdProfAutorizaAndEstadoAndFechaAutoriza(idIdea, idProf, estado, new Date());
+        if(registro > 0){
+            return Optional.of(Boolean.TRUE);
+        }
+        return Optional.empty();
     }
 
 }

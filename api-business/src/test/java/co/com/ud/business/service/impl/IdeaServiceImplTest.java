@@ -2,7 +2,6 @@ package co.com.ud.business.service.impl;
 
 import co.com.ud.business.rest.client.IdeaCliente;
 import co.com.ud.business.rest.client.UsuarioCliente;
-import co.com.ud.business.service.IdeaService;
 import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.dto.PersonaDto;
 import co.com.ud.utiles.dto.UsuarioDto;

@@ -45,4 +45,23 @@ public class IdeaServiceImpl implements IdeaService {
         }
         return ideas;
     }
+
+    @Override
+    public List<IdeaDto> findByProfesorIdAndEstado(Long idProfesor, String estado) {
+        List<IdeaDto> ideas = new ArrayList<>();
+        ResponseEntity<IdeaDto[]> idea = ideaCliente.getIdeasByProfesorAndEstado(idProfesor, estado);
+        if(HttpStatus.OK.equals(idea.getStatusCode())){
+            ideas = Arrays.asList(idea.getBody());
+            ideas = ideas.stream().parallel()
+                    .map(item -> {
+                        ResponseEntity<UsuarioDto> response = usuarioCliente.getUserById(item.getUsuarioId());
+                        if(HttpStatus.OK.equals(response.getStatusCode())){
+                            UsuarioDto profesor = response.getBody();
+                            item.setNombreAlumno(profesor.getPersona().getApellidos() + " " + profesor.getPersona().getNombres());
+                        }
+                        return item;
+                    }).collect(Collectors.toList());
+        }
+        return ideas;
+    }
 }

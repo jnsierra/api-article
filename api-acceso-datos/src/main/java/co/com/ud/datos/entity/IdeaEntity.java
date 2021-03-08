@@ -7,12 +7,15 @@ import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "idea")
-@NamedQueries(
-        @NamedQuery(name = "IdeaEntity.findByUsuarioId", query = "select idea from IdeaEntity idea inner join fetch idea.usuario as usu where usu.id = :idUsua ")
-)
+@NamedQueries({
+        @NamedQuery(name = "IdeaEntity.findByUsuarioId", query = "select idea from IdeaEntity idea inner join fetch idea.usuario as usu where usu.id = :idUsua "),
+        @NamedQuery(name = "IdeaEntity.findByProfesorIdAndEstado", query = "select idea from IdeaEntity idea inner join fetch idea.usuario as usu where idea.id_profesor = :idProfesor and idea.estado = :estadoIdea"),
+        @NamedQuery(name = "IdeaEntity.modificarIdProfAutorizaAndEstadoAndFechaAutoriza", query = "Update IdeaEntity idea set idea.idProfesorAutoriza = :idProf, idea.estado = :estado, id.fechaAprobacion = :fechaApro where idea.id = :idIdea")
+})
 @Data
 @Builder
 @AllArgsConstructor
@@ -26,7 +29,7 @@ public class IdeaEntity extends Auditable<String>{
     @SequenceGenerator(name = "idea_generator", sequenceName = "idea_seq", allocationSize = 1)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false)
     private UsuarioEntity usuario;
 
@@ -41,5 +44,12 @@ public class IdeaEntity extends Auditable<String>{
 
     @Column(name = "titulo")
     private String titulo;
+
+    @Column(name = "id_prof_autoriza")
+    private Long idProfesorAutoriza;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "fecha_aprob")
+    private Date fechaAprobacion;
 
 }

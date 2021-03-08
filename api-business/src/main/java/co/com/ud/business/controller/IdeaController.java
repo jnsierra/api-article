@@ -6,10 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +27,16 @@ public class IdeaController {
     @GetMapping(value = "/by/usuarios/")
     public ResponseEntity<IdeaDto[]> getIdeasByUsuario(@RequestParam(name = "id", required = false) Long idUsuario){
         List<IdeaDto> ideas = ideaService.findIdeasByUsuario(idUsuario);
+        if(Objects.nonNull(ideas) && !ideas.isEmpty()){
+            return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/by/profesor/{idProfesor}/")
+    public ResponseEntity<IdeaDto[]> getIdeasByProfesorAndEstado(@PathVariable(name = "idProfesor", required = false) Long idProfesor
+            , @RequestParam(name = "estado", required = false) String estado){
+        List<IdeaDto> ideas = ideaService.findByProfesorIdAndEstado(idProfesor, estado);
         if(Objects.nonNull(ideas) && !ideas.isEmpty()){
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         }
