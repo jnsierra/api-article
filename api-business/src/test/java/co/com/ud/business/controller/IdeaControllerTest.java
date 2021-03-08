@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @SpringBootTest
 public class IdeaControllerTest {
@@ -61,6 +62,46 @@ public class IdeaControllerTest {
         ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByUsuario(1L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetIdeasByUsuarioEMPTY(){
+
+        Mockito.doReturn(null).when(ideaService).findIdeasByUsuario(Mockito.any());
+
+        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByUsuario(1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetIdeasByProfesorAndEstadoEMPTY(){
+
+        Mockito.doReturn(null).when(ideaService).findByProfesorIdAndEstado(Mockito.any(), Mockito.any());
+
+        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByProfesorAndEstado(0L, "CREADO");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+
+    }
+
+    @Test
+    public void testGetIdeasByProfesorAndEstadoSUCCESS(){
+
+        List<IdeaDto> ideas = new ArrayList<>();
+        IdeaDto idea = IdeaDto.builder()
+                .id(0L)
+                .id_profesor(1L)
+                .contenido("Esto es una prueba")
+                .build();
+        ideas.add(idea);
+
+        Mockito.doReturn(ideas).when(ideaService).findByProfesorIdAndEstado(Mockito.any(), Mockito.any());
+
+        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByProfesorAndEstado(0L, "CREADO");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+
     }
 
 }

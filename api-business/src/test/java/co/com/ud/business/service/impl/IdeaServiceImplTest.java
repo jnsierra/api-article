@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -66,6 +67,53 @@ public class IdeaServiceImplTest {
         List<IdeaDto> respuesta = ideaService.findIdeasByUsuario(1L);
         Assert.assertNotNull(respuesta);
         Assert.assertEquals(0, respuesta.size());
+    }
+
+    @Test
+    public void testFindByProfesorIdAndEstadoEMPTY(){
+        Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(ideaCliente).getIdeasByProfesorAndEstado(Mockito.any(), Mockito.any());
+
+        List<IdeaDto> response = ideaService.findByProfesorIdAndEstado(0L, "CREADA");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isEmpty());
+
+    }
+
+    @Test
+    public void testFindByProfesorIdAndEstadoEMPTY_LIST(){
+        IdeaDto[] ideas = new IdeaDto[0];
+
+        Mockito.doReturn(new ResponseEntity<>(ideas,HttpStatus.OK)).when(ideaCliente).getIdeasByProfesorAndEstado(Mockito.any(), Mockito.any());
+
+        List<IdeaDto> response = ideaService.findByProfesorIdAndEstado(0L, "CREADA");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isEmpty());
+
+    }
+
+    @Test
+    public void testFindByProfesorIdAndEstadoSUCCESS(){
+        IdeaDto[] ideas = new IdeaDto[1];
+        IdeaDto idea = IdeaDto.builder()
+                .id(1L)
+                .usuarioId(2L)
+                .build();
+        ideas[0] = idea;
+
+        UsuarioDto usu = UsuarioDto.builder()
+                .id(2L)
+                .nombre("Jesus Nicolas")
+                .persona(PersonaDto.builder().nombres("Jesus Nicolas").apellidos("Sierra Chaparro").build())
+                .build();
+        ResponseEntity<UsuarioDto> responseUsu = new ResponseEntity<>(usu, HttpStatus.OK);
+        Mockito.doReturn(responseUsu).when(usuarioCliente).getUserById(Mockito.any());
+
+        Mockito.doReturn(new ResponseEntity<>(ideas,HttpStatus.OK)).when(ideaCliente).getIdeasByProfesorAndEstado(Mockito.any(), Mockito.any());
+
+        List<IdeaDto> response = ideaService.findByProfesorIdAndEstado(0L, "CREADA");
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isEmpty());
+
     }
 
 }

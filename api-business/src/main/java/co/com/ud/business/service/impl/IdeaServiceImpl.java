@@ -50,7 +50,7 @@ public class IdeaServiceImpl implements IdeaService {
     public List<IdeaDto> findByProfesorIdAndEstado(Long idProfesor, String estado) {
         List<IdeaDto> ideas = new ArrayList<>();
         ResponseEntity<IdeaDto[]> idea = ideaCliente.getIdeasByProfesorAndEstado(idProfesor, estado);
-        if(HttpStatus.OK.equals(idea.getStatusCode())){
+        if(HttpStatus.OK.equals(idea.getStatusCode()) && idea.getBody().length != 0){
             ideas = Arrays.asList(idea.getBody());
             ideas = ideas.stream().parallel()
                     .map(item -> {
