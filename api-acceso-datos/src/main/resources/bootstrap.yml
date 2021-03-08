@@ -3,6 +3,6 @@ spring:
     name: api-acceso-datos
   cloud:
     config:
-      uri: http://192.168.0.30:8888
+      uri: http://server-config:8888
   profiles:
     active: dev
