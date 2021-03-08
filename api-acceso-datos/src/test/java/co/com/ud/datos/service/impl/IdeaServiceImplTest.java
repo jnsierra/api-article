@@ -11,7 +11,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -54,6 +57,71 @@ public class IdeaServiceImplTest {
         Optional<IdeaEntity> rta = ideaService.save(request);
         Assert.assertNotNull(rta);
         Assert.assertTrue(rta.isPresent());
+    }
+
+    @Test
+    public void testFindByUsuarioId(){
+        ArrayList<IdeaEntity> list = new ArrayList<>();
+        IdeaEntity response = IdeaEntity.builder()
+                .id(1L)
+                .titulo("Este es un titulo")
+                .contenido("Este es el contenido")
+                .estado("CREADO")
+                .id_profesor(1L)
+                .usuario(UsuarioEntity.builder()
+                        .id(1L)
+                        .build())
+                .build();
+        list.add(response);
+        Mockito.doReturn(list).when(ideaRepository).findByUsuarioId(Mockito.any());
+
+        List<IdeaEntity> rta = ideaService.findByUsuarioId(Mockito.any());
+        Assert.assertNotNull(rta);
+        Assert.assertFalse(rta.isEmpty());
+    }
+
+    @Test
+    public void testFindByProfesorIdAndEstado(){
+        ArrayList<IdeaEntity> list = new ArrayList<>();
+        IdeaEntity response = IdeaEntity.builder()
+                .id(1L)
+                .titulo("Este es un titulo")
+                .contenido("Este es el contenido")
+                .estado("CREADO")
+                .id_profesor(1L)
+                .usuario(UsuarioEntity.builder()
+                        .id(1L)
+                        .build())
+                .build();
+        list.add(response);
+        Mockito.doReturn(list).when(ideaRepository).findByProfesorIdAndEstado(Mockito.any(), Mockito.any());
+
+        List<IdeaEntity> rta = ideaService.findByProfesorIdAndEstado(0L, "CREADO");
+        Assert.assertNotNull(rta);
+        Assert.assertFalse(rta.isEmpty());
+
+    }
+
+    @Test
+    public void testModificarIdProfAutorizaAndEstadoAndFechaAutorizaFAILED(){
+
+        Mockito.doReturn(0).when(ideaRepository).modificarIdProfAutorizaAndEstadoAndFechaAutoriza(Mockito.any(), Mockito.any(), Mockito.any(),Mockito.any() );
+
+        Optional<Boolean> rta = ideaService.modificarIdProfAutorizaAndEstadoAndFechaAutoriza(0L, 1L, "CREADA");
+        Assert.assertNotNull(rta);
+        Assert.assertFalse(rta.isPresent());
+
+    }
+
+    @Test
+    public void testModificarIdProfAutorizaAndEstadoAndFechaAutorizaSUCCESS(){
+
+        Mockito.doReturn(1).when(ideaRepository).modificarIdProfAutorizaAndEstadoAndFechaAutoriza(Mockito.any(), Mockito.any(), Mockito.any(),Mockito.any() );
+
+        Optional<Boolean> rta = ideaService.modificarIdProfAutorizaAndEstadoAndFechaAutoriza(0L, 1L, "CREADA");
+        Assert.assertNotNull(rta);
+        Assert.assertTrue(rta.isPresent());
+
     }
 
 }

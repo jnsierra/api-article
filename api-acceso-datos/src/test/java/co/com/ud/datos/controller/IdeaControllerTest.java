@@ -109,4 +109,50 @@ public class IdeaControllerTest {
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
+
+    @Test
+    public void testGetIdeasByProfesorAndEstadoEMPTY(){
+        List<IdeaEntity> ideas = new ArrayList<>();
+        Mockito.doReturn(ideas).when(ideaServiceImpl).findByProfesorIdAndEstado(Mockito.any(), Mockito.any());
+        ResponseEntity<IdeaDto[]> response = ideaControler.getIdeasByProfesorAndEstado(0L, "CREADA");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetIdeasByProfesorAndEstadoSUCCESS(){
+        List<IdeaEntity> ideas = new ArrayList<>();
+        IdeaEntity idea = IdeaEntity.builder()
+                .id(0L)
+                .contenido("Esto es una prueba")
+                .build();
+        ideas.add(idea);
+
+        Mockito.doReturn(ideas).when(ideaServiceImpl).findByProfesorIdAndEstado(Mockito.any(), Mockito.any());
+        ResponseEntity<IdeaDto[]> response = ideaControler.getIdeasByProfesorAndEstado(0L, "CREADA");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testUpdateStatusIdeaByIdAndUsuarioSUCCESS(){
+
+        Mockito.doReturn(Optional.of(true)).when(ideaServiceImpl).modificarIdProfAutorizaAndEstadoAndFechaAutoriza(Mockito.any(), Mockito.any(), Mockito.any());
+
+        ResponseEntity<Boolean> response = ideaControler.updateStatusIdeaByIdAndUsuario(0L, "CREADA", 1l);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.getBody());
+
+    }
+
+    @Test
+    public void testUpdateStatusIdeaByIdAndUsuarioEMPTY(){
+
+        Mockito.doReturn(Optional.empty()).when(ideaServiceImpl).modificarIdProfAutorizaAndEstadoAndFechaAutoriza(Mockito.any(), Mockito.any(), Mockito.any());
+
+        ResponseEntity<Boolean> response = ideaControler.updateStatusIdeaByIdAndUsuario(0L, "CREADA", 1l);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+
+    }
 }
