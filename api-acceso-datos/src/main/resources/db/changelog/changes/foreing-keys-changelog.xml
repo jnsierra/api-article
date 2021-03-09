@@ -23,20 +23,8 @@
         <addForeignKeyConstraint baseTableName="idea" baseColumnNames="id_usuario" constraintName="fk_usuario_idea" referencedTableName="usuario"
                                  referencedColumnNames="id"/>
     </changeSet>
-    <changeSet id="7" author="">
-        <addForeignKeyConstraint baseTableName="revision" baseColumnNames="id_usuario" constraintName="fk_revision_usuario" referencedTableName="usuario"
-                                 referencedColumnNames="id"/>
-    </changeSet>
-    <changeSet id="8" author="">
-        <addForeignKeyConstraint baseTableName="revision" baseColumnNames="id_idea" constraintName="fk_revision_idea" referencedTableName="idea"
-                                 referencedColumnNames="id"/>
-    </changeSet>
-    <changeSet id="9" author="">
-        <addForeignKeyConstraint baseTableName="aprobacion" baseColumnNames="id_revision" constraintName="fk_revision_aprovacion" referencedTableName="revision"
-                                 referencedColumnNames="id"/>
-    </changeSet>
     <changeSet id="10" author="">
-        <addForeignKeyConstraint baseTableName="articulo" baseColumnNames="id_aprobacion" constraintName="fk_aprobacion_articulo" referencedTableName="aprobacion"
+        <addForeignKeyConstraint baseTableName="articulo" baseColumnNames="id_idea" constraintName="fk_idea_articulo" referencedTableName="idea"
                                  referencedColumnNames="id"/>
     </changeSet>
     <changeSet id="11" author="">

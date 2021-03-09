@@ -9,15 +9,26 @@
             <column name="id" type="INT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="id_aprobacion" type="INT">
+            <column name="id_idea" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="titulo" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="resumen_ingles" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="resumen" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contenido" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="estado" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+
+
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>

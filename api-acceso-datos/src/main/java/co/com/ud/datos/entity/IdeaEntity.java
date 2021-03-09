@@ -52,4 +52,7 @@ public class IdeaEntity extends Auditable<String>{
     @Column(name = "fecha_aprob")
     private Date fechaAprobacion;
 
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL, mappedBy = "idea")
+    private ArticuloEntity articulo;
+
 }
