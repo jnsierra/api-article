@@ -1,7 +1,10 @@
 package co.com.ud.business.controller;
 
 import co.com.ud.business.service.IdeaService;
+import co.com.ud.business.service.UsuarioService;
+import co.com.ud.utiles.dto.IdeaCompletoDto;
 import co.com.ud.utiles.dto.IdeaDto;
+import co.com.ud.utiles.dto.UsuarioDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,18 +13,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v.1/ideas")
 public class IdeaController {
 
     private final IdeaService ideaService;
+    private final UsuarioService usuarioService;
     private final ModelMapper mapper;
 
     @Autowired
-    public IdeaController(IdeaService ideaService, ModelMapper mapper) {
+    public IdeaController(IdeaService ideaService, ModelMapper mapper, UsuarioService usuarioService) {
         this.ideaService = ideaService;
         this.mapper = mapper;
+        this.usuarioService = usuarioService;
     }
 
     @GetMapping(value = "/by/usuarios/")
@@ -39,6 +45,20 @@ public class IdeaController {
         List<IdeaDto> ideas = ideaService.findByProfesorIdAndEstado(idProfesor, estado);
         if(Objects.nonNull(ideas) && !ideas.isEmpty()){
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/{id}/")
+    public ResponseEntity<IdeaCompletoDto> getById(@PathVariable(name = "id") Long idIdea){
+        Optional<IdeaDto> idea = ideaService.findById(idIdea);
+        if(idea.isPresent()){
+            Optional<UsuarioDto> usuario = usuarioService.getUserById(idea.get().getUsuarioId());
+            if(usuario.isPresent()){
+                IdeaCompletoDto ideaCom = mapper.map(idea.get(),IdeaCompletoDto.class);
+                ideaCom.setUsuario(usuario.get());
+                return new ResponseEntity<>(ideaCom, HttpStatus.OK);
+            }
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

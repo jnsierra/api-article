@@ -21,6 +21,11 @@ public class IdeaServiceImpl implements IdeaService {
     }
 
     @Override
+    public Optional<IdeaEntity> findById(Long id) {
+        return ideaRepository.findById(id);
+    }
+
+    @Override
     public Optional<IdeaEntity> save(IdeaEntity idea) {
         IdeaEntity ideaEntity = ideaRepository.save(idea);
         return Optional.of(ideaEntity);

@@ -1,6 +1,7 @@
 package co.com.ud.business.controller;
 
 import co.com.ud.business.service.IdeaService;
+import co.com.ud.business.service.UsuarioService;
 import co.com.ud.utiles.dto.IdeaDto;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,6 +23,8 @@ public class IdeaControllerTest {
 
     @Mock
     private IdeaService ideaService;
+    @Mock
+    private UsuarioService usuarioService;
     private ModelMapper modelMapper;
     private IdeaController ideaController;
 
@@ -29,7 +32,7 @@ public class IdeaControllerTest {
     public void setUp(){
         MockitoAnnotations.initMocks(this);
         this.modelMapper = new ModelMapper();
-        this.ideaController = new IdeaController(ideaService, modelMapper);
+        this.ideaController = new IdeaController(ideaService, modelMapper, usuarioService);
     }
 
     @Test

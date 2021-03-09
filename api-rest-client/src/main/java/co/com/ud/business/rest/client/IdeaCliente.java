@@ -17,4 +17,7 @@ public interface IdeaCliente {
     @GetMapping(value = "/by/profesor/{idProfesor}/")
     ResponseEntity<IdeaDto[]> getIdeasByProfesorAndEstado(@PathVariable(name = "idProfesor", required = false) Long idProfesor
             , @RequestParam(name = "estado", required = false) String estado);
+
+    @GetMapping(value = "/{id}/")
+    ResponseEntity<IdeaDto> getById(@PathVariable(name = "id") Long idIdea);
 }

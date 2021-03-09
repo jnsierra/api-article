@@ -10,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,14 +52,37 @@ public class IdeaServiceImpl implements IdeaService {
             ideas = Arrays.asList(idea.getBody());
             ideas = ideas.stream().parallel()
                     .map(item -> {
-                        ResponseEntity<UsuarioDto> response = usuarioCliente.getUserById(item.getUsuarioId());
-                        if(HttpStatus.OK.equals(response.getStatusCode())){
-                            UsuarioDto profesor = response.getBody();
-                            item.setNombreAlumno(profesor.getPersona().getApellidos() + " " + profesor.getPersona().getNombres());
-                        }
+                        Optional<String> nomAlum = getNombreUsuario(item.getId_profesor());
+                        item.setNombreAlumno(nomAlum.isPresent() ? nomAlum.get() : "");
                         return item;
                     }).collect(Collectors.toList());
         }
         return ideas;
+    }
+
+    @Override
+    public Optional<IdeaDto> findById(Long idIdea) {
+        ResponseEntity<IdeaDto> idea = ideaCliente.getById(idIdea);
+        if(HttpStatus.OK.equals(idea.getStatusCode())){
+            IdeaDto responseIdea = idea.getBody();
+            Optional<String> nombreUsurio  = Objects.isNull(responseIdea.getUsuarioId()) ? Optional.empty() : getNombreUsuario(responseIdea.getUsuarioId());
+            Optional<String> nombreProfAsi = Objects.isNull(responseIdea.getId_profesor()) ? Optional.empty() : getNombreUsuario(responseIdea.getId_profesor());
+            Optional<String> nombreProfAut = Objects.isNull(responseIdea.getIdProfesorAutoriza()) ? Optional.empty() : getNombreUsuario(responseIdea.getIdProfesorAutoriza());
+            responseIdea.setNombreAlumno(nombreUsurio.isPresent() ? nombreUsurio.get() : "" );
+            responseIdea.setProfesorAsignado(nombreProfAsi.isPresent() ? nombreProfAsi.get() : "" );
+            responseIdea.setProfesorAutoriza(nombreProfAut.isPresent() ? nombreProfAut.get() : "");
+
+            return Optional.of(responseIdea);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<String> getNombreUsuario(Long idUsuario){
+        ResponseEntity<UsuarioDto> response = usuarioCliente.getUserById(idUsuario);
+        if(HttpStatus.OK.equals(response.getStatusCode())){
+            UsuarioDto profesor = response.getBody();
+            return Optional.of(profesor.getPersona().getApellidos() + " " + profesor.getPersona().getNombres());
+        }
+        return Optional.empty();
     }
 }

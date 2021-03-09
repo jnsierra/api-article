@@ -63,4 +63,13 @@ public class IdeaController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping(value = "/{id}/")
+    public ResponseEntity<IdeaDto> getById(@PathVariable(name = "id") Long idIdea){
+        Optional<IdeaEntity> idea = ideaService.findById(idIdea);
+        if(idea.isPresent()){
+            return new ResponseEntity<>(mapper.map(idea.get(), IdeaDto.class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

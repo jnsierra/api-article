@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class IdeaDto {
+public class IdeaCompletoDto {
 
     private Long id;
 
@@ -32,6 +32,8 @@ public class IdeaDto {
     private String profesorAutoriza;
 
     private Long idProfesorAutoriza;
+
+    private UsuarioDto usuario;
 
     private String fechaAprobacion;
 
