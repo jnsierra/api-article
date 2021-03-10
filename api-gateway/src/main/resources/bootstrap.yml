@@ -3,6 +3,6 @@ spring:
     name: gateway-app
   cloud:
     config:
-      uri: http://service-gateway:8888
+      uri: http://server-config:8888
   profiles:
     active: dev
