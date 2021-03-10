@@ -60,8 +60,13 @@ public class LoginServiceImpl_IT_Test {
         stubFor(get(urlEqualTo("/api-datos/v.1/usuarios/by/?correo=jnsierrac%40gmail.com"))
                 .willReturn(aResponse().withHeader("Content-Type", "application/json")
                         .withBodyFile("responseUsers.json")));
+
         stubFor(get(urlEqualTo("/api-datos/v.1/usuarios/by/?correo=jnsierrac%40gmail.com&contrasenia=123456"))
                 .willReturn(aResponse().withStatus(204)));
+
+        stubFor(put(urlEqualTo("/api-datos/v.1/usuarios/jnsierrac%40gmail.com/intentos"))
+                .willReturn(aResponse().withStatus(200)));
+
         LOGIN_ACTION rta = loginServiceImpl.validaLogin("jnsierrac@gmail.com", "123456");
         Assert.assertNotNull(rta);
         Assert.assertEquals(LOGIN_ACTION.PASSWORD_INCORRECT, rta );
