@@ -25,4 +25,7 @@ public interface UsuarioCliente {
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<UsuarioDto> save(@RequestBody(required = true) UsuarioDto usuarioDto);
 
+    @PutMapping(value = "/{correo}/intentos", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Boolean> updateIntentosUser(@PathVariable("correo")String correo);
+
 }

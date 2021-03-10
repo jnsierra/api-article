@@ -14,4 +14,6 @@ public interface UsuarioService {
     Optional<UsuarioDto> getUserById(Long id);
 
     Optional<UsuarioDto> save(UsuarioDto usuario);
+
+    void updateIntentosLoginUser(String correo);
 }

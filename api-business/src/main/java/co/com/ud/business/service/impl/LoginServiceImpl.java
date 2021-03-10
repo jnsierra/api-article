@@ -70,6 +70,8 @@ public class LoginServiceImpl implements LoginService {
         if (HttpStatus.OK.equals(response.getStatusCode())) {
             return Boolean.TRUE;
         }
+        //En el caso de ser incorrecto el usuario y contraseña se contara un intento de ingreso
+        usuarioCliente.updateIntentosUser(correo);
         return Boolean.FALSE;
     }
 

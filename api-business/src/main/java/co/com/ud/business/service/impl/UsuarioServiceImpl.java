@@ -65,4 +65,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         return Optional.empty();
     }
 
+    @Override
+    public void updateIntentosLoginUser(String correo) {
+        usuarioCliente.updateIntentosUser(correo);
+    }
+
 }
