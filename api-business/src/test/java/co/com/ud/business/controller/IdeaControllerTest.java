@@ -2,7 +2,10 @@ package co.com.ud.business.controller;
 
 import co.com.ud.business.service.IdeaService;
 import co.com.ud.business.service.UsuarioService;
+import co.com.ud.utiles.dto.IdeaCompletoDto;
 import co.com.ud.utiles.dto.IdeaDto;
+import co.com.ud.utiles.dto.UsuarioDto;
+import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,9 +17,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @SpringBootTest
 public class IdeaControllerTest {
@@ -105,6 +109,54 @@ public class IdeaControllerTest {
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
+    }
+    @Test
+    public void testGetByIdEMPTY_IDEA(){
+        Mockito.doReturn(Optional.empty()).when(ideaService).findById(Mockito.any());
+
+        ResponseEntity<IdeaCompletoDto> response = ideaController.getById(0L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetByIdEMPTY_USER(){
+        IdeaDto idea = IdeaDto.builder()
+                .id(1L)
+                .contenido("Prueba de contenido")
+                .usuarioId(1L)
+                .build();
+
+        Mockito.doReturn(Optional.of(idea)).when(ideaService).findById(Mockito.any());
+
+        Mockito.doReturn(Optional.empty()).when(usuarioService).getUserById(Mockito.any());
+
+        ResponseEntity<IdeaCompletoDto> response = ideaController.getById(0L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetByIdSUCCESS(){
+        IdeaDto idea = IdeaDto.builder()
+                .id(1L)
+                .contenido("Prueba de contenido")
+                .usuarioId(1L)
+                .build();
+
+        Mockito.doReturn(Optional.of(idea)).when(ideaService).findById(Mockito.any());
+
+        UsuarioDto usuario = UsuarioDto.builder()
+                .id(1L)
+                .nombre("Jesus Nicolas")
+                .estado(USER_STATE.ACTIVO)
+                .build();
+
+        Mockito.doReturn(Optional.of(usuario)).when(usuarioService).getUserById(Mockito.any());
+
+        ResponseEntity<IdeaCompletoDto> response = ideaController.getById(0L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
 }

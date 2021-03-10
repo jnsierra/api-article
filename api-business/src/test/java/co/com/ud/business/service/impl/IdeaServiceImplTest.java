@@ -15,8 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class IdeaServiceImplTest {
@@ -114,6 +114,58 @@ public class IdeaServiceImplTest {
         Assert.assertNotNull(response);
         Assert.assertFalse(response.isEmpty());
 
+    }
+
+    @Test
+    public void testFindByIdEMPTY(){
+        Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(ideaCliente).getById(Mockito.any());
+
+        Optional<IdeaDto> response = ideaService.findById(1L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isEmpty());
+    }
+
+    @Test
+    public void testFindByIdEMPTY_USER(){
+        IdeaDto ideaDto = IdeaDto.builder()
+                .id(1L)
+                .usuarioId(1L)
+                .id_profesor(2L)
+                .idProfesorAutoriza(3L)
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(ideaDto, HttpStatus.OK)).when(ideaCliente).getById(Mockito.any());
+
+        Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(usuarioCliente).getUserById(Mockito.any());
+
+        Optional<IdeaDto> response = ideaService.findById(1L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testFindByIdSUCCESS(){
+        IdeaDto ideaDto = IdeaDto.builder()
+                .id(1L)
+                .usuarioId(1L)
+                .id_profesor(2L)
+                .idProfesorAutoriza(3L)
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(ideaDto, HttpStatus.OK)).when(ideaCliente).getById(Mockito.any());
+
+        UsuarioDto usuarioDto = UsuarioDto.builder()
+                .persona(PersonaDto.builder()
+                        .apellidos("Sierra")
+                        .nombres("Jesus")
+                        .build())
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(usuarioDto, HttpStatus.OK)).when(usuarioCliente).getUserById(Mockito.any());
+
+        Optional<IdeaDto> response = ideaService.findById(1L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
     }
 
 }
