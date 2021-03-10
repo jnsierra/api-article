@@ -10,6 +10,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "articulo")
+@NamedQueries({
+        @NamedQuery(name = "ArticuloEntity.findByIdIdea", query = "from ArticuloEntity art inner join art.idea as ide where ide.id = :idIdea ")
+})
 @Data
 @Builder
 @AllArgsConstructor
