@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,7 +54,7 @@ public class UsuariosController {
     }
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDto> save(@RequestBody(required = true) UsuarioDto usuario){
+    public ResponseEntity<UsuarioDto> save(@RequestBody @Valid UsuarioDto usuario){
         //Creamos la entidad Persona
         Optional<PersonaDto> persona = personaService.save(usuario.getPersona());
         if(persona.isPresent()){
