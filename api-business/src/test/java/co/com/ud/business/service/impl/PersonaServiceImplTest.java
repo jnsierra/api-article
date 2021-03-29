@@ -41,7 +41,9 @@ public class PersonaServiceImplTest {
                 .apellidos("Sierra")
                 .build();
 
-        Mockito.doReturn(new ResponseEntity<>( response,  HttpStatus.CREATED)).when(personaCliente).save(Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>( response,  HttpStatus.CREATED))
+                .when(personaCliente)
+                .save(Mockito.any());
 
         Optional<PersonaDto> respuesta = personaService.save(persona);
         Assert.assertNotNull(respuesta);
