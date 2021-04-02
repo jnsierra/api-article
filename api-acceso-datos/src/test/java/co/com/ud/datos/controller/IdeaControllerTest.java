@@ -155,4 +155,23 @@ public class IdeaControllerTest {
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 
     }
+
+    @Test
+    public void testUpdateIdeaSUCCESS(){
+
+        IdeaDto dto = IdeaDto.builder()
+                .id(1L)
+                .id_profesor(2L)
+                .estado("CREADA")
+                .titulo("PRUEBA TITULO")
+                .contenido("prueba contenido")
+                .build();
+
+        Mockito.doReturn(Optional.of(Boolean.TRUE)).when(ideaServiceImpl).modificaIdea(Mockito.any());
+
+        ResponseEntity<Boolean> response = ideaControler.updateIdea(dto);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+
+    }
 }

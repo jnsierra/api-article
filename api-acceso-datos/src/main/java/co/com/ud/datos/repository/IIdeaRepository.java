@@ -22,4 +22,12 @@ public interface IIdeaRepository extends JpaRepository<IdeaEntity, Long>, CrudRe
     @Transactional
     Integer modificarIdProfAutorizaAndEstadoAndFechaAutoriza(@Param("idIdea") Long idIdea, @Param("idProf") Long idProf, @Param("estado") String estado, @Param("fechaApro")Date fechaApr);
 
+    @Modifying
+    @Transactional
+    Integer modificarIdea(@Param("idIdea") Long idIdea,
+                          @Param("ideaTitulo") String titulo,
+                          @Param("ideaContenido") String contenido,
+                          @Param("estado") String estado,
+                          @Param("idProf") Long idProf
+                          );
 }

@@ -16,4 +16,6 @@ public interface IdeaService {
     List<IdeaEntity> findByProfesorIdAndEstado(Long idProfesor, String estado);
 
     Optional<Boolean> modificarIdProfAutorizaAndEstadoAndFechaAutoriza(Long idIdea, Long idProf, String estado);
+
+    Optional<Boolean> modificaIdea(IdeaEntity idea);
 }

@@ -72,4 +72,13 @@ public class IdeaController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping(value = "/")
+    public ResponseEntity<Boolean> updateIdea(@RequestBody IdeaDto idea){
+        Optional<Boolean> response = ideaService.modificaIdea(mapper.map(idea, IdeaEntity.class));
+        if(response.isPresent()){
+            return new ResponseEntity<>(response.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

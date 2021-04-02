@@ -50,4 +50,10 @@ public class IdeaServiceImpl implements IdeaService {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<Boolean> modificaIdea(IdeaEntity idea) {
+        Integer response = ideaRepository.modificarIdea(idea.getId(),idea.getTitulo(),idea.getContenido(), idea.getEstado(), idea.getId_profesor());
+        return response > 0 ? Optional.of(Boolean.TRUE) : Optional.of(Boolean.FALSE) ;
+    }
+
 }

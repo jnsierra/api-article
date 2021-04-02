@@ -122,5 +122,37 @@ public class IdeaServiceImplTest {
         Assert.assertTrue(rta.isPresent());
 
     }
+    @Test
+    public void testModificaIdeaSUCCESS(){
+        Mockito.doReturn(1).when(ideaRepository).modificarIdea(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
+
+        IdeaEntity entity = IdeaEntity.builder()
+                .id(1L)
+                .id_profesor(2L)
+                .estado("CREADA")
+                .titulo("PRUEBA TITULO")
+                .contenido("prueba contenido")
+                .build();
+        Optional<Boolean> response = ideaService.modificaIdea(entity);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testModificaIdeaFAILED(){
+        Mockito.doReturn(0).when(ideaRepository).modificarIdea(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
+
+        IdeaEntity entity = IdeaEntity.builder()
+                .id(1L)
+                .id_profesor(2L)
+                .estado("CREADA")
+                .titulo("PRUEBA TITULO")
+                .contenido("prueba contenido")
+                .build();
+        Optional<Boolean> response = ideaService.modificaIdea(entity);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+        Assert.assertFalse(response.get());
+    }
 
 }

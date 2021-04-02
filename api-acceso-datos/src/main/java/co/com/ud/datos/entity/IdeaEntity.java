@@ -14,7 +14,8 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name = "IdeaEntity.findByUsuarioId", query = "select idea from IdeaEntity idea inner join fetch idea.usuario as usu where usu.id = :idUsua "),
         @NamedQuery(name = "IdeaEntity.findByProfesorIdAndEstado", query = "select idea from IdeaEntity idea inner join fetch idea.usuario as usu where idea.id_profesor = :idProfesor and idea.estado = :estadoIdea"),
-        @NamedQuery(name = "IdeaEntity.modificarIdProfAutorizaAndEstadoAndFechaAutoriza", query = "Update IdeaEntity idea set idea.idProfesorAutoriza = :idProf, idea.estado = :estado, id.fechaAprobacion = :fechaApro where idea.id = :idIdea")
+        @NamedQuery(name = "IdeaEntity.modificarIdProfAutorizaAndEstadoAndFechaAutoriza", query = "Update IdeaEntity idea set idea.idProfesorAutoriza = :idProf, idea.estado = :estado, id.fechaAprobacion = :fechaApro where idea.id = :idIdea"),
+        @NamedQuery(name = "IdeaEntity.modificarIdea", query = "update IdeaEntity idea set idea.id_profesor = :idProf, idea.estado = :estado, idea.contenido = :ideaContenido, idea.titulo = :ideaTitulo where idea.id = :idIdea")
 })
 @Data
 @Builder
