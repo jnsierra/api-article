@@ -21,11 +21,13 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        System.out.println("Esto es una prueba");
+        System.out.println("******************************** Inicio la configuracion de seguridad ********************************");
         http.csrf().disable()
                 .addFilterAfter(getJwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/login/","/v.1/usuarios/")
+                .permitAll()
+                .antMatchers( "/v.1/usuarios/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

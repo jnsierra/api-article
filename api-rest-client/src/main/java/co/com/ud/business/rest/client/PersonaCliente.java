@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "${endpoint.ms-acceso-datos.personas.name}",
-        url = "${endpoint.ms-acceso-datos.protocol}${endpoint.ms-acceso-datos.host}:${endpoint.ms-acceso-datos.port}${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.personas.version}${endpoint.ms-acceso-datos.personas.url}")
+//@FeignClient(name = "${endpoint.ms-acceso-datos.personas.name}",
+//        url = "${endpoint.ms-acceso-datos.protocol}${endpoint.ms-acceso-datos.host}:${endpoint.ms-acceso-datos.port}${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.personas.version}${endpoint.ms-acceso-datos.personas.url}")
+//@FeignClient(value = "api-acceso-datos2",url = "${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.personas.version}${endpoint.ms-acceso-datos.personas.url}")
+@FeignClient(name = "api-acceso-datos", contextId = "${endpoint.ms-acceso-datos.personas.name}", path = "${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.personas.version}${endpoint.ms-acceso-datos.personas.url}")
 public interface PersonaCliente {
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

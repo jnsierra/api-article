@@ -3,6 +3,9 @@ server:
     context-path: /api-datos
   port: 5003
 
+jwt:
+  secret: a6e21884876f43819523c31033fa697e
+
 spring:
   datasource:
     url: jdbc:h2:mem:santander
