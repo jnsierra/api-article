@@ -26,9 +26,9 @@ public class IdeaServiceImpl implements IdeaService {
     }
 
     @Override
-    public List<IdeaDto> findIdeasByUsuario(Long idUsuario) {
+    public List<IdeaDto> findIdeasByUsuario(String token, Long idUsuario) {
         List<IdeaDto> ideas = new ArrayList<>();
-        ResponseEntity<IdeaDto[]> idea = ideaCliente.getIdeasByUsuario(idUsuario);
+        ResponseEntity<IdeaDto[]> idea = ideaCliente.getIdeasByUsuario(token, idUsuario);
         if(HttpStatus.OK.equals(idea.getStatusCode())){
             ideas = Arrays.asList(idea.getBody());
             ideas = ideas.stream().parallel()
@@ -45,9 +45,9 @@ public class IdeaServiceImpl implements IdeaService {
     }
 
     @Override
-    public List<IdeaDto> findByProfesorIdAndEstado(Long idProfesor, String estado) {
+    public List<IdeaDto> findByProfesorIdAndEstado(String token, Long idProfesor, String estado) {
         List<IdeaDto> ideas = new ArrayList<>();
-        ResponseEntity<IdeaDto[]> idea = ideaCliente.getIdeasByProfesorAndEstado(idProfesor, estado);
+        ResponseEntity<IdeaDto[]> idea = ideaCliente.getIdeasByProfesorAndEstado(token,idProfesor, estado);
         if(HttpStatus.OK.equals(idea.getStatusCode()) && idea.getBody().length != 0){
             ideas = Arrays.asList(idea.getBody());
             ideas = ideas.stream().parallel()
@@ -61,8 +61,8 @@ public class IdeaServiceImpl implements IdeaService {
     }
 
     @Override
-    public Optional<IdeaDto> findById(Long idIdea) {
-        ResponseEntity<IdeaDto> idea = ideaCliente.getById(idIdea);
+    public Optional<IdeaDto> findById(String token, Long idIdea) {
+        ResponseEntity<IdeaDto> idea = ideaCliente.getById(token, idIdea);
         if(HttpStatus.OK.equals(idea.getStatusCode())){
             IdeaDto responseIdea = idea.getBody();
             Optional<String> nombreUsurio  = Objects.isNull(responseIdea.getUsuarioId()) ? Optional.empty() : getNombreUsuario(responseIdea.getUsuarioId());

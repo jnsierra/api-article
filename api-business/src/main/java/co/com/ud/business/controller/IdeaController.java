@@ -31,8 +31,8 @@ public class IdeaController {
     }
 
     @GetMapping(value = "/by/usuarios/")
-    public ResponseEntity<IdeaDto[]> getIdeasByUsuario(@RequestParam(name = "id", required = false) Long idUsuario){
-        List<IdeaDto> ideas = ideaService.findIdeasByUsuario(idUsuario);
+    public ResponseEntity<IdeaDto[]> getIdeasByUsuario(@RequestHeader("Authorization")String autenticacion, @RequestParam(name = "id", required = false) Long idUsuario){
+        List<IdeaDto> ideas = ideaService.findIdeasByUsuario(autenticacion, idUsuario);
         if(Objects.nonNull(ideas) && !ideas.isEmpty()){
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         }
@@ -40,9 +40,9 @@ public class IdeaController {
     }
 
     @GetMapping(value = "/by/profesor/{idProfesor}/")
-    public ResponseEntity<IdeaDto[]> getIdeasByProfesorAndEstado(@PathVariable(name = "idProfesor", required = false) Long idProfesor
+    public ResponseEntity<IdeaDto[]> getIdeasByProfesorAndEstado(@RequestHeader("Authorization")String autenticacion,@PathVariable(name = "idProfesor", required = false) Long idProfesor
             , @RequestParam(name = "estado", required = false) String estado){
-        List<IdeaDto> ideas = ideaService.findByProfesorIdAndEstado(idProfesor, estado);
+        List<IdeaDto> ideas = ideaService.findByProfesorIdAndEstado(autenticacion,idProfesor, estado);
         if(Objects.nonNull(ideas) && !ideas.isEmpty()){
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         }
@@ -50,8 +50,8 @@ public class IdeaController {
     }
 
     @GetMapping(value = "/{id}/")
-    public ResponseEntity<IdeaCompletoDto> getById(@PathVariable(name = "id") Long idIdea){
-        Optional<IdeaDto> idea = ideaService.findById(idIdea);
+    public ResponseEntity<IdeaCompletoDto> getById(@RequestHeader("Authorization")String autenticacion ,@PathVariable(name = "id") Long idIdea){
+        Optional<IdeaDto> idea = ideaService.findById(autenticacion, idIdea);
         if(idea.isPresent()){
             Optional<UsuarioDto> usuario = usuarioService.getUserById(idea.get().getUsuarioId());
             if(usuario.isPresent()){

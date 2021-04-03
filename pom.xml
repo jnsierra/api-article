@@ -117,6 +117,7 @@
                                         <!--Exclusiones para bussines-->
                                         <exclude>co.com.ud.business.AppBusiness</exclude>
                                         <exclude>co.com.ud.business.exceptions.CustomExceptionHandler</exclude>
+                                        <exclude>co.com.ud.business.config.BussinessConfig</exclude>
                                         <!--Exclusionaes para mail-->
                                         <exclude>co.com.ud.mail.AppMail</exclude>
                                     </excludes>

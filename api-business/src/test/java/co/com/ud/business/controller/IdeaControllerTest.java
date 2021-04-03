@@ -17,7 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -48,9 +47,9 @@ public class IdeaControllerTest {
                 .build();
         respuesta.add(rta);
 
-        Mockito.doReturn(respuesta).when(ideaService).findIdeasByUsuario(Mockito.any());
+        Mockito.doReturn(respuesta).when(ideaService).findIdeasByUsuario(Mockito.any(), Mockito.any());
 
-        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByUsuario(1L);
+        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByUsuario("1234",1L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
@@ -64,9 +63,9 @@ public class IdeaControllerTest {
                 .build();
         respuesta.add(rta);
 
-        Mockito.doReturn(respuesta).when(ideaService).findIdeasByUsuario(Mockito.any());
+        Mockito.doReturn(respuesta).when(ideaService).findIdeasByUsuario(Mockito.any(),Mockito.any());
 
-        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByUsuario(1L);
+        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByUsuario("1234",1L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
@@ -74,9 +73,9 @@ public class IdeaControllerTest {
     @Test
     public void testGetIdeasByUsuarioEMPTY(){
 
-        Mockito.doReturn(null).when(ideaService).findIdeasByUsuario(Mockito.any());
+        Mockito.doReturn(null).when(ideaService).findIdeasByUsuario(Mockito.any(), Mockito.any());
 
-        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByUsuario(1L);
+        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByUsuario("1234",1L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
@@ -84,9 +83,9 @@ public class IdeaControllerTest {
     @Test
     public void testGetIdeasByProfesorAndEstadoEMPTY(){
 
-        Mockito.doReturn(null).when(ideaService).findByProfesorIdAndEstado(Mockito.any(), Mockito.any());
+        Mockito.doReturn(null).when(ideaService).findByProfesorIdAndEstado(Mockito.any(), Mockito.any(), Mockito.any());
 
-        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByProfesorAndEstado(0L, "CREADO");
+        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByProfesorAndEstado("123",0L, "CREADO");
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 
@@ -103,18 +102,18 @@ public class IdeaControllerTest {
                 .build();
         ideas.add(idea);
 
-        Mockito.doReturn(ideas).when(ideaService).findByProfesorIdAndEstado(Mockito.any(), Mockito.any());
+        Mockito.doReturn(ideas).when(ideaService).findByProfesorIdAndEstado(Mockito.any(), Mockito.any(), Mockito.any());
 
-        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByProfesorAndEstado(0L, "CREADO");
+        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByProfesorAndEstado("123",0L, "CREADO");
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
     }
     @Test
     public void testGetByIdEMPTY_IDEA(){
-        Mockito.doReturn(Optional.empty()).when(ideaService).findById(Mockito.any());
+        Mockito.doReturn(Optional.empty()).when(ideaService).findById(Mockito.any(), Mockito.any());
 
-        ResponseEntity<IdeaCompletoDto> response = ideaController.getById(0L);
+        ResponseEntity<IdeaCompletoDto> response = ideaController.getById("1234",0L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
@@ -127,11 +126,11 @@ public class IdeaControllerTest {
                 .usuarioId(1L)
                 .build();
 
-        Mockito.doReturn(Optional.of(idea)).when(ideaService).findById(Mockito.any());
+        Mockito.doReturn(Optional.of(idea)).when(ideaService).findById(Mockito.any(), Mockito.any());
 
         Mockito.doReturn(Optional.empty()).when(usuarioService).getUserById(Mockito.any());
 
-        ResponseEntity<IdeaCompletoDto> response = ideaController.getById(0L);
+        ResponseEntity<IdeaCompletoDto> response = ideaController.getById("1234",0L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
@@ -144,7 +143,7 @@ public class IdeaControllerTest {
                 .usuarioId(1L)
                 .build();
 
-        Mockito.doReturn(Optional.of(idea)).when(ideaService).findById(Mockito.any());
+        Mockito.doReturn(Optional.of(idea)).when(ideaService).findById(Mockito.any(), Mockito.any());
 
         UsuarioDto usuario = UsuarioDto.builder()
                 .id(1L)
@@ -154,7 +153,7 @@ public class IdeaControllerTest {
 
         Mockito.doReturn(Optional.of(usuario)).when(usuarioService).getUserById(Mockito.any());
 
-        ResponseEntity<IdeaCompletoDto> response = ideaController.getById(0L);
+        ResponseEntity<IdeaCompletoDto> response = ideaController.getById("123445",0L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }

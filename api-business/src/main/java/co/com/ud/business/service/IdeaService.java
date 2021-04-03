@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface IdeaService {
 
-    List<IdeaDto> findIdeasByUsuario(Long idUsuario);
+    List<IdeaDto> findIdeasByUsuario(String token, Long idUsuario);
 
-    List<IdeaDto> findByProfesorIdAndEstado(Long idProfesor, String estado);
+    List<IdeaDto> findByProfesorIdAndEstado(String token, Long idProfesor, String estado);
 
-    Optional<IdeaDto> findById(Long idIdea);
+    Optional<IdeaDto> findById(String token, Long idIdea);
 }
