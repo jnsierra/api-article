@@ -1,6 +1,5 @@
 package co.com.ud.business.rest.client;
 
-import co.com.ud.business.config.FeignConfigInterceptor;
 import co.com.ud.utiles.dto.IdeaDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//@FeignClient(name = "${endpoint.ms-acceso-datos.ideas.name}",
-//        url = "${endpoint.ms-acceso-datos.protocol}${endpoint.ms-acceso-datos.host}:${endpoint.ms-acceso-datos.port}${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.ideas.version}${endpoint.ms-acceso-datos.ideas.url}")
-//@FeignClient(value = "api-acceso-datos1", url = "${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.ideas.version}${endpoint.ms-acceso-datos.ideas.url}" )
-@FeignClient(name = "api-acceso-datos"
-        , contextId = "${endpoint.ms-acceso-datos.ideas.name}"
-        , path = "${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.ideas.version}${endpoint.ms-acceso-datos.ideas.url}"
-        , configuration = {FeignConfigInterceptor.class})
+@FeignClient(name = "${endpoint.ms-acceso-datos.ideas.name}",
+        url = "${endpoint.ms-acceso-datos.protocol}${endpoint.ms-acceso-datos.host}:${endpoint.ms-acceso-datos.port}${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.ideas.version}${endpoint.ms-acceso-datos.ideas.url}")
+//@FeignClient(name = "api-acceso-datos"
+//        , contextId = "${endpoint.ms-acceso-datos.ideas.name}"
+//        , path = "${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.ideas.version}${endpoint.ms-acceso-datos.ideas.url}"
+//        , configuration = {FeignConfigInterceptor.class})
 public interface IdeaCliente {
 
     @GetMapping(value = "/by/usuarios/")
