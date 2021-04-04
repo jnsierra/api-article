@@ -29,6 +29,8 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers( "/v.1/usuarios/**")
                 .permitAll()
+                .antMatchers(HttpMethod.POST, "/v.1/personas/")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
         //http.authorizeRequests().antMatchers("/v.1/usuarios/").permitAll().anyRequest().authenticated();
