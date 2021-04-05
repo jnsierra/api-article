@@ -28,3 +28,7 @@ endpoint:
       version: /v.1
       url: /usuarios
       name: usuariosCliente
+
+repositorio:
+  formato:
+    ubicacion: C:\\repository\\documentos\\formatos\\formato_001.docx
