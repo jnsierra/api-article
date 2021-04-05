@@ -15,7 +15,7 @@ public class DescargaFormatoServiceImplTest {
 
     @Before
     public void setUp(){
-        this.descargaFormatoService = new DescargaFormatoServiceImpl("C:\\repository\\documentos\\formatos\\formato_001.docx");
+        this.descargaFormatoService = new DescargaFormatoServiceImpl("src/test/resources/document/formato_001.docx");
     }
 
     @Test
