@@ -56,4 +56,7 @@ public class IdeaEntity extends Auditable<String>{
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL, mappedBy = "idea")
     private ArticuloEntity articulo;
 
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL, mappedBy = "idea")
+    private FormatoIdeaEntity formatoIdea;
+
 }

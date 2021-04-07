@@ -47,4 +47,8 @@
         <addForeignKeyConstraint baseTableName="role_permiso" baseColumnNames="permiso_id" constraintName="fk_role_permiso_permiso_id" referencedTableName="permiso"
                                  referencedColumnNames="id"/>
     </changeSet>
+    <changeSet id="16" author="">
+        <addForeignKeyConstraint baseTableName="formato_idea" baseColumnNames="id_idea" constraintName="fk_formato_idea" referencedTableName="idea"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>
