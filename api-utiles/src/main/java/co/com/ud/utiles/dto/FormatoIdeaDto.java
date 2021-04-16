@@ -22,4 +22,6 @@ public class FormatoIdeaDto {
 
     private String formato;
 
+    private String base64;
+
 }

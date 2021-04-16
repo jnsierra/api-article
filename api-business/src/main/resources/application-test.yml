@@ -1,5 +1,4 @@
 
-
 jwt:
   secret: a6e21884876f43819523c31033fa697e
 
@@ -16,6 +15,10 @@ endpoint:
     host: localhost
     port: 5003
     base: /api-datos
+    formato-ideas:
+      version: /v.1
+      url: /formatoidea
+      name: formatoIdeasCliente
     ideas:
       version: /v.1
       url: /ideas
@@ -32,3 +35,7 @@ endpoint:
 repositorio:
   formato:
     ubicacion: C:\\repository\\documentos\\formatos\\formato_001.docx
+
+path:
+  repo:
+    idea: /repository/documentos/usuario/

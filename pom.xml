@@ -120,6 +120,7 @@
                                         <exclude>co.com.ud.business.config.BussinessConfig</exclude>
                                         <!--Exclusionaes para mail-->
                                         <exclude>co.com.ud.mail.AppMail</exclude>
+                                        <exclude>co.com.ud.utiles.*</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
