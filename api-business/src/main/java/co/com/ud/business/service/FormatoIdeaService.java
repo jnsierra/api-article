@@ -6,8 +6,8 @@ import java.util.Optional;
 
 public interface FormatoIdeaService {
 
-    Optional<FormatoIdeaDto> saveFormato(FormatoIdeaDto formatoIdea);
+    Optional<FormatoIdeaDto> saveFormato(String token,FormatoIdeaDto formatoIdea);
 
-    Optional<FormatoIdeaDto> persistirFormatoIdea(FormatoIdeaDto formatoIdea);
+    Optional<FormatoIdeaDto> persistirFormatoIdea(String token,FormatoIdeaDto formatoIdea);
 
 }

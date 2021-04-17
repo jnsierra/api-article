@@ -25,8 +25,8 @@ public class FormatoIdeaServiceImpl implements FormatoIdeaService {
     }
 
     @Override
-    public Optional<FormatoIdeaDto> saveFormato(FormatoIdeaDto formato) {
-        ResponseEntity<FormatoIdeaDto> formatoIdea = formatoIdeaCliente.save(formato);
+    public Optional<FormatoIdeaDto> saveFormato(String token,FormatoIdeaDto formato) {
+        ResponseEntity<FormatoIdeaDto> formatoIdea = formatoIdeaCliente.save(token,formato);
         if(HttpStatus.OK.equals(formatoIdea.getStatusCode())){
             return Optional.of(formatoIdea.getBody());
         }
@@ -34,14 +34,15 @@ public class FormatoIdeaServiceImpl implements FormatoIdeaService {
     }
 
     @Override
-    public Optional<FormatoIdeaDto> persistirFormatoIdea(FormatoIdeaDto formatoIdea) {
+    public Optional<FormatoIdeaDto> persistirFormatoIdea(String token, FormatoIdeaDto formatoIdea) {
         //Guardo el archivo en el repo
         String name = formatoIdea.getIdIdea() + "_idea.pdf";
         Boolean guardar = UtilesBase64.builder().build().saveFile(formatoIdea.getBase64(),pathRepo, name);
         if(guardar){
             //cambiamos la ruta en la que se almaceno el archivo
             formatoIdea.setUbicacion(pathRepo + name);
-            return saveFormato(formatoIdea);
+            formatoIdea.setNombre(name);
+            return saveFormato(token,formatoIdea);
         }
         return Optional.empty();
     }

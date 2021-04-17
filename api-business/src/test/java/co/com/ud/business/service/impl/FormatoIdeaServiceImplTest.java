@@ -44,9 +44,9 @@ public class FormatoIdeaServiceImplTest {
                 .nombre("FORMATO")
                 .ubicacion("/repository/documents/")
                 .build();
-        Mockito.doReturn(new ResponseEntity<>(responseDto, HttpStatus.OK)).when(formatoIdeaCliente).save(Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(responseDto, HttpStatus.OK)).when(formatoIdeaCliente).save(Mockito.any(), Mockito.any());
 
-        Optional<FormatoIdeaDto> response = formatoIdeaService.saveFormato(formatoIdeaDto);
+        Optional<FormatoIdeaDto> response = formatoIdeaService.saveFormato("123gfd", formatoIdeaDto);
         Assert.assertNotNull(response);
         Assert.assertEquals(Boolean.TRUE, response.isPresent());
     }
@@ -68,10 +68,10 @@ public class FormatoIdeaServiceImplTest {
                 .base64(base64)
                 .build();
 
-        Mockito.doReturn(new ResponseEntity<>(responseDto, HttpStatus.OK)).when(formatoIdeaCliente).save(Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(responseDto, HttpStatus.OK)).when(formatoIdeaCliente).save(Mockito.any(), Mockito.any());
 
 
-        Optional<FormatoIdeaDto> response = formatoIdeaService.persistirFormatoIdea(responseDto);
+        Optional<FormatoIdeaDto> response = formatoIdeaService.persistirFormatoIdea("1321546fadf",responseDto);
         Assert.assertNotNull(response);
         Assert.assertEquals(Boolean.TRUE, response.isPresent());
     }

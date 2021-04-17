@@ -43,8 +43,8 @@ public class FormatoIdeaControllerTest {
                 .idIdea(1l)
                 .nombre("FORMATO")
                 .build();
-        Mockito.doReturn(Optional.of(responseDto)).when(formatoIdeaService).persistirFormatoIdea(Mockito.any());
-        ResponseEntity<FormatoIdeaDto> rta = formatoIdeaController.save(formatoIdeaDto);
+        Mockito.doReturn(Optional.of(responseDto)).when(formatoIdeaService).persistirFormatoIdea(Mockito.any(), Mockito.any());
+        ResponseEntity<FormatoIdeaDto> rta = formatoIdeaController.save("13456gfda", formatoIdeaDto);
         Assert.assertNotNull(rta);
         Assert.assertEquals(HttpStatus.CREATED, rta.getStatusCode());
     }
