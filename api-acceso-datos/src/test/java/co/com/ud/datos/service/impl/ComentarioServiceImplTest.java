@@ -11,6 +11,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -49,5 +51,22 @@ public class ComentarioServiceImplTest {
         Assert.assertTrue(rta.isPresent());
     }
 
+    @Test
+    public void testFindByLlaveAndTipoComentario() {
+        List<ComentarioEntity> comentarios = new ArrayList<>();
+        ComentarioEntity comentario = ComentarioEntity.builder()
+                .id(1L)
+                .id_usuario(1L)
+                .llave(1L)
+                .tipo_comentario(TYPE_COMMENTS.RECHAZO_IDEA)
+                .comentario("PRUEBA")
+                .build();
+        comentarios.add(comentario);
+
+        Mockito.doReturn(comentarios).when(comentarioRepository).findByLlaveAndTipoComentario(Mockito.any(), Mockito.any());
+
+        List<ComentarioEntity> rta = comentarioService.findByLlaveAndTipoComentario(1L, TYPE_COMMENTS.RECHAZO_FORMATO_IDEA);
+        Assert.assertNotNull(rta);
+    }
 
 }

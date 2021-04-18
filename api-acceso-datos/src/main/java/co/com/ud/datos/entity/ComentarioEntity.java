@@ -10,6 +10,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "comentario")
+@NamedQueries({
+        @NamedQuery(name = "ComentarioEntity.findByLlaveAndTipoComentario"
+                , query = "from ComentarioEntity com WHERE com.llave = :llave and com.tipo_comentario = :tipoComentario ")
+})
 @Data
 @Builder
 @AllArgsConstructor

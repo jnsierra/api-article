@@ -15,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -67,6 +69,27 @@ public class ComentarioControllerTest {
         ResponseEntity<ComentarioDto> rta = comentarioController.save(entity);
         Assert.assertNotNull(rta);
         Assert.assertEquals(HttpStatus.NO_CONTENT, rta.getStatusCode());
+    }
+
+    @Test
+    public void testGetComentariosByLLaveAndTypeComments(){
+        List<ComentarioEntity> list = new ArrayList<>();
+        ComentarioEntity comentario = ComentarioEntity
+                .builder()
+                .id(1L)
+                .llave(1L)
+                .id_usuario(1L)
+                .comentario("Pruebas")
+                .tipo_comentario(TYPE_COMMENTS.RECHAZO_IDEA)
+                .build();
+        list.add(comentario);
+
+
+        Mockito.doReturn(list).when(comentarioService).findByLlaveAndTipoComentario(Mockito.any(), Mockito.any());
+
+        ResponseEntity<ComentarioDto[]> comentarioRta = comentarioController.getComentariosByLLaveAndTypeComments(1L, TYPE_COMMENTS.RECHAZO_FORMATO_IDEA);
+        Assert.assertNotNull(comentarioRta);
+        Assert.assertEquals(HttpStatus.OK, comentarioRta.getStatusCode());
     }
 
 }
