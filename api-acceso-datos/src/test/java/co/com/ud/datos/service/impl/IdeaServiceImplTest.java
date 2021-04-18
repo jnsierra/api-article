@@ -155,4 +155,23 @@ public class IdeaServiceImplTest {
         Assert.assertFalse(response.get());
     }
 
+    @Test
+    public void testModificaEstadoSUCCESS(){
+        Mockito.doReturn(1).when(ideaRepository).modificarEstado(Mockito.any(), Mockito.any());
+
+        Optional<Boolean> response = ideaService.modificarEstado(1L, "POR_CONFIRMAR_FORMATO");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testModificaEstadoFAILED(){
+        Mockito.doReturn(0).when(ideaRepository).modificarEstado(Mockito.any(), Mockito.any());
+
+        Optional<Boolean> response = ideaService.modificarEstado(1L, "POR_CONFIRMAR_FORMATO");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+        Assert.assertFalse(response.get());
+    }
+
 }

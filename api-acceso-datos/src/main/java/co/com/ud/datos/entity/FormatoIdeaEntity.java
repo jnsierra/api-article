@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Audited
 public class FormatoIdeaEntity extends Auditable<String> {
 
     @Id
@@ -21,7 +23,7 @@ public class FormatoIdeaEntity extends Auditable<String> {
     @SequenceGenerator(name = "formato_idea_generator", sequenceName = "formato_idea_seq", allocationSize = 1)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_idea", nullable = false)
     private IdeaEntity idea;
 

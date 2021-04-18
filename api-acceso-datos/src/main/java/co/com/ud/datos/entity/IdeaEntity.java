@@ -7,15 +7,19 @@ import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import java.text.Format;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "idea")
 @NamedQueries({
-        @NamedQuery(name = "IdeaEntity.findByUsuarioId", query = "select idea from IdeaEntity idea inner join fetch idea.usuario as usu where usu.id = :idUsua "),
+        @NamedQuery(name = "IdeaEntity.findByUsuarioId", query = "from IdeaEntity idea inner join fetch idea.usuario as usu where usu.id = :idUsua "),
         @NamedQuery(name = "IdeaEntity.findByProfesorIdAndEstado", query = "select idea from IdeaEntity idea inner join fetch idea.usuario as usu where idea.id_profesor = :idProfesor and idea.estado = :estadoIdea"),
         @NamedQuery(name = "IdeaEntity.modificarIdProfAutorizaAndEstadoAndFechaAutoriza", query = "Update IdeaEntity idea set idea.idProfesorAutoriza = :idProf, idea.estado = :estado, id.fechaAprobacion = :fechaApro where idea.id = :idIdea"),
-        @NamedQuery(name = "IdeaEntity.modificarIdea", query = "update IdeaEntity idea set idea.id_profesor = :idProf, idea.estado = :estado, idea.contenido = :ideaContenido, idea.titulo = :ideaTitulo where idea.id = :idIdea")
+        @NamedQuery(name = "IdeaEntity.modificarIdea", query = "update IdeaEntity idea set idea.id_profesor = :idProf, idea.estado = :estado, idea.contenido = :ideaContenido, idea.titulo = :ideaTitulo where idea.id = :idIdea"),
+        @NamedQuery(name = "IdeaEntity.modificarEstado", query = "update IdeaEntity idea set idea.estado = :estado where idea.id = :idIdea"),
 })
 @Data
 @Builder
@@ -56,7 +60,18 @@ public class IdeaEntity extends Auditable<String>{
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL, mappedBy = "idea")
     private ArticuloEntity articulo;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL, mappedBy = "idea")
-    private FormatoIdeaEntity formatoIdea;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idea", orphanRemoval = true)
+    private List<FormatoIdeaEntity> formatoIdeas = new ArrayList<>();
+
+
+    public void addFormatoIdeas(FormatoIdeaEntity formatoIdea) {
+        formatoIdeas.add(formatoIdea);
+        formatoIdea.setIdea(this);
+    }
+
+    public void removeIdea(FormatoIdeaEntity formatoIdea) {
+        formatoIdeas.remove(formatoIdea);
+        formatoIdea.setIdea(null);
+    }
 
 }

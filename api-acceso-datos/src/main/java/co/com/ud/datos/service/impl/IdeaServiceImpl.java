@@ -56,4 +56,10 @@ public class IdeaServiceImpl implements IdeaService {
         return response > 0 ? Optional.of(Boolean.TRUE) : Optional.of(Boolean.FALSE) ;
     }
 
+    @Override
+    public Optional<Boolean> modificarEstado(Long idIdea, String estado) {
+        Integer response = ideaRepository.modificarEstado(idIdea, estado);
+        return response > 0 ? Optional.of(Boolean.TRUE) : Optional.of(Boolean.FALSE) ;
+    }
+
 }

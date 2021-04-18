@@ -174,4 +174,24 @@ public class IdeaControllerTest {
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
     }
+
+    @Test
+    public void testUpdateStatusIdeaSUCCESS(){
+
+        Mockito.doReturn(Optional.of(true)).when(ideaServiceImpl).modificarEstado(Mockito.any(), Mockito.any());
+
+        ResponseEntity<Boolean> response = ideaControler.updateStatusIdea(0L, "POR_CONFIRMAR_FORMATO");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.getBody());
+    }
+
+    @Test
+    public void testUpdateStatusIdeaFAILED(){
+
+        Mockito.doReturn(Optional.of(false)).when(ideaServiceImpl).modificarEstado(Mockito.any(), Mockito.any());
+
+        ResponseEntity<Boolean> response = ideaControler.updateStatusIdea(0L, "POR_CONFIRMAR_FORMATO");
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.getBody());
+    }
 }

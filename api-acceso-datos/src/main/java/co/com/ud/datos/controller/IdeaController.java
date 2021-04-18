@@ -64,6 +64,16 @@ public class IdeaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PutMapping(value = "/estado/{idIdea}/{estado}/")
+    public ResponseEntity<Boolean> updateStatusIdea(@PathVariable(name = "idIdea") Long id
+            , @PathVariable(name = "estado") String estado){
+        Optional<Boolean> rta = ideaService.modificarEstado(id, estado);
+        if(rta.isPresent()){
+            return new ResponseEntity<>(rta.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @GetMapping(value = "/{id}/")
     public ResponseEntity<IdeaDto> getById(@PathVariable(name = "id") Long idIdea){
         Optional<IdeaEntity> idea = ideaService.findById(idIdea);
