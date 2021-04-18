@@ -2,7 +2,6 @@ package co.com.ud.business.controller;
 
 import co.com.ud.business.service.FormatoIdeaService;
 import co.com.ud.utiles.dto.FormatoIdeaDto;
-import co.com.ud.utiles.dto.IdeaDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

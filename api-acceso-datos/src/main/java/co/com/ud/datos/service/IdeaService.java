@@ -1,7 +1,6 @@
 package co.com.ud.datos.service;
 
 import co.com.ud.datos.entity.IdeaEntity;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;

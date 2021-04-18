@@ -2,13 +2,13 @@ package co.com.ud.utiles.service;
 
 import lombok.Builder;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
-import java.io.File;
-import java.io.OutputStream;
-import java.io.FileOutputStream;
 
 @Builder
 public class UtilesBase64 {
