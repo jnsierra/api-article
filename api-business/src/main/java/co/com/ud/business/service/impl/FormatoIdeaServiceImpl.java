@@ -2,6 +2,7 @@ package co.com.ud.business.service.impl;
 
 import co.com.ud.business.rest.client.FormatoIdeaCliente;
 import co.com.ud.business.service.FormatoIdeaService;
+import co.com.ud.business.service.IdeaService;
 import co.com.ud.utiles.dto.FormatoIdeaDto;
 import co.com.ud.utiles.service.UtilesBase64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,14 @@ import java.util.Optional;
 public class FormatoIdeaServiceImpl implements FormatoIdeaService {
 
     private final FormatoIdeaCliente formatoIdeaCliente;
+    private final IdeaService ideaService;
     private String pathRepo;
 
     @Autowired
-    public FormatoIdeaServiceImpl(FormatoIdeaCliente formatoIdeaCliente,@Value("${path.repo.idea}")  String pathRepo) {
+    public FormatoIdeaServiceImpl(FormatoIdeaCliente formatoIdeaCliente,@Value("${path.repo.idea}")  String pathRepo, IdeaService ideaService) {
         this.formatoIdeaCliente = formatoIdeaCliente;
         this.pathRepo = pathRepo;
+        this.ideaService = ideaService;
     }
 
     @Override
@@ -42,7 +45,12 @@ public class FormatoIdeaServiceImpl implements FormatoIdeaService {
             //cambiamos la ruta en la que se almaceno el archivo
             formatoIdea.setUbicacion(pathRepo + name);
             formatoIdea.setNombre(name);
-            return saveFormato(token,formatoIdea);
+            Optional<FormatoIdeaDto> formato = saveFormato(token,formatoIdea);
+            if(formato.isPresent()){
+                //Actualiza el estado del idea
+                ideaService.updateStatus(token, formatoIdea.getIdIdea(),"POR_CONFIRMAR_FORMATO");
+            }
+            return formato;
         }
         return Optional.empty();
     }

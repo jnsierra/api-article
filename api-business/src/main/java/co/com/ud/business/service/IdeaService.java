@@ -12,4 +12,6 @@ public interface IdeaService {
     List<IdeaDto> findByProfesorIdAndEstado(String token, Long idProfesor, String estado);
 
     Optional<IdeaDto> findById(String token, Long idIdea);
+
+    Optional<Boolean> updateStatus(String token, Long idIdea, String status);
 }

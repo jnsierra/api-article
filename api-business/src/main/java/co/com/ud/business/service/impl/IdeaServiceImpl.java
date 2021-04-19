@@ -52,7 +52,7 @@ public class IdeaServiceImpl implements IdeaService {
             ideas = Arrays.asList(idea.getBody());
             ideas = ideas.stream().parallel()
                     .map(item -> {
-                        Optional<String> nomAlum = getNombreUsuario(item.getId_profesor());
+                        Optional<String> nomAlum = getNombreUsuario(item.getUsuarioId());
                         item.setNombreAlumno(nomAlum.isPresent() ? nomAlum.get() : "");
                         return item;
                     }).collect(Collectors.toList());
@@ -73,6 +73,15 @@ public class IdeaServiceImpl implements IdeaService {
             responseIdea.setProfesorAutoriza(nombreProfAut.isPresent() ? nombreProfAut.get() : "");
 
             return Optional.of(responseIdea);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Boolean> updateStatus(String token,Long idIdea, String status) {
+        ResponseEntity<Boolean> response = this.ideaCliente.updateStatusIdea(token, idIdea, status);
+        if(HttpStatus.OK.equals(response.getStatusCode())){
+            return Optional.of(response.getBody());
         }
         return Optional.empty();
     }

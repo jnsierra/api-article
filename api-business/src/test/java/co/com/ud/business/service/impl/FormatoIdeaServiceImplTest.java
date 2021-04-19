@@ -2,6 +2,7 @@ package co.com.ud.business.service.impl;
 
 import co.com.ud.business.rest.client.FormatoIdeaCliente;
 import co.com.ud.business.service.FormatoIdeaService;
+import co.com.ud.business.service.IdeaService;
 import co.com.ud.utiles.dto.FormatoIdeaDto;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,11 +25,13 @@ public class FormatoIdeaServiceImplTest {
     private FormatoIdeaService formatoIdeaService;
     @Mock
     private FormatoIdeaCliente formatoIdeaCliente;
+    @Mock
+    private IdeaService ideaService;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.formatoIdeaService = new FormatoIdeaServiceImpl(formatoIdeaCliente, "/repository/documentos/usuario/");
+        this.formatoIdeaService = new FormatoIdeaServiceImpl(formatoIdeaCliente, "/repository/documentos/usuario/", ideaService);
     }
 
     @Test
