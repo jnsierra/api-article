@@ -41,4 +41,11 @@ public class DownloadFilesControllerTest {
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+
+    @Test
+    public void testGetFormatoIdeaEMPTY(){
+        ResponseEntity<DocumentDownloadDto> response = downloadFilesController.getFormatoIdea("321654dsg", 1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode() );
+    }
 }

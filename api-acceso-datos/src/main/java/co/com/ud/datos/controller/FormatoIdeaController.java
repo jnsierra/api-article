@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -33,6 +31,15 @@ public class FormatoIdeaController {
         Optional<FormatoIdeaEntity> formatoIdea = formatoIdeaService.save(modelMapper.map(formatoIdeaDto, FormatoIdeaEntity.class));
         if(formatoIdea.isPresent()){
             return new ResponseEntity<>(modelMapper.map(formatoIdea.get(), FormatoIdeaDto.class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/by/{idIdea}/")
+    public ResponseEntity<FormatoIdeaDto[]> getFormatoByIdIdea(@PathVariable("idIdea")Long idIdea){
+        List<FormatoIdeaEntity>  listResponse = formatoIdeaService.getFormatosByIdea(idIdea);
+        if(!listResponse.isEmpty()){
+            return new ResponseEntity<>(modelMapper.map(listResponse, FormatoIdeaDto[].class),HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -6,6 +6,7 @@ import co.com.ud.datos.service.FormatoIdeaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,5 +23,10 @@ public class FormatoIdeaServiceImpl implements FormatoIdeaService {
     public Optional<FormatoIdeaEntity> save(FormatoIdeaEntity formatoIdeaEntity) {
         FormatoIdeaEntity response = formatoIdeaRepository.save(formatoIdeaEntity);
         return Optional.of(response);
+    }
+
+    @Override
+    public List<FormatoIdeaEntity> getFormatosByIdea(Long idIdea) {
+        return formatoIdeaRepository.getFormatosByIdea(idIdea);
     }
 }
