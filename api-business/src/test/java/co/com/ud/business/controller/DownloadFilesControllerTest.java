@@ -44,8 +44,24 @@ public class DownloadFilesControllerTest {
 
     @Test
     public void testGetFormatoIdeaEMPTY(){
+
         ResponseEntity<DocumentDownloadDto> response = downloadFilesController.getFormatoIdea("321654dsg", 1L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode() );
     }
+
+    @Test
+    public void testGetFormatoIdeaSUCCESS(){
+
+        Mockito.doReturn(Optional.empty()).when(descargaFormatoService).descargarFormatoIdeaByIdIdea(Mockito.any(), Mockito.any());
+
+        DocumentDownloadDto entity = DocumentDownloadDto.builder()
+                .build();
+
+        ResponseEntity<DocumentDownloadDto> response = downloadFilesController.getFormatoIdea("321654dsg", 1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode() );
+    }
+
+
 }

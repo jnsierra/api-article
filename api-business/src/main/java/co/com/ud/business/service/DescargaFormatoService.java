@@ -7,4 +7,8 @@ import java.util.Optional;
 public interface DescargaFormatoService {
 
     Optional<DocumentDownloadDto> descargarFormatoIdea();
+
+    Optional<DocumentDownloadDto> descargarFormatoIdeaByIdIdea(String token, Long idIdea);
+
+
 }

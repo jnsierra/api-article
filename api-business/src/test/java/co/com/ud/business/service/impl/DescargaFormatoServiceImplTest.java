@@ -1,9 +1,12 @@
 package co.com.ud.business.service.impl;
 
+import co.com.ud.business.rest.client.FormatoIdeaCliente;
 import co.com.ud.utiles.dto.DocumentDownloadDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
@@ -12,10 +15,13 @@ import java.util.Optional;
 public class DescargaFormatoServiceImplTest {
 
     private DescargaFormatoServiceImpl descargaFormatoService;
+    @Mock
+    private FormatoIdeaCliente formatoIdeaCliente;
 
     @Before
     public void setUp(){
-        this.descargaFormatoService = new DescargaFormatoServiceImpl("src/test/resources/document/formato_001.docx");
+        MockitoAnnotations.initMocks(this);
+        this.descargaFormatoService = new DescargaFormatoServiceImpl("src/test/resources/document/formato_001.docx", formatoIdeaCliente);
     }
 
     @Test
@@ -25,5 +31,7 @@ public class DescargaFormatoServiceImplTest {
         Assert.assertNotNull(down);
         Assert.assertTrue(down.isPresent());
     }
+
+
 
 }

@@ -30,7 +30,12 @@ public class DownloadFilesController {
     }
 
     @GetMapping(value = "/formatoAdjuntoIdea/{idIdea}/")
-    public ResponseEntity<DocumentDownloadDto> getFormatoIdea(@RequestHeader("Authorization")String autenticacion , @PathVariable(name = "id") Long idIdea){
+    public ResponseEntity<DocumentDownloadDto> getFormatoIdea(@RequestHeader("Authorization")String autenticacion
+            ,@PathVariable(name = "idIdea") Long idIdea){
+        Optional<DocumentDownloadDto> descarga = descargaFormatoService.descargarFormatoIdeaByIdIdea(autenticacion,idIdea);
+        if(descarga.isPresent()){
+            return new ResponseEntity<>(descarga.get(), HttpStatus.OK);
+        }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
