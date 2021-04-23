@@ -23,4 +23,10 @@ public class ArticuloServiceImpl implements ArticuloService {
         return articuloRepository.findByIdIdea(idIdea);
     }
 
+    @Override
+    public Optional<ArticuloEntity> save(ArticuloEntity articuloEntity) {
+        ArticuloEntity response = articuloRepository.save(articuloEntity);
+        return Optional.of(response);
+    }
+
 }

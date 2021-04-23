@@ -52,4 +52,25 @@ public class ArticuloControllerTest {
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+    @Test
+    public void testSave(){
+        ArticuloDto responseEntity = ArticuloDto.builder()
+                .id(1L)
+                .contenido("Este es el contenido de la idea")
+                .estado("PRUEBA")
+                .ideaId(1L)
+                .build();
+        Mockito.doReturn(Optional.of(responseEntity)).when(articuloService).save(Mockito.any());
+
+        ArticuloDto articulo = ArticuloDto.builder()
+                .contenido("Este es el contenido de la idea")
+                .estado("PRUEBA")
+                .ideaId(1L)
+                .build();
+        ResponseEntity<ArticuloDto> response = articuloController.save(articulo);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+
+    }
+
 }

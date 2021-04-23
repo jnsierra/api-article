@@ -8,4 +8,6 @@ public interface ArticuloService {
 
     Optional<ArticuloEntity> findByIdIdea(Long idIdea);
 
+    Optional<ArticuloEntity> save(ArticuloEntity articuloEntity);
+
 }

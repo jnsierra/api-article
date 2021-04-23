@@ -6,8 +6,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
@@ -26,10 +29,17 @@ public class DescargaFormatoServiceImplTest {
 
     @Test
     public void testDescargarFormatoIdea(){
-
         Optional<DocumentDownloadDto> down = descargaFormatoService.descargarFormatoIdea();
         Assert.assertNotNull(down);
         Assert.assertTrue(down.isPresent());
+    }
+    @Test
+    public void testDescargarFormatoIdeaByIdIdeaEMPTY(){
+        Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(formatoIdeaCliente).getFormatoByIdIdea(Mockito.any(), Mockito.any());
+
+        Optional<DocumentDownloadDto> response = descargaFormatoService.descargarFormatoIdeaByIdIdea("sgsdfg5416", 1L);
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isPresent());
     }
 
 
