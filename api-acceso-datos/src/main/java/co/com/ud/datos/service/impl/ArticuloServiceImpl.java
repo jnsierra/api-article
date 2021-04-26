@@ -6,6 +6,7 @@ import co.com.ud.datos.service.ArticuloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,6 +28,16 @@ public class ArticuloServiceImpl implements ArticuloService {
     public Optional<ArticuloEntity> save(ArticuloEntity articuloEntity) {
         ArticuloEntity response = articuloRepository.save(articuloEntity);
         return Optional.of(response);
+    }
+
+    @Override
+    public List<ArticuloEntity> getArticulosByUser(Long idUser) {
+        return articuloRepository.getArticulosByUser(idUser);
+    }
+
+    @Override
+    public Optional<ArticuloEntity> getById(Long id) {
+        return articuloRepository.findById(id);
     }
 
 }

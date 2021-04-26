@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @SpringBootTest
@@ -71,6 +72,37 @@ public class ArticuloControllerTest {
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
+    }
+
+    @Test
+    public void testGetByIdSUCCESS(){
+        ArticuloDto responseEntity = ArticuloDto.builder()
+                .id(1L)
+                .contenido("Este es el contenido de la idea")
+                .estado("PRUEBA")
+                .ideaId(1L)
+                .build();
+        Mockito.doReturn(Optional.of(responseEntity)).when(articuloService).getById(1L);
+        ResponseEntity<ArticuloDto> response = articuloController.getById(1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetByIdEMPTY(){
+        Mockito.doReturn(Optional.empty()).when(articuloService).getById(1L);
+        ResponseEntity<ArticuloDto> response = articuloController.getById(1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetArticulosByUserEMPTY(){
+        Mockito.doReturn(new ArrayList<>()).when(articuloService).getArticulosByUser(Mockito.any());
+
+        ResponseEntity<ArticuloDto[]> response = articuloController.getArticulosByUser(1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
 }

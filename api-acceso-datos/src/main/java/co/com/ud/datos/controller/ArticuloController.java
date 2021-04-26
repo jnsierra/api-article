@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -38,6 +39,24 @@ public class ArticuloController {
         Optional<ArticuloEntity> response = articuloService.save(map.map(articuloDto, ArticuloEntity.class));
         if(response.isPresent()){
             return new ResponseEntity<>( map.map(response.get(), ArticuloDto.class) , HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/idea/user/{idUser}/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArticuloDto[]> getArticulosByUser(@PathVariable("idUser") Long idUser){
+        List<ArticuloEntity> response = articuloService.getArticulosByUser(idUser);
+        if(!response.isEmpty()){
+            return new ResponseEntity<>(map.map(response,ArticuloDto[].class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/by/{idArt}/")
+    public ResponseEntity<ArticuloDto> getById(@PathVariable Long idArt){
+        Optional<ArticuloEntity> articulo = articuloService.getById(idArt);
+        if(articulo.isPresent()){
+            return new ResponseEntity<>(map.map(articulo.get(), ArticuloDto.class), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

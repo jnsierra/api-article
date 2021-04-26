@@ -7,11 +7,16 @@ import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "articulo")
 @NamedQueries({
-        @NamedQuery(name = "ArticuloEntity.findByIdIdea", query = "from ArticuloEntity art inner join art.idea as ide where ide.id = :idIdea ")
+        @NamedQuery(name = "ArticuloEntity.findByIdIdea",
+                query = "from ArticuloEntity art inner join art.idea as ide where ide.id = :idIdea "),
+        @NamedQuery(name = "ArticuloEntity.getArticulosByUser",
+                query = "from ArticuloEntity art inner join art.idea as ide inner join ide.usuario as usu where usu.id = :idUser ")
 })
 @Data
 @Builder
@@ -37,4 +42,6 @@ public class ArticuloEntity extends Auditable<String>{
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_idea", nullable = false)
     private IdeaEntity idea;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo", orphanRemoval = true)
+    private List<ControlLecturaEntity> controlLecturas = new ArrayList<>();
 }

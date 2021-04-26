@@ -50,7 +50,7 @@ public class IFormatoIdeaRepositoryTest {
         Assert.assertNotNull(formatoResponse);
         Assert.assertNotNull(formatoResponse.getId());
 
-        List<FormatoIdeaEntity> response = formatoIdeaRepository.getFormatosByIdea(1L);
+        List<FormatoIdeaEntity> response = formatoIdeaRepository.getFormatosByIdea(responseIdea.getId());
         Assert.assertNotNull(response);
         Assert.assertFalse(response.isEmpty());
 
