@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "control_lectura")
 @NamedQueries({
         @NamedQuery(name = "ControlLecturaEntity.getByIdArticulo",
-                query = "from ControlLecturaEntity as contLec inner join contLec.articulo as art where art.id = :idArt ")
+                query = "from ControlLecturaEntity as contLec inner join contLec.articulo as art where art.id = :idArt order by contLec.id desc ")
 })
 @Data
 @Builder
