@@ -44,4 +44,6 @@ public class ArticuloEntity extends Auditable<String>{
     private IdeaEntity idea;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo", orphanRemoval = true)
     private List<ControlLecturaEntity> controlLecturas = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo", orphanRemoval = true)
+    private List<ParrafoEntity> parrafos = new ArrayList<>();
 }

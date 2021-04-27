@@ -10,7 +10,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.validation.constraints.AssertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

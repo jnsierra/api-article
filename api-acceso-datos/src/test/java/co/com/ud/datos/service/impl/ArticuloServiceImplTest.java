@@ -5,7 +5,6 @@ import co.com.ud.datos.entity.IdeaEntity;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.repository.IArticuloRepository;
 import co.com.ud.datos.service.ArticuloService;
-import org.checkerframework.checker.nullness.Opt;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

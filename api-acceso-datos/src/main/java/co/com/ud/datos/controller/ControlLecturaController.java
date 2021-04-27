@@ -3,7 +3,6 @@ package co.com.ud.datos.controller;
 import co.com.ud.datos.entity.ControlLecturaEntity;
 import co.com.ud.datos.service.ControlLecturaService;
 import co.com.ud.utiles.dto.ControlLecturaDto;
-import com.netflix.client.IResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +35,7 @@ public class ControlLecturaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(value = "/articulo/{idArticulo}")
+    @GetMapping(value = "/articulo/{idArticulo}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ControlLecturaDto[]> getByArticuloId( @PathVariable("idArticulo") Long idArticulo){
         List<ControlLecturaEntity> response = controlLecturaService.getByIdArticulo(idArticulo);
         if(!response.isEmpty()){

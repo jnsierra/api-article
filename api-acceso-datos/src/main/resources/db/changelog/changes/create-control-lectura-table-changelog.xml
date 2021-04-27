@@ -25,7 +25,7 @@
             <column name="comentario" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="year" type="DATE">
+            <column name="year" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="calificacion" type="VARCHAR(255)">

@@ -49,4 +49,7 @@ public class ControlLecturaEntity extends Auditable<String>{
     @Column(name = "year")
     private Long year;
 
+    @Column(name = "calificacion")
+    private Long calificacion;
+
 }

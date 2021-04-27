@@ -9,23 +9,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ControlLecturaDto {
+public class ParrafoDto {
 
     private Long id;
-
-    private Long idArticulo;
 
     private Long orden;
 
     private String estado;
 
-    private String link;
+    private String contenido;
 
-    private String autor;
+    private Long idArticulo;
 
-    private String comentario;
-
-    private Long year;
-
-    private Long calificacion;
 }
