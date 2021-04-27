@@ -31,7 +31,7 @@ public class FormatoIdeaServiceImplTest {
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.formatoIdeaService = new FormatoIdeaServiceImpl(formatoIdeaCliente, "/repository/documentos/usuario/", ideaService);
+        this.formatoIdeaService = new FormatoIdeaServiceImpl(formatoIdeaCliente, "/opt/", ideaService);
     }
 
     @Test
