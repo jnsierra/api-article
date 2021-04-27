@@ -16,7 +16,7 @@ public class UtilesBase64Test {
 
     @Before
     public void setUp(){
-        this.path = "/repository/documentos/usuario/";
+        this.path = "/opt/";
     }
     @Test
     public void testSaveFileSUCCESS()throws FileNotFoundException {
