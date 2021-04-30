@@ -38,4 +38,13 @@ public class DownloadFilesController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping(value = "/")
+    public ResponseEntity<DocumentDownloadDto> getDocByUrl(@RequestBody DocumentDownloadDto documentDownloadDto){
+        Optional<DocumentDownloadDto> descarga = descargaFormatoService.descargarDocumento(documentDownloadDto.getUbicacion());
+        if(descarga.isPresent()){
+            return new ResponseEntity<>(descarga.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

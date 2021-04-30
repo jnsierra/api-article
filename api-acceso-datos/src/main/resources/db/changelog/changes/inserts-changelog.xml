@@ -17,7 +17,7 @@
         <insert tableName="tipo_usuario">
             <column name="id" valueComputed="${sequence.tipo_usuario}"></column>
             <column name="tipo" value="PROFESOR"></column>
-            <column name="descripcion" value="Administracion del aplictivo"></column>
+            <column name="descripcion" value="Profesores "></column>
 
             <column name="created_by" value="jsierra"></column>
             <column name="created_date" valueDate="${now}"></column>
@@ -27,7 +27,17 @@
         <insert tableName="tipo_usuario">
             <column name="id" valueComputed="${sequence.tipo_usuario}"></column>
             <column name="tipo" value="ALUMNO"></column>
-            <column name="descripcion" value="Administracion del aplictivo"></column>
+            <column name="descripcion" value="Alumnos productores de articulos"></column>
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+        <insert tableName="tipo_usuario">
+            <column name="id" valueComputed="${sequence.tipo_usuario}"></column>
+            <column name="tipo" value="COORDINACION"></column>
+            <column name="descripcion" value="Usuario encargado de asignar jurados a los articulos "></column>
 
             <column name="created_by" value="jsierra"></column>
             <column name="created_date" valueDate="${now}"></column>

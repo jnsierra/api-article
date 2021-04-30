@@ -22,4 +22,10 @@ public class ComentarioDto {
 
     private String comentario;
 
+    private String base;
+
+    private String tipo_documento;
+
+    private String ubicacion;
+
 }

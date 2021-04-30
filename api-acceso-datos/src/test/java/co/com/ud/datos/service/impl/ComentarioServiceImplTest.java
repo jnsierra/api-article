@@ -69,4 +69,22 @@ public class ComentarioServiceImplTest {
         Assert.assertNotNull(rta);
     }
 
+    @Test
+    public void testUpdateComentarioUbicacionSUCCESS(){
+        Mockito.doReturn(1).when(comentarioRepository).updateComentarioUbicacion(Mockito.any(),Mockito.any());
+
+        Optional<Boolean> response = comentarioService.updateComentarioUbicacion(1L, "/opt/1_comentario.pdf");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(Boolean.TRUE, response.get());
+    }
+
+    @Test
+    public void testUpdateComentarioUbicacionEMPTY(){
+        Mockito.doReturn(0).when(comentarioRepository).updateComentarioUbicacion(Mockito.any(),Mockito.any());
+
+        Optional<Boolean> response = comentarioService.updateComentarioUbicacion(1L, "/opt/1_comentario.pdf");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(Boolean.FALSE, response.get());
+    }
+
 }

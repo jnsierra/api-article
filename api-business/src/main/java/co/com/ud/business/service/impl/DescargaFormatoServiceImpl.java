@@ -49,6 +49,17 @@ public class DescargaFormatoServiceImpl implements DescargaFormatoService {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<DocumentDownloadDto> descargarDocumento(String ubicacion) {
+        String name = "documento.";
+        if(ubicacion.contains("pdf")){
+            name += "pdf";
+        }else{
+            name += "docx";
+        }
+        return obtenerDoc(ubicacion, name);
+    }
+
     private static byte[] loadFile(File file) throws IOException {
         InputStream is = new FileInputStream(file);
 

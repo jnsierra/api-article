@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "parrafo")
 @NamedQueries({
-        @NamedQuery(name = "ParrafoEntity.getParrafoByArticulo", query = "from ParrafoEntity parr inner join parr.articulo art WHERE art.id = :artId")
+        @NamedQuery(name = "ParrafoEntity.getParrafoByArticulo", query = "from ParrafoEntity parr inner join parr.articulo art WHERE art.id = :artId order by parr.orden ")
+
 })
 @Data
 @Builder
@@ -29,7 +30,7 @@ public class ParrafoEntity extends Auditable<String>{
     private Long orden;
     @Column(name = "estado")
     private String estado;
-    @Column(name = "contenido")
+    @Column(name = "contenido",columnDefinition = "text" )
     private String contenido;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_articulo", nullable = false)

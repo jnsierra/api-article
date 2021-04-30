@@ -29,4 +29,10 @@ public class ComentarioServiceImpl implements ComentarioService {
     public List<ComentarioEntity> findByLlaveAndTipoComentario(Long llave, TYPE_COMMENTS type_comments) {
         return this.comentarioRepository.findByLlaveAndTipoComentario(llave,type_comments);
     }
+
+    @Override
+    public Optional<Boolean> updateComentarioUbicacion(Long idCom, String ubicacion) {
+        Integer update = this.comentarioRepository.updateComentarioUbicacion(idCom, ubicacion);
+        return (update > 0) ? Optional.of(Boolean.TRUE) : Optional.of(Boolean.FALSE);
+    }
 }

@@ -18,7 +18,7 @@
             <column name="estado" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="contenido" type="VARCHAR(255)"/>
+            <column name="contenido" type="clob"/>
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>

@@ -10,5 +10,7 @@ public interface DescargaFormatoService {
 
     Optional<DocumentDownloadDto> descargarFormatoIdeaByIdIdea(String token, Long idIdea);
 
+    Optional<DocumentDownloadDto> descargarDocumento(String ubicacion);
+
 
 }

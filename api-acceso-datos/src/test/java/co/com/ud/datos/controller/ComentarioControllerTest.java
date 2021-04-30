@@ -92,4 +92,29 @@ public class ComentarioControllerTest {
         Assert.assertEquals(HttpStatus.OK, comentarioRta.getStatusCode());
     }
 
+    @Test
+    public void testUpdateUbicacionComentarioSUCCESS(){
+        ComentarioDto comentario = ComentarioDto.builder()
+                .id(1L)
+                .ubicacion("/opt/documentos/01_documento.pdf")
+                .build();
+        Mockito.doReturn(Optional.of(Boolean.TRUE)).when(comentarioService).updateComentarioUbicacion(Mockito.any(), Mockito.any());
+
+        ResponseEntity<Boolean> response = comentarioController.updateUbicacionComentario(comentario);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testUpdateUbicacionComentarioEMPTY(){
+        ComentarioDto comentario = ComentarioDto.builder()
+                .id(1L)
+                .ubicacion("/opt/documentos/01_documento.pdf")
+                .build();
+        Mockito.doReturn(Optional.empty()).when(comentarioService).updateComentarioUbicacion(Mockito.any(), Mockito.any());
+        ResponseEntity<Boolean> response = comentarioController.updateUbicacionComentario(comentario );
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
 }

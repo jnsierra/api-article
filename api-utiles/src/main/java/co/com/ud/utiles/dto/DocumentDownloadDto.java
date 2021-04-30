@@ -9,4 +9,5 @@ public class DocumentDownloadDto {
 
     private String document;
     private String nombre;
+    private String ubicacion;
 }

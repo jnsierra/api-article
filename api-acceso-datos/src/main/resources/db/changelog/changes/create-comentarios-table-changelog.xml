@@ -19,6 +19,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="comentario" type="VARCHAR(255)"/>
+            <column name="ubicacion" type="VARCHAR(255)"/>
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>

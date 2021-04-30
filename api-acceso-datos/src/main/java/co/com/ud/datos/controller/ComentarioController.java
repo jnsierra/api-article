@@ -46,4 +46,13 @@ public class ComentarioController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping(value = "/ubicacion", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> updateUbicacionComentario(@RequestBody ComentarioDto comentarioDto){
+        Optional<Boolean> response = comentarioService.updateComentarioUbicacion(comentarioDto.getId(), comentarioDto.getUbicacion());
+        if(response.isPresent()){
+            return new ResponseEntity<>(response.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

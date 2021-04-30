@@ -12,7 +12,9 @@ import javax.persistence.*;
 @Table(name = "comentario")
 @NamedQueries({
         @NamedQuery(name = "ComentarioEntity.findByLlaveAndTipoComentario"
-                , query = "from ComentarioEntity com WHERE com.llave = :llave and com.tipo_comentario = :tipoComentario order by id desc")
+                , query = "from ComentarioEntity com WHERE com.llave = :llave and com.tipo_comentario = :tipoComentario order by id desc"),
+        @NamedQuery(name = "ComentarioEntity.updateComentarioUbicacion"
+                , query = "Update ComentarioEntity com set com.ubicacion = :ubicacion where com.id = :idCom")
 })
 @Data
 @Builder
@@ -33,4 +35,6 @@ public class ComentarioEntity extends Auditable<String>{
     private Long llave;
     @Column(name = "comentario")
     private String comentario;
+    @Column(name = "ubicacion")
+    private String ubicacion;
 }
