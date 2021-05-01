@@ -29,7 +29,7 @@ public class DownloadFilesControllerTest {
     }
 
     @Test
-    public void testGetFormato(){
+    public void testGetFormatoSUCCESS(){
         DocumentDownloadDto descarga = DocumentDownloadDto.builder()
                 .nombre("formato")
                 .document("213456ghjkl")
@@ -43,6 +43,16 @@ public class DownloadFilesControllerTest {
     }
 
     @Test
+    public void testGetFormatoEMPTY(){
+
+        Mockito.doReturn(Optional.empty()).when(descargaFormatoService).descargarFormatoIdea();
+
+        ResponseEntity<DocumentDownloadDto> response = downloadFilesController.getFormato();
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
     public void testGetFormatoIdeaEMPTY(){
 
         ResponseEntity<DocumentDownloadDto> response = downloadFilesController.getFormatoIdea("321654dsg", 1L);
@@ -53,15 +63,26 @@ public class DownloadFilesControllerTest {
     @Test
     public void testGetFormatoIdeaSUCCESS(){
 
-        Mockito.doReturn(Optional.empty()).when(descargaFormatoService).descargarFormatoIdeaByIdIdea(Mockito.any(), Mockito.any());
-
         DocumentDownloadDto entity = DocumentDownloadDto.builder()
+                .nombre("documento.pdf")
+                .document("sdfdsgsadgfsd")
+                .ubicacion("/opt/documento.pdf")
                 .build();
+        Mockito.doReturn(Optional.of(entity)).when(descargaFormatoService).descargarFormatoIdeaByIdIdea(Mockito.any(), Mockito.any());
 
         ResponseEntity<DocumentDownloadDto> response = downloadFilesController.getFormatoIdea("321654dsg", 1L);
         Assert.assertNotNull(response);
-        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode() );
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode() );
     }
 
+    @Test
+    public void testGetDocByUrlEMPTY(){
+        DocumentDownloadDto entity = DocumentDownloadDto.builder()
+                .ubicacion("/opt/documento.pdf")
+                .build();
+        ResponseEntity<DocumentDownloadDto> response = downloadFilesController.getDocByUrl(entity);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
 
 }
