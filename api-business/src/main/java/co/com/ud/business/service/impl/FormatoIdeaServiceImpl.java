@@ -40,7 +40,9 @@ public class FormatoIdeaServiceImpl implements FormatoIdeaService {
     public Optional<FormatoIdeaDto> persistirFormatoIdea(String token, FormatoIdeaDto formatoIdea) {
         //Guardo el archivo en el repo
         String name = formatoIdea.getIdIdea() + "_idea." + formatoIdea.getTipo();
+        System.out.println("Este es el nombre del archivo nuevo " + name);
         Boolean guardar = UtilesBase64.builder().build().saveFile(formatoIdea.getBase64(),pathRepo, name);
+        System.out.println("Esta es la respuesta para guardar: " + guardar);
         if(guardar){
             //cambiamos la ruta en la que se almaceno el archivo
             formatoIdea.setUbicacion(pathRepo + name);
