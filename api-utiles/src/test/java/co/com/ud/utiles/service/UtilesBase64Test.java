@@ -59,4 +59,11 @@ public class UtilesBase64Test {
         Assert.assertNotNull(base64);
         Assert.assertEquals(base64, "asdf");
     }
+
+    @Test
+    public void testBorraTipoBase64WORDXML(){
+        String base64 = UtilesBase64.builder().build().borraTipoBase64("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,UEsDBBQABgA");
+        Assert.assertNotNull(base64);
+        Assert.assertEquals(base64, "UEsDBBQABgA");
+    }
 }
