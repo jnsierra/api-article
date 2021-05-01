@@ -25,6 +25,8 @@ public class UtilesBase64 {
                 base64 = base64.replace("data:application/pdf;base64,", "");
             }else if(nameFile.contains(".docx")){
                 base64 = base64.replace("data:application/octet-stream;base64,", "");
+                base64 = base64.replace("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,", "");
+
             }
             Base64.Decoder decoder = Base64.getDecoder();
             byte[] decodedByteArray = decoder.decode(base64);
