@@ -14,6 +14,7 @@ import java.util.Base64;
 public class UtilesBase64 {
 
     public Boolean saveFile(String base64, String directoryPath, String nameFile){
+        System.out.println("Llego al cargue");
         Path path = Paths.get(directoryPath);
         boolean isDir = Files.isDirectory(path);
         if(!isDir){
