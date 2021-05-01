@@ -52,7 +52,7 @@ public class FormatoIdeaServiceImpl implements FormatoIdeaService {
         Boolean guardar = UtilesBase64.builder().build().saveFile(formatoIdea.getBase64(),pathRepo, name.get());
         if(guardar){
             //cambiamos la ruta en la que se almaceno el archivo
-            formatoIdea.setUbicacion(pathRepo + name);
+            formatoIdea.setUbicacion(pathRepo + name.get());
             formatoIdea.setNombre(name.get());
             Optional<FormatoIdeaDto> formato = saveFormato(token,formatoIdea);
             if(formato.isPresent()){
