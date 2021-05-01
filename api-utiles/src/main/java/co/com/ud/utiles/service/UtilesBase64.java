@@ -1,6 +1,8 @@
 package co.com.ud.utiles.service;
 
 import lombok.Builder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,11 +15,14 @@ import java.util.Base64;
 @Builder
 public class UtilesBase64 {
 
+    private static final Logger logger = LogManager.getLogger(UtilesBase64.class);
+
     public Boolean saveFile(String base64, String directoryPath, String nameFile){
         System.out.println("Llego al cargue");
         Path path = Paths.get(directoryPath);
         boolean isDir = Files.isDirectory(path);
         if(!isDir){
+            logger.error("NOT_EXISTS_DIRECTORY|{}|{}|{}","SAVE_FILE", directoryPath, nameFile);
             return Boolean.FALSE;
         }
 
