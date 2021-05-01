@@ -23,7 +23,7 @@ public class FormatoIdeaController {
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FormatoIdeaDto> save(@RequestHeader("Authorization")String autenticacion, @RequestBody FormatoIdeaDto formatoIdeaDto){
-        System.out.println("Llego al controntroller");
+        System.out.println("Llego al controntroller: " + formatoIdeaDto.toString());
         Optional<FormatoIdeaDto> response = formatoIdeaService.persistirFormatoIdea(autenticacion, formatoIdeaDto);
         System.out.println("Llego a la respuesta");
         if(response.isPresent()){
