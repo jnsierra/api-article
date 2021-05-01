@@ -18,7 +18,6 @@ public class UtilesBase64 {
     private static final Logger logger = LogManager.getLogger(UtilesBase64.class);
 
     public Boolean saveFile(String base64, String directoryPath, String nameFile){
-        System.out.println("Llego al cargue");
         Path path = Paths.get(directoryPath);
         boolean isDir = Files.isDirectory(path);
         if(!isDir){
