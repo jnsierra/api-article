@@ -26,7 +26,6 @@ public class UtilesBase64Test {
         String valor = sc.next();
         Boolean response = UtilesBase64.builder().build().saveFile(valor, this.path, "prueba.pdf");
         Assert.assertEquals(Boolean.TRUE, response);
-
     }
 
     @Test
@@ -38,6 +37,13 @@ public class UtilesBase64Test {
         //Altero el path original
         Boolean response = UtilesBase64.builder().build().saveFile(valor, this.path + "s", "");
         Assert.assertEquals(Boolean.FALSE, response);
+    }
+
+    @Test
+    public void testBorraTipoBase64WITHOUTIDENTIFICADOR(){
+        String base64 = UtilesBase64.builder().build().borraTipoBase64("asdf");
+        Assert.assertNotNull(base64);
+        Assert.assertEquals(base64, "asdf");
     }
 
     @Test

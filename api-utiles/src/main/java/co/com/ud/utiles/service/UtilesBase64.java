@@ -39,8 +39,10 @@ public class UtilesBase64 {
 
     public String borraTipoBase64(String base64){
         final String IDENTIFICADOR = ";base64,";
-        int find = base64.indexOf(IDENTIFICADOR) + 8;
-        String nuevoBase64 = base64.substring(find);
-        return  nuevoBase64;
+        if(base64.contains(IDENTIFICADOR)){
+            int find = base64.indexOf(IDENTIFICADOR) + 8;
+            base64 = base64.substring(find);
+        }
+        return base64;
     }
 }
