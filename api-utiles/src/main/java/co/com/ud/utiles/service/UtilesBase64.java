@@ -31,7 +31,7 @@ public class UtilesBase64 {
             os.write(decodedByteArray);
             os.close();
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
