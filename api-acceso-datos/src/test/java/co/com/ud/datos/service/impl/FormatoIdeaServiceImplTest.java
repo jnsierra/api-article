@@ -68,7 +68,24 @@ public class FormatoIdeaServiceImplTest {
         List<FormatoIdeaEntity> response = formatoIdeaService.getFormatosByIdea(1L);
         Assert.assertNotNull(response);
         Assert.assertFalse(response.isEmpty());
+    }
 
+    @Test
+    public void testGetFormatosByIdeaAndTipoFormato(){
+        FormatoIdeaEntity entity  = FormatoIdeaEntity.builder()
+                .id(1L)
+                .idea(IdeaEntity.builder().id(1L).build())
+                .formato("FORMATO_IDEA")
+                .nombre("idea.pdf")
+                .ubicacion("/repository/documentos/usuario/1_idea.pdf")
+                .build();
+        List<FormatoIdeaEntity> listFormato = new ArrayList<>();
+        listFormato.add(entity);
+        Mockito.doReturn(listFormato).when(iFormatoIdeaRepository).getFormatosByIdeaAndTipoFormato(Mockito.any(), Mockito.any());
+
+        List<FormatoIdeaEntity> response = formatoIdeaService.getFormatosByIdeaAndTipoFormato(1L,"FORMATO_IDEA");
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isEmpty());
     }
 
 }

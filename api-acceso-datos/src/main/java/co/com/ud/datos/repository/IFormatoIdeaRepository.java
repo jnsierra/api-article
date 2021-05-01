@@ -12,4 +12,6 @@ public interface IFormatoIdeaRepository extends JpaRepository<FormatoIdeaEntity,
 
 
     List<FormatoIdeaEntity> getFormatosByIdea(Long idIdea);
+
+    List<FormatoIdeaEntity> getFormatosByIdeaAndTipoFormato(Long idIdea, String tipoFormato);
 }

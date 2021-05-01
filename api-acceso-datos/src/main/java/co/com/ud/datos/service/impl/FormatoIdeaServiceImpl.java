@@ -29,4 +29,9 @@ public class FormatoIdeaServiceImpl implements FormatoIdeaService {
     public List<FormatoIdeaEntity> getFormatosByIdea(Long idIdea) {
         return formatoIdeaRepository.getFormatosByIdea(idIdea);
     }
+
+    @Override
+    public List<FormatoIdeaEntity> getFormatosByIdeaAndTipoFormato(Long idIdea, String tipoFormato) {
+        return formatoIdeaRepository.getFormatosByIdeaAndTipoFormato(idIdea, tipoFormato);
+    }
 }

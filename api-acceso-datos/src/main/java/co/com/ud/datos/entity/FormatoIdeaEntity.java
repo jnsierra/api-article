@@ -11,7 +11,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "formato_idea")
 @NamedQueries({
-        @NamedQuery(name="FormatoIdeaEntity.getFormatosByIdea", query = "from FormatoIdeaEntity formato where formato.idea.id = :idIdea order by formato.id desc ")
+        @NamedQuery(name="FormatoIdeaEntity.getFormatosByIdea",               query = "from FormatoIdeaEntity formato where formato.idea.id = :idIdea order by formato.id desc "),
+        @NamedQuery(name="FormatoIdeaEntity.getFormatosByIdeaAndTipoFormato", query = "from FormatoIdeaEntity formato where formato.idea.id = :idIdea and formato.formato = :tipoFormato order by formato.id desc ")
+
 })
 @Data
 @Builder

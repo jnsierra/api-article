@@ -10,4 +10,6 @@ public interface FormatoIdeaService {
     Optional<FormatoIdeaEntity> save(FormatoIdeaEntity formatoIdeaEntity);
 
     List<FormatoIdeaEntity> getFormatosByIdea(Long idIdea);
+
+    List<FormatoIdeaEntity> getFormatosByIdeaAndTipoFormato(Long idIdea, String tipoFormato);
 }

@@ -35,9 +35,19 @@ public class FormatoIdeaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(value = "/by/{idIdea}/")
+    @GetMapping(value = "/by/{idIdea}/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FormatoIdeaDto[]> getFormatoByIdIdea(@PathVariable("idIdea")Long idIdea){
         List<FormatoIdeaEntity>  listResponse = formatoIdeaService.getFormatosByIdea(idIdea);
+        if(!listResponse.isEmpty()){
+            return new ResponseEntity<>(modelMapper.map(listResponse, FormatoIdeaDto[].class),HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/by/{idIdea}/{formato}/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<FormatoIdeaDto[]> getFormatoByIdIdeaAndFormato(@PathVariable("idIdea")  Long idIdea,
+                                                                         @PathVariable("formato") String formato){
+        List<FormatoIdeaEntity>  listResponse = formatoIdeaService.getFormatosByIdeaAndTipoFormato(idIdea,formato);
         if(!listResponse.isEmpty()){
             return new ResponseEntity<>(modelMapper.map(listResponse, FormatoIdeaDto[].class),HttpStatus.OK);
         }
