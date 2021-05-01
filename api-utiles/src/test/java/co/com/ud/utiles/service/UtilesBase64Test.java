@@ -39,4 +39,18 @@ public class UtilesBase64Test {
         Boolean response = UtilesBase64.builder().build().saveFile(valor, this.path + "s", "");
         Assert.assertEquals(Boolean.FALSE, response);
     }
+
+    @Test
+    public void testBorraTipoBase64PDF(){
+        String base64 = UtilesBase64.builder().build().borraTipoBase64("data:application/pdf;base64,asdf");
+        Assert.assertNotNull(base64);
+        Assert.assertEquals(base64, "asdf");
+    }
+
+    @Test
+    public void testBorraTipoBase64WORD(){
+        String base64 = UtilesBase64.builder().build().borraTipoBase64("data:application/octet-stream;base64,asdf");
+        Assert.assertNotNull(base64);
+        Assert.assertEquals(base64, "asdf");
+    }
 }

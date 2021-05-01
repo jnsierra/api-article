@@ -21,13 +21,8 @@ public class UtilesBase64 {
         }
 
         try {
-            if(nameFile.contains(".pdf")){
-                base64 = base64.replace("data:application/pdf;base64,", "");
-            }else if(nameFile.contains(".docx")){
-                base64 = base64.replace("data:application/octet-stream;base64,", "");
-                base64 = base64.replace("data:application/vnd.openxmlformats-officedocument.wordprocessingml.document;base64,", "");
-
-            }
+            base64 = borraTipoBase64(base64);
+            System.out.println("Este es el nuevo");
             Base64.Decoder decoder = Base64.getDecoder();
             byte[] decodedByteArray = decoder.decode(base64);
             File file = new File(directoryPath + nameFile );
@@ -40,5 +35,12 @@ public class UtilesBase64 {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
+    }
+
+    public String borraTipoBase64(String base64){
+        final String IDENTIFICADOR = ";base64,";
+        int find = base64.indexOf(IDENTIFICADOR) + 8;
+        String nuevoBase64 = base64.substring(find);
+        return  nuevoBase64;
     }
 }
