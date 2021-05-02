@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
@@ -51,6 +53,27 @@ public class IIdeaRepositoryTest {
         Integer update = ideaRepository.modificarIdea(response.getId(), "Titulo nuevo", "contenido actualizado", "CREADA", 3L);
         Assert.assertNotNull(update);
         Assert.assertTrue(update>0);
+
+    }
+
+    @Test
+    public void testFindByEstado(){
+        IdeaEntity ideaEntity = IdeaEntity.builder()
+                .contenido("Esta es una prueba de contendio")
+                .titulo("Titulo de prueba")
+                .id_profesor(3L)
+                .estado("CREADA")
+                .usuario(UsuarioEntity.builder()
+                        .id(1L)
+                        .build())
+                .build();
+        IdeaEntity response = ideaRepository.save(ideaEntity);
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getId());
+        //Consultamos las ideas creadas
+        List<IdeaEntity> list = ideaRepository.findByEstado("CREADA");
+        Assert.assertNotNull(list);
+        Assert.assertFalse(list.isEmpty());
 
     }
 }

@@ -53,6 +53,15 @@ public class IdeaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping(value = "/by/")
+    public ResponseEntity<IdeaDto[]> getIdeasByEstado(String estado){
+        List<IdeaEntity> ideas = ideaService.findByEstado(estado);
+        if(Objects.nonNull(ideas) && !ideas.isEmpty()){
+            return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @PutMapping(value = "/estado/{idIdea}/{estado}/{idUsuario}/")
     public ResponseEntity<Boolean> updateStatusIdeaByIdAndUsuario(@PathVariable(name = "idIdea") Long id
             , @PathVariable(name = "estado") String estado

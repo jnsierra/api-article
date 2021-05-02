@@ -80,6 +80,27 @@ public class IdeaServiceImplTest {
     }
 
     @Test
+    public void testFindByUsuarioEstado(){
+        ArrayList<IdeaEntity> list = new ArrayList<>();
+        IdeaEntity response = IdeaEntity.builder()
+                .id(1L)
+                .titulo("Este es un titulo")
+                .contenido("Este es el contenido")
+                .estado("CREADO")
+                .id_profesor(1L)
+                .usuario(UsuarioEntity.builder()
+                        .id(1L)
+                        .build())
+                .build();
+        list.add(response);
+        Mockito.doReturn(list).when(ideaRepository).findByEstado(Mockito.any());
+
+        List<IdeaEntity> rta = ideaService.findByEstado("CREADO");
+        Assert.assertNotNull(rta);
+        Assert.assertFalse(rta.isEmpty());
+    }
+
+    @Test
     public void testFindByProfesorIdAndEstado(){
         ArrayList<IdeaEntity> list = new ArrayList<>();
         IdeaEntity response = IdeaEntity.builder()

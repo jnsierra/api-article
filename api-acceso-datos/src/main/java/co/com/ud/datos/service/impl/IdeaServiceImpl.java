@@ -42,6 +42,11 @@ public class IdeaServiceImpl implements IdeaService {
     }
 
     @Override
+    public List<IdeaEntity> findByEstado(String estadoIdea) {
+        return ideaRepository.findByEstado(estadoIdea);
+    }
+
+    @Override
     public Optional<Boolean> modificarIdProfAutorizaAndEstadoAndFechaAutoriza(Long idIdea, Long idProf, String estado) {
         Integer registro = ideaRepository.modificarIdProfAutorizaAndEstadoAndFechaAutoriza(idIdea, idProf, estado, new Date());
         if(registro > 0){

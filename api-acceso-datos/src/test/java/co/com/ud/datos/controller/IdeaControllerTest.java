@@ -99,6 +99,27 @@ public class IdeaControllerTest {
     }
 
     @Test
+    public void testGetIdeasByEstadoSUCCESS(){
+
+        List<IdeaEntity> ideas = new ArrayList<>();
+        IdeaEntity ideaResponse = IdeaEntity.builder()
+                .id(0L)
+                .usuario(UsuarioEntity.builder().id(1L).build())
+                .id_profesor(2L)
+                .estado("CREADA")
+                .titulo("Titulo")
+                .contenido("Este es el contenido")
+                .build();
+        ideas.add(ideaResponse);
+
+        Mockito.doReturn(ideas).when(ideaServiceImpl).findByEstado(Mockito.any());
+
+        ResponseEntity<IdeaDto[]> response = ideaControler.getIdeasByEstado("CREADA");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
     public void testGetIdeasByUsuarioFAILED(){
 
         List<IdeaEntity> ideas = new ArrayList<>();
