@@ -85,7 +85,7 @@ public class IdeaController {
 
     @PutMapping(value = "/jurado/{idIdea}/{idJurado}")
     public ResponseEntity<Boolean> updateJuradoIdea(@PathVariable(name = "idIdea")Long idIdea,
-                                                    @PathVariable(name = "idIdea")Long idJurado){
+                                                    @PathVariable(name = "idJurado")Long idJurado){
         Optional<Boolean> rta = ideaService.modificarJurado(idIdea, idJurado);
         if (rta.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
