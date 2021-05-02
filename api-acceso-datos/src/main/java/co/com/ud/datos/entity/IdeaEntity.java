@@ -19,7 +19,8 @@ import java.util.List;
         @NamedQuery(name = "IdeaEntity.findByProfesorIdAndEstado", query = "select idea from IdeaEntity idea inner join fetch idea.usuario as usu where idea.id_profesor = :idProfesor and idea.estado = :estadoIdea"),
         @NamedQuery(name = "IdeaEntity.modificarIdProfAutorizaAndEstadoAndFechaAutoriza", query = "Update IdeaEntity idea set idea.idProfesorAutoriza = :idProf, idea.estado = :estado, id.fechaAprobacion = :fechaApro where idea.id = :idIdea"),
         @NamedQuery(name = "IdeaEntity.modificarIdea", query = "update IdeaEntity idea set idea.id_profesor = :idProf, idea.estado = :estado, idea.contenido = :ideaContenido, idea.titulo = :ideaTitulo where idea.id = :idIdea"),
-        @NamedQuery(name = "IdeaEntity.modificarEstado", query = "update IdeaEntity idea set idea.estado = :estado where idea.id = :idIdea")
+        @NamedQuery(name = "IdeaEntity.modificarEstado", query = "update IdeaEntity idea set idea.estado = :estado where idea.id = :idIdea"),
+        @NamedQuery(name = "IdeaEntity.modificarJurado", query = "update IdeaEntity idea set idea.idProfesorJurado = :idProfesorJurado where idea.id = :idIdea")
 })
 @Data
 @Builder
@@ -56,6 +57,9 @@ public class IdeaEntity extends Auditable<String>{
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_aprob")
     private Date fechaAprobacion;
+
+    @Column(name = "id_prof_jurado")
+    private Long idProfesorJurado;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL, mappedBy = "idea")
     private ArticuloEntity articulo;

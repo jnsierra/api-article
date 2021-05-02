@@ -7,10 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "${endpoint.ms-acceso-datos.ideas.name}",
         url = "${endpoint.ms-acceso-datos.protocol}${endpoint.ms-acceso-datos.host}:${endpoint.ms-acceso-datos.port}${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.ideas.version}${endpoint.ms-acceso-datos.ideas.url}")
-//@FeignClient(name = "api-acceso-datos"
-//        , contextId = "${endpoint.ms-acceso-datos.ideas.name}"
-//        , path = "${endpoint.ms-acceso-datos.base}${endpoint.ms-acceso-datos.ideas.version}${endpoint.ms-acceso-datos.ideas.url}"
-//        , configuration = {FeignConfigInterceptor.class})
 public interface IdeaCliente {
 
     @GetMapping(value = "/by/usuarios/")
@@ -27,4 +23,7 @@ public interface IdeaCliente {
 
     @PutMapping(value = "/estado/{idIdea}/{estado}/")
     ResponseEntity<Boolean> updateStatusIdea(@RequestHeader("Authorization") String token,@PathVariable(name = "idIdea") Long id, @PathVariable(name = "estado") String estado);
+
+    @GetMapping(value = "/by/")
+    ResponseEntity<IdeaDto[]> getIdeasByEstado(@RequestHeader("Authorization") String token, @RequestParam(name = "estado")String estado);
 }

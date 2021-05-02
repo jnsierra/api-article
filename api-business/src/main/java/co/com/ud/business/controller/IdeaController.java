@@ -4,6 +4,7 @@ import co.com.ud.business.service.IdeaService;
 import co.com.ud.business.service.UsuarioService;
 import co.com.ud.utiles.dto.IdeaCompletoDto;
 import co.com.ud.utiles.dto.IdeaDto;
+import co.com.ud.utiles.dto.ProfesoresIdeaDto;
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,25 @@ public class IdeaController {
                 ideaCom.setUsuario(usuario.get());
                 return new ResponseEntity<>(ideaCom, HttpStatus.OK);
             }
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/by/")
+    public ResponseEntity<IdeaDto[]> getIdeasByEstado(@RequestHeader("Authorization")String autenticacion, @RequestParam(name = "estado")String estado){
+        List<IdeaDto> ideas = ideaService.findByEstado(autenticacion, estado);
+        if(Objects.nonNull(ideas) && !ideas.isEmpty()){
+            return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/by/profesores/{idIdea}" )
+    public ResponseEntity<ProfesoresIdeaDto> getProfByIdIdea(@RequestHeader("Authorization")String autenticacion
+                                                            , @PathVariable(name = "idIdea") Long idIdea){
+        Optional<ProfesoresIdeaDto> profesores = ideaService.getProfesoresByIdIdea(autenticacion, idIdea);
+        if(profesores.isPresent()){
+            return new ResponseEntity<>(profesores.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

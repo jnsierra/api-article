@@ -22,4 +22,6 @@ public interface IdeaService {
     Optional<Boolean> modificaIdea(IdeaEntity idea);
 
     Optional<Boolean> modificarEstado(Long idIdea, String estado);
+
+    Optional<Boolean> modificarJurado(Long idIdea, Long idJurado);
 }

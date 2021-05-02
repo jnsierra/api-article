@@ -26,12 +26,10 @@ public class IdeaControllerTest {
     @Mock
     private IdeaServiceImpl ideaServiceImpl;
 
-    private ModelMapper mapper;
-
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.mapper = new ModelMapper();
+        ModelMapper mapper = new ModelMapper();
         this.ideaControler = new IdeaController(ideaServiceImpl, mapper);
     }
 
@@ -160,8 +158,9 @@ public class IdeaControllerTest {
 
         Mockito.doReturn(Optional.of(true)).when(ideaServiceImpl).modificarIdProfAutorizaAndEstadoAndFechaAutoriza(Mockito.any(), Mockito.any(), Mockito.any());
 
-        ResponseEntity<Boolean> response = ideaControler.updateStatusIdeaByIdAndUsuario(0L, "CREADA", 1l);
+        ResponseEntity<Boolean> response = ideaControler.updateStatusIdeaByIdAndUsuario(0L, "CREADA", 1L);
         Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getBody());
         Assert.assertTrue(response.getBody());
 
     }
@@ -171,7 +170,7 @@ public class IdeaControllerTest {
 
         Mockito.doReturn(Optional.empty()).when(ideaServiceImpl).modificarIdProfAutorizaAndEstadoAndFechaAutoriza(Mockito.any(), Mockito.any(), Mockito.any());
 
-        ResponseEntity<Boolean> response = ideaControler.updateStatusIdeaByIdAndUsuario(0L, "CREADA", 1l);
+        ResponseEntity<Boolean> response = ideaControler.updateStatusIdeaByIdAndUsuario(0L, "CREADA", 1L);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 
@@ -203,6 +202,7 @@ public class IdeaControllerTest {
 
         ResponseEntity<Boolean> response = ideaControler.updateStatusIdea(0L, "POR_CONFIRMAR_FORMATO");
         Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getBody());
         Assert.assertTrue(response.getBody());
     }
 
@@ -213,6 +213,16 @@ public class IdeaControllerTest {
 
         ResponseEntity<Boolean> response = ideaControler.updateStatusIdea(0L, "POR_CONFIRMAR_FORMATO");
         Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getBody());
         Assert.assertFalse(response.getBody());
+    }
+
+    @Test
+    public void testUpdateJuradoIdeaSUCCESS(){
+        Mockito.doReturn(Optional.of(true)).when(ideaServiceImpl).modificarJurado(Mockito.any(), Mockito.any());
+        ResponseEntity<Boolean> response = ideaControler.updateJuradoIdea(1L,1L);
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getBody());
+        Assert.assertTrue(response.getBody());
     }
 }

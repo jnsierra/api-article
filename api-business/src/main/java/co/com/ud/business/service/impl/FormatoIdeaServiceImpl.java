@@ -7,7 +7,6 @@ import co.com.ud.utiles.dto.FormatoIdeaDto;
 import co.com.ud.utiles.service.UtilesBase64;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.checkerframework.checker.nullness.Opt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

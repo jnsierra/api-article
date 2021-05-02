@@ -35,4 +35,6 @@ public class IdeaDto {
 
     private String fechaAprobacion;
 
+    private Long idProfesorJurado;
+
 }

@@ -1,6 +1,5 @@
 package co.com.ud.datos.controller;
 
-import co.com.ud.datos.entity.ParrafoEntity;
 import co.com.ud.datos.service.ParrafoService;
 import co.com.ud.utiles.dto.ParrafoDto;
 import org.junit.Assert;

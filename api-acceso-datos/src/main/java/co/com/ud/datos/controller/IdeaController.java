@@ -30,10 +30,10 @@ public class IdeaController {
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<IdeaDto> save(@RequestBody IdeaDto idea){
         Optional<IdeaEntity> ideaEntity = ideaService.save(mapper.map(idea, IdeaEntity.class));
-        if(ideaEntity.isPresent()){
-            return new ResponseEntity<>( mapper.map(ideaEntity.get(), IdeaDto.class),   HttpStatus.CREATED);
+        if (ideaEntity.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>( mapper.map(ideaEntity.get(), IdeaDto.class),   HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/by/usuarios/")
@@ -54,7 +54,7 @@ public class IdeaController {
     }
 
     @GetMapping(value = "/by/")
-    public ResponseEntity<IdeaDto[]> getIdeasByEstado(String estado){
+    public ResponseEntity<IdeaDto[]> getIdeasByEstado(@RequestParam(name = "estado")String estado){
         List<IdeaEntity> ideas = ideaService.findByEstado(estado);
         if(Objects.nonNull(ideas) && !ideas.isEmpty()){
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
@@ -67,37 +67,47 @@ public class IdeaController {
             , @PathVariable(name = "estado") String estado
             , @PathVariable(name = "idUsuario") Long idUsuario){
         Optional<Boolean> rta = ideaService.modificarIdProfAutorizaAndEstadoAndFechaAutoriza(id, idUsuario, estado);
-        if(rta.isPresent()){
-            return new ResponseEntity<>(rta.get(), HttpStatus.OK);
+        if (rta.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(rta.get(), HttpStatus.OK);
     }
 
     @PutMapping(value = "/estado/{idIdea}/{estado}/")
     public ResponseEntity<Boolean> updateStatusIdea(@PathVariable(name = "idIdea") Long id
             , @PathVariable(name = "estado") String estado){
         Optional<Boolean> rta = ideaService.modificarEstado(id, estado);
-        if(rta.isPresent()){
-            return new ResponseEntity<>(rta.get(), HttpStatus.OK);
+        if (rta.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(rta.get(), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/jurado/{idIdea}/{idJurado}")
+    public ResponseEntity<Boolean> updateJuradoIdea(@PathVariable(name = "idIdea")Long idIdea,
+                                                    @PathVariable(name = "idIdea")Long idJurado){
+        Optional<Boolean> rta = ideaService.modificarJurado(idIdea, idJurado);
+        if (rta.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(rta.get(),HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}/")
     public ResponseEntity<IdeaDto> getById(@PathVariable(name = "id") Long idIdea){
         Optional<IdeaEntity> idea = ideaService.findById(idIdea);
-        if(idea.isPresent()){
-            return new ResponseEntity<>(mapper.map(idea.get(), IdeaDto.class), HttpStatus.OK);
+        if (idea.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(mapper.map(idea.get(), IdeaDto.class), HttpStatus.OK);
     }
 
     @PutMapping(value = "/")
     public ResponseEntity<Boolean> updateIdea(@RequestBody IdeaDto idea){
         Optional<Boolean> response = ideaService.modificaIdea(mapper.map(idea, IdeaEntity.class));
-        if(response.isPresent()){
-            return new ResponseEntity<>(response.get(), HttpStatus.OK);
+        if (response.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(response.get(), HttpStatus.OK);
     }
 }

@@ -4,6 +4,7 @@ import co.com.ud.business.rest.client.IdeaCliente;
 import co.com.ud.business.rest.client.UsuarioCliente;
 import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.dto.PersonaDto;
+import co.com.ud.utiles.dto.ProfesoresIdeaDto;
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.junit.Assert;
 import org.junit.Before;
@@ -164,6 +165,76 @@ public class IdeaServiceImplTest {
         Mockito.doReturn(new ResponseEntity<>(usuarioDto, HttpStatus.OK)).when(usuarioCliente).getUserById(Mockito.any());
 
         Optional<IdeaDto> response = ideaService.findById("123456",1L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testUpdateStatusSUCCESS(){
+        Mockito.doReturn(new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK)).when(ideaCliente).updateStatusIdea(Mockito.any(), Mockito.any(), Mockito.any());
+
+        Optional<Boolean> response = ideaService.updateStatus("dgfgfdhw5", 1L, "ESPERA_JURADO");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testUpdateStatusEMPTY(){
+        Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(ideaCliente).updateStatusIdea(Mockito.any(), Mockito.any(), Mockito.any());
+
+        Optional<Boolean> response = ideaService.updateStatus("dgfgfdhw5", 1L, "ESPERA_JURADO");
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isPresent());
+    }
+
+    @Test
+    public void testFindByEstadoSUCCESS(){
+
+        IdeaDto[] responseEntity = new IdeaDto[1];
+        IdeaDto item = IdeaDto.builder()
+                .id(1L)
+                .build();
+        responseEntity[0] = item;
+        Mockito.doReturn(new ResponseEntity<>(responseEntity, HttpStatus.OK)).when(ideaCliente).getIdeasByEstado(Mockito.any(), Mockito.any());
+
+        UsuarioDto entity = UsuarioDto.builder()
+                .id(1L)
+                .persona(PersonaDto.builder()
+                        .id(1L)
+                        .nombres("Jesus Nicolas")
+                        .apellidos("Sierra")
+                        .build())
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(entity,HttpStatus.OK)).when(usuarioCliente).getUserById(Mockito.any());
+
+
+        List<IdeaDto> response = ideaService.findByEstado("dgfdsghdf54", "ESPERA_JURADO");
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isEmpty());
+
+    }
+
+    @Test
+    public void testGetProfesoresByIdIdeaSUCCESS(){
+        UsuarioDto usuarioDto = UsuarioDto.builder()
+                .persona(PersonaDto.builder()
+                        .apellidos("Sierra")
+                        .nombres("Jesus")
+                        .build())
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(usuarioDto, HttpStatus.OK)).when(usuarioCliente).getUserById(Mockito.any());
+        IdeaDto item = IdeaDto.builder()
+                .id(1L)
+                .idProfesorAutoriza(1L)
+                .id_profesor(2L)
+                .idProfesorJurado(3L)
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(item, HttpStatus.OK)).when(ideaCliente).getById(Mockito.any(), Mockito.any());
+
+        Optional<ProfesoresIdeaDto> response = ideaService.getProfesoresByIdIdea("sadgff3h21", 1L);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
     }

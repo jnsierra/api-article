@@ -4,6 +4,7 @@ import co.com.ud.business.service.IdeaService;
 import co.com.ud.business.service.UsuarioService;
 import co.com.ud.utiles.dto.IdeaCompletoDto;
 import co.com.ud.utiles.dto.IdeaDto;
+import co.com.ud.utiles.dto.ProfesoresIdeaDto;
 import co.com.ud.utiles.dto.UsuarioDto;
 import co.com.ud.utiles.enumeracion.USER_STATE;
 import org.junit.Assert;
@@ -28,13 +29,12 @@ public class IdeaControllerTest {
     private IdeaService ideaService;
     @Mock
     private UsuarioService usuarioService;
-    private ModelMapper modelMapper;
     private IdeaController ideaController;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.modelMapper = new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
         this.ideaController = new IdeaController(ideaService, modelMapper, usuarioService);
     }
 
@@ -155,6 +155,41 @@ public class IdeaControllerTest {
 
         ResponseEntity<IdeaCompletoDto> response = ideaController.getById("123445",0L);
         Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetIdeasByEstadoSUCCESS(){
+
+        List<IdeaDto> lista = new ArrayList<>();
+        IdeaDto idea = IdeaDto.builder()
+                .id(1L)
+                .titulo("Esta es una idea de pruebas")
+                .build();
+        lista.add(idea);
+
+        Mockito.doReturn(lista).when(ideaService).findByEstado(Mockito.any(), Mockito.any());
+
+        ResponseEntity<IdeaDto[]> response = ideaController.getIdeasByEstado("13156", "ESPERA_JURADO");
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getBody());
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetProfByIdIdeaSUCCESS(){
+
+        ProfesoresIdeaDto prof = ProfesoresIdeaDto.builder()
+                .idIdea(1L)
+                .idProfJurado(2L)
+                .build();
+
+
+        Mockito.doReturn(Optional.of(prof)).when(ideaService).getProfesoresByIdIdea(Mockito.any(), Mockito.any());
+
+        ResponseEntity<ProfesoresIdeaDto> response = ideaController.getProfByIdIdea("13156", 1L);
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getBody());
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 

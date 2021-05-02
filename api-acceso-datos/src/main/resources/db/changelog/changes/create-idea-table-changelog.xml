@@ -27,6 +27,10 @@
 
             <column name="id_prof_autoriza" type="INT">
             </column>
+
+            <column name="id_prof_jurado" type="INT">
+            </column>
+
             <column name="fecha_aprob" type="datetime">
             </column>
             <column name="created_by" type="VARCHAR(255)">

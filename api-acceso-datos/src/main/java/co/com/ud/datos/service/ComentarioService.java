@@ -2,7 +2,6 @@ package co.com.ud.datos.service;
 
 import co.com.ud.datos.entity.ComentarioEntity;
 import co.com.ud.utiles.enumeracion.TYPE_COMMENTS;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;

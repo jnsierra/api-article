@@ -41,4 +41,9 @@ public interface IIdeaRepository extends JpaRepository<IdeaEntity, Long>, CrudRe
     Integer modificarEstado(@Param("idIdea") Long idIdea,
                             @Param("estado") String estado
                             );
+
+    @Modifying
+    @Transactional
+    Integer modificarJurado(@Param("idIdea") Long idIdea,
+                            @Param("idProfesorJurado") Long idJurado);
 }

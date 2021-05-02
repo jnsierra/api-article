@@ -4,7 +4,6 @@ import co.com.ud.datos.entity.ArticuloEntity;
 import co.com.ud.datos.entity.ParrafoEntity;
 import co.com.ud.datos.repository.IParrafoRepository;
 import co.com.ud.datos.service.ParrafoService;
-import co.com.ud.utiles.dto.ParrafoDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
