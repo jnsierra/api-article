@@ -55,8 +55,13 @@ public class FormatoIdeaServiceImpl implements FormatoIdeaService {
             formatoIdea.setNombre(name.get());
             Optional<FormatoIdeaDto> formato = saveFormato(token,formatoIdea);
             if(formato.isPresent()){
+                String estado = "POR_CONFIRMAR_FORMATO";
                 //Actualiza el estado del idea
-                ideaService.updateStatus(token, formatoIdea.getIdIdea(),"POR_CONFIRMAR_FORMATO");
+                //se valida si el formato es correccion de la idea o de jurado
+                if("PROCESO_AUT_JURADO".equals(formatoIdea.getFormato())){
+                    estado = "APROBACION_FORMATO_JURADO";
+                }
+                ideaService.updateStatus(token, formatoIdea.getIdIdea(),estado);
             }
             return formato;
         }
