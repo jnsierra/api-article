@@ -65,7 +65,28 @@ public class ParrafoServiceImplTest {
         List<ParrafoEntity> response = parrafoService.getParrafoByArticulo(1L);
         Assert.assertNotNull(response);
         Assert.assertFalse(response.isEmpty());
+    }
 
+    @Test
+    public void testUpdateOrdenSUCCESS(){
+
+        Mockito.doReturn(1).when(parrafoRepository).modificarOrden(Mockito.any(), Mockito.any());
+
+        Optional<Boolean> response = parrafoService.updateOrden(1L, 2L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+        Assert.assertTrue(response.get());
+    }
+
+    @Test
+    public void testUpdateOrdenFAILED(){
+
+        Mockito.doReturn(0).when(parrafoRepository).modificarOrden(Mockito.any(), Mockito.any());
+
+        Optional<Boolean> response = parrafoService.updateOrden(1L, 2L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+        Assert.assertFalse(response.get());
     }
 
 }

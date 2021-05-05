@@ -84,4 +84,31 @@ public class ParrafoControllerTest {
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+
+    @Test
+    public void testGetParrafoByArticuloEMPTY(){
+        Mockito.doReturn(new ArrayList<>()).when(parrafoService).getParrafoByArticulo(Mockito.any());
+
+        ResponseEntity<ParrafoDto[]> response = parrafoController.getParrafoByArticulo(1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testModificarOrdenParrafoEMPTY(){
+        Mockito.doReturn(Optional.empty()).when(parrafoService).updateOrden(Mockito.any(), Mockito.any());
+
+        ResponseEntity<Boolean> response = parrafoController.modificarOrdenParrafo(1L, 1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testModificarOrdenParrafoSUCCESS(){
+        Mockito.doReturn(Optional.of(Boolean.TRUE)).when(parrafoService).updateOrden(Mockito.any(), Mockito.any());
+
+        ResponseEntity<Boolean> response = parrafoController.modificarOrdenParrafo(1L, 1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
 }
