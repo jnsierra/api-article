@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "parrafo")
 @NamedQueries({
-        @NamedQuery(name = "ParrafoEntity.getParrafoByArticulo", query = "from ParrafoEntity parr inner join parr.articulo art WHERE art.id = :artId order by parr.orden ")
-
+        @NamedQuery(name = "ParrafoEntity.getParrafoByArticulo", query = "from ParrafoEntity parr inner join parr.articulo art WHERE art.id = :artId and parr.estado <> 'ELIMINADO' order by parr.orden "),
+        @NamedQuery(name = "ParrafoEntity.modificarOrden", query = "Update ParrafoEntity parr set parr.orden = :orden where parr.id = :parrafoId ")
 })
 @Data
 @Builder

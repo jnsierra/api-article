@@ -43,4 +43,17 @@ public class ParrafoController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping(value = "/{idParrafo}/{orden}/")
+    public ResponseEntity<Boolean> modificarOrdenParrafo(@PathVariable(name = "idParrafo") Long idParrafo
+                                                        ,@PathVariable(name = "orden") Long orden){
+        Optional<Boolean> parrafo = parrafoService.updateOrden(idParrafo, orden);
+        if(parrafo.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(parrafo.get(), HttpStatus.OK);
+    }
+
+
+
 }

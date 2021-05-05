@@ -30,4 +30,10 @@ public class ParrafoServiceImpl implements ParrafoService {
         return parrafoRepository.getParrafoByArticulo(artId);
     }
 
+    @Override
+    public Optional<Boolean> updateOrden(Long idParrafo, Long orden) {
+        Integer modifica = parrafoRepository.modificarOrden(idParrafo, orden);
+        return modifica > 0 ? Optional.of(Boolean.TRUE) : Optional.of(Boolean.FALSE);
+    }
+
 }

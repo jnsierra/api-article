@@ -11,4 +11,6 @@ public interface ParrafoService {
 
     List<ParrafoEntity> getParrafoByArticulo(Long artId);
 
+    Optional<Boolean> updateOrden(Long idParrafo, Long orden);
+
 }
