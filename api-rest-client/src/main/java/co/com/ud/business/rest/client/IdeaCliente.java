@@ -1,6 +1,7 @@
 package co.com.ud.business.rest.client;
 
 import co.com.ud.utiles.dto.IdeaDto;
+import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,8 @@ public interface IdeaCliente {
     @GetMapping(value = "/by/profesor/{idProfesor}/")
     ResponseEntity<IdeaDto[]> getIdeasByProfesorAndEstado(@RequestHeader("Authorization") String token
             , @PathVariable(name = "idProfesor", required = false) Long idProfesor
-            , @RequestParam(name = "estado", required = false) String estado);
+            , @RequestParam(name = "estado", required = false) String estado
+            , @RequestParam(name = "rolIdea", required = false) TYPE_PROFESOR typeProfesor);
 
     @GetMapping(value = "/{id}/")
     ResponseEntity<IdeaDto> getById(@RequestHeader("Authorization") String token, @PathVariable(name = "id") Long idIdea);

@@ -6,6 +6,7 @@ import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.dto.PersonaDto;
 import co.com.ud.utiles.dto.ProfesoresIdeaDto;
 import co.com.ud.utiles.dto.UsuarioDto;
+import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
-public class IdeaServiceImplTest {
+public class  IdeaServiceImplTest {
 
     private IdeaServiceImpl ideaService;
     @Mock
@@ -72,9 +73,9 @@ public class IdeaServiceImplTest {
 
     @Test
     public void testFindByProfesorIdAndEstadoEMPTY(){
-        Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(ideaCliente).getIdeasByProfesorAndEstado(Mockito.any(),Mockito.any(), Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(ideaCliente).getIdeasByProfesorAndEstado(Mockito.any(),Mockito.any(), Mockito.any(), Mockito.any());
 
-        List<IdeaDto> response = ideaService.findByProfesorIdAndEstado("123", 0L, "CREADA");
+        List<IdeaDto> response = ideaService.findByProfesorIdAndEstado("123", 0L, "CREADA", TYPE_PROFESOR.TUTOR);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isEmpty());
 
@@ -84,9 +85,9 @@ public class IdeaServiceImplTest {
     public void testFindByProfesorIdAndEstadoEMPTY_LIST(){
         IdeaDto[] ideas = new IdeaDto[0];
 
-        Mockito.doReturn(new ResponseEntity<>(ideas,HttpStatus.OK)).when(ideaCliente).getIdeasByProfesorAndEstado(Mockito.any(),Mockito.any(), Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(ideas,HttpStatus.OK)).when(ideaCliente).getIdeasByProfesorAndEstado(Mockito.any(),Mockito.any(), Mockito.any(), Mockito.any());
 
-        List<IdeaDto> response = ideaService.findByProfesorIdAndEstado("123",0L, "CREADA");
+        List<IdeaDto> response = ideaService.findByProfesorIdAndEstado("123",0L, "CREADA", TYPE_PROFESOR.TUTOR);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isEmpty());
 
@@ -109,9 +110,9 @@ public class IdeaServiceImplTest {
         ResponseEntity<UsuarioDto> responseUsu = new ResponseEntity<>(usu, HttpStatus.OK);
         Mockito.doReturn(responseUsu).when(usuarioCliente).getUserById(Mockito.any());
 
-        Mockito.doReturn(new ResponseEntity<>(ideas,HttpStatus.OK)).when(ideaCliente).getIdeasByProfesorAndEstado(Mockito.any(), Mockito.any(), Mockito.any());
+        Mockito.doReturn(new ResponseEntity<>(ideas,HttpStatus.OK)).when(ideaCliente).getIdeasByProfesorAndEstado(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
 
-        List<IdeaDto> response = ideaService.findByProfesorIdAndEstado("123",0L, "CREADA");
+        List<IdeaDto> response = ideaService.findByProfesorIdAndEstado("123",0L, "CREADA",TYPE_PROFESOR.TUTOR);
         Assert.assertNotNull(response);
         Assert.assertFalse(response.isEmpty());
 

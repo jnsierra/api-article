@@ -18,6 +18,8 @@ public interface IIdeaRepository extends JpaRepository<IdeaEntity, Long>, CrudRe
 
     List<IdeaEntity> findByProfesorIdAndEstado(@Param("idProfesor") Long idProfesor,@Param("estadoIdea") String estadoIdea );
 
+    List<IdeaEntity> findByProfesorIdAndEstadoJurado(@Param("idProfesor") Long idProfesor,@Param("estadoIdea") String estadoIdea );
+
     List<IdeaEntity> findByEstado(@Param("estadoIdea") String estadoIdea );
 
     @Modifying

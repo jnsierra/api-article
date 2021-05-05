@@ -3,11 +3,13 @@ package co.com.ud.datos.service.impl;
 import co.com.ud.datos.entity.IdeaEntity;
 import co.com.ud.datos.repository.IIdeaRepository;
 import co.com.ud.datos.service.IdeaService;
+import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -37,7 +39,11 @@ public class IdeaServiceImpl implements IdeaService {
     }
 
     @Override
-    public List<IdeaEntity> findByProfesorIdAndEstado(Long idProfesor, String estado) {
+    public List<IdeaEntity> findByProfesorIdAndEstado(Long idProfesor, String estado, TYPE_PROFESOR typeProfesor) {
+        if(Objects.nonNull(typeProfesor) && TYPE_PROFESOR.JURADO.equals(typeProfesor)){
+            return ideaRepository.findByProfesorIdAndEstadoJurado(idProfesor, estado);
+        }
+        //Consulta para buscar las ideas asignadas a un tutor
         return ideaRepository.findByProfesorIdAndEstado(idProfesor, estado);
     }
 

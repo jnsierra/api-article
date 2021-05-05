@@ -6,6 +6,7 @@ import co.com.ud.business.service.IdeaService;
 import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.dto.ProfesoresIdeaDto;
 import co.com.ud.utiles.dto.UsuarioDto;
+import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,9 +47,9 @@ public class IdeaServiceImpl implements IdeaService {
     }
 
     @Override
-    public List<IdeaDto> findByProfesorIdAndEstado(String token, Long idProfesor, String estado) {
+    public List<IdeaDto> findByProfesorIdAndEstado(String token, Long idProfesor, String estado, TYPE_PROFESOR type_profesor) {
         List<IdeaDto> ideas = new ArrayList<>();
-        ResponseEntity<IdeaDto[]> idea = ideaCliente.getIdeasByProfesorAndEstado(token,idProfesor, estado);
+        ResponseEntity<IdeaDto[]> idea = ideaCliente.getIdeasByProfesorAndEstado(token,idProfesor, estado, type_profesor);
         if(HttpStatus.OK.equals(idea.getStatusCode()) && idea.getBody().length != 0){
             ideas = Arrays.asList(idea.getBody());
             ideas = ideas.stream().parallel()

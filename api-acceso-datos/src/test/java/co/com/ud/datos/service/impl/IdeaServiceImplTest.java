@@ -4,6 +4,7 @@ import co.com.ud.datos.entity.IdeaEntity;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.repository.IIdeaRepository;
 import co.com.ud.datos.service.IdeaService;
+import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -116,7 +117,7 @@ public class IdeaServiceImplTest {
         list.add(response);
         Mockito.doReturn(list).when(ideaRepository).findByProfesorIdAndEstado(Mockito.any(), Mockito.any());
 
-        List<IdeaEntity> rta = ideaService.findByProfesorIdAndEstado(0L, "CREADO");
+        List<IdeaEntity> rta = ideaService.findByProfesorIdAndEstado(0L, "CREADO", TYPE_PROFESOR.TUTOR);
         Assert.assertNotNull(rta);
         Assert.assertFalse(rta.isEmpty());
 

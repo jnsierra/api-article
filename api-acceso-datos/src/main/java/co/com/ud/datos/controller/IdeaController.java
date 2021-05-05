@@ -3,6 +3,7 @@ package co.com.ud.datos.controller;
 import co.com.ud.datos.entity.IdeaEntity;
 import co.com.ud.datos.service.IdeaService;
 import co.com.ud.utiles.dto.IdeaDto;
+import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,8 +47,9 @@ public class IdeaController {
 
     @GetMapping(value = "/by/profesor/{idProfesor}/")
     public ResponseEntity<IdeaDto[]> getIdeasByProfesorAndEstado(@PathVariable(name = "idProfesor", required = false) Long idProfesor
-            , @RequestParam(name = "estado", required = false) String estado){
-        List<IdeaEntity> ideas = ideaService.findByProfesorIdAndEstado(idProfesor, estado);
+            , @RequestParam(name = "estado", required = false) String estado
+            , @RequestParam(name = "rolIdea", required = false) TYPE_PROFESOR typeProfesor){
+        List<IdeaEntity> ideas = ideaService.findByProfesorIdAndEstado(idProfesor, estado,typeProfesor);
         if(Objects.nonNull(ideas) && !ideas.isEmpty())
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

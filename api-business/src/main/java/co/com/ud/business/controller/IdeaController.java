@@ -6,6 +6,7 @@ import co.com.ud.utiles.dto.IdeaCompletoDto;
 import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.dto.ProfesoresIdeaDto;
 import co.com.ud.utiles.dto.UsuarioDto;
+import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,9 +42,11 @@ public class IdeaController {
     }
 
     @GetMapping(value = "/by/profesor/{idProfesor}/")
-    public ResponseEntity<IdeaDto[]> getIdeasByProfesorAndEstado(@RequestHeader("Authorization")String autenticacion,@PathVariable(name = "idProfesor", required = false) Long idProfesor
-            , @RequestParam(name = "estado", required = false) String estado){
-        List<IdeaDto> ideas = ideaService.findByProfesorIdAndEstado(autenticacion,idProfesor, estado);
+    public ResponseEntity<IdeaDto[]> getIdeasByProfesorAndEstado(@RequestHeader("Authorization")String autenticacion
+                                                                , @PathVariable(name = "idProfesor", required = false) Long idProfesor
+                                                                , @RequestParam(name = "estado", required = false) String estado
+                                                                , @RequestParam(name = "rolProfIdea", required = false) TYPE_PROFESOR type_profesor){
+        List<IdeaDto> ideas = ideaService.findByProfesorIdAndEstado(autenticacion,idProfesor, estado, type_profesor);
         if(Objects.nonNull(ideas) && !ideas.isEmpty()){
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         }

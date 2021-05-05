@@ -4,6 +4,8 @@ import co.com.ud.datos.entity.IdeaEntity;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.service.impl.IdeaServiceImpl;
 import co.com.ud.utiles.dto.IdeaDto;
+import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
+import org.assertj.core.util.diff.Delta;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -132,8 +134,8 @@ public class IdeaControllerTest {
     @Test
     public void testGetIdeasByProfesorAndEstadoEMPTY(){
         List<IdeaEntity> ideas = new ArrayList<>();
-        Mockito.doReturn(ideas).when(ideaServiceImpl).findByProfesorIdAndEstado(Mockito.any(), Mockito.any());
-        ResponseEntity<IdeaDto[]> response = ideaControler.getIdeasByProfesorAndEstado(0L, "CREADA");
+        Mockito.doReturn(ideas).when(ideaServiceImpl).findByProfesorIdAndEstado(Mockito.any(), Mockito.any(), Mockito.any());
+        ResponseEntity<IdeaDto[]> response = ideaControler.getIdeasByProfesorAndEstado(0L, "CREADA", TYPE_PROFESOR.JURADO);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
@@ -147,8 +149,8 @@ public class IdeaControllerTest {
                 .build();
         ideas.add(idea);
 
-        Mockito.doReturn(ideas).when(ideaServiceImpl).findByProfesorIdAndEstado(Mockito.any(), Mockito.any());
-        ResponseEntity<IdeaDto[]> response = ideaControler.getIdeasByProfesorAndEstado(0L, "CREADA");
+        Mockito.doReturn(ideas).when(ideaServiceImpl).findByProfesorIdAndEstado(Mockito.any(), Mockito.any(), Mockito.any());
+        ResponseEntity<IdeaDto[]> response = ideaControler.getIdeasByProfesorAndEstado(0L, "CREADA", TYPE_PROFESOR.JURADO);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
