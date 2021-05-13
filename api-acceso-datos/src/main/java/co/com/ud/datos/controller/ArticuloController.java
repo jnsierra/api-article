@@ -30,17 +30,18 @@ public class ArticuloController {
     public ResponseEntity<ArticuloDto> getByIdeaId(@PathVariable("id") Long idIdea){
         Optional<ArticuloEntity> articulo = articuloService.findByIdIdea(idIdea);
         if(articulo.isPresent()){
-            return new ResponseEntity<>(map.map(articulo.get(), ArticuloDto.class), HttpStatus.OK);
+            ArticuloDto responseObj = map.map(articulo.get(), ArticuloDto.class);
+            return new ResponseEntity<>(responseObj, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArticuloDto> save(@RequestBody ArticuloDto articuloDto){
         Optional<ArticuloEntity> response = articuloService.save(map.map(articuloDto, ArticuloEntity.class));
-        if(response.isPresent()){
-            return new ResponseEntity<>( map.map(response.get(), ArticuloDto.class) , HttpStatus.OK);
+        if (response.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>( map.map(response.get(), ArticuloDto.class) , HttpStatus.OK);
     }
 
     @GetMapping(value = "/idea/user/{idUser}/", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -55,9 +56,19 @@ public class ArticuloController {
     @GetMapping(value = "/by/{idArt}/")
     public ResponseEntity<ArticuloDto> getById(@PathVariable Long idArt){
         Optional<ArticuloEntity> articulo = articuloService.getById(idArt);
-        if(articulo.isPresent()){
-            return new ResponseEntity<>(map.map(articulo.get(), ArticuloDto.class), HttpStatus.OK);
+        if (articulo.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(map.map(articulo.get(), ArticuloDto.class), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArticuloDto> updateArticulo(@RequestBody ArticuloDto articuloDto){
+        Optional<ArticuloEntity> articulo = articuloService.updateArticulo(articuloDto);
+        if(articulo.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(map.map(articulo.get(), ArticuloDto.class) ,HttpStatus.OK);
+
     }
 }

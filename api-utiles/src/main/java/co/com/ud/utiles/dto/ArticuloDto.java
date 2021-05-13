@@ -24,4 +24,9 @@ public class ArticuloDto {
     private String estado;
 
     private Long ideaId;
+
+    private String introduccion;
+
+    private String conclusion;
+
 }

@@ -3,6 +3,8 @@ package co.com.ud.datos.service.impl;
 import co.com.ud.datos.entity.ArticuloEntity;
 import co.com.ud.datos.repository.IArticuloRepository;
 import co.com.ud.datos.service.ArticuloService;
+import co.com.ud.utiles.dto.ArticuloDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,12 @@ import java.util.Optional;
 public class ArticuloServiceImpl implements ArticuloService {
 
     private final IArticuloRepository articuloRepository;
+    private final ModelMapper mapper;
 
     @Autowired
-    public ArticuloServiceImpl(IArticuloRepository articuloRepository) {
+    public ArticuloServiceImpl(IArticuloRepository articuloRepository, ModelMapper mapper) {
         this.articuloRepository = articuloRepository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -39,5 +43,18 @@ public class ArticuloServiceImpl implements ArticuloService {
     public Optional<ArticuloEntity> getById(Long id) {
         return articuloRepository.findById(id);
     }
+
+    @Override
+    public Optional<ArticuloEntity> updateArticulo(ArticuloDto articuloDto) {
+        Optional<ArticuloEntity> entity = articuloRepository.findById(articuloDto.getId());
+        if(entity.isPresent()){
+            ArticuloEntity articulo = entity.get();
+            articulo = mapper.map(articuloDto, ArticuloEntity.class);
+            articuloRepository.save(articulo);
+            return Optional.of(articulo);
+        }
+        return Optional.empty();
+    }
+
 
 }

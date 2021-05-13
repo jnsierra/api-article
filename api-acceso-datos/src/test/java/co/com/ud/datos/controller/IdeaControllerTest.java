@@ -5,7 +5,6 @@ import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.service.impl.IdeaServiceImpl;
 import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
-import org.assertj.core.util.diff.Delta;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

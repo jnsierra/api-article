@@ -5,12 +5,14 @@ import co.com.ud.datos.entity.IdeaEntity;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.repository.IArticuloRepository;
 import co.com.ud.datos.service.ArticuloService;
+import co.com.ud.utiles.dto.ArticuloDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class ArticuloServiceImplTest {
     @Before
     public void setup(){
         MockitoAnnotations.initMocks(this);
-        articuloService = new ArticuloServiceImpl(articuloRepository);
+        articuloService = new ArticuloServiceImpl(articuloRepository, new ModelMapper());
     }
 
     @Test
@@ -100,6 +102,30 @@ public class ArticuloServiceImplTest {
         Mockito.doReturn(Optional.of(entity)).when(articuloRepository).findById(1L);
 
         Optional<ArticuloEntity> response = articuloService.getById(1L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testUpdateArticulo(){
+        ArticuloEntity entity = ArticuloEntity.builder()
+                .id(1L)
+                .titulo("titulo")
+                .resumen("Este es el resumen")
+                .resumen_ingles("This is in english")
+                .build();
+
+        Mockito.doReturn(Optional.of(entity)).when(articuloRepository).findById(Mockito.any());
+
+
+        Optional<ArticuloEntity> response = articuloService.updateArticulo(ArticuloDto.builder()
+                .id(1L)
+                .titulo("titulo")
+                .resumen("Este es el resumen")
+                .resumen_ingles("This is in english")
+                .introduccion("Esto es una introduccion")
+                .conclusion("Esta es la conclusion")
+                .build());
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
     }

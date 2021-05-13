@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "articulo")
 @NamedQueries({
         @NamedQuery(name = "ArticuloEntity.findByIdIdea",
-                query = "from ArticuloEntity art inner join art.idea as ide where ide.id = :idIdea "),
+                query = "from ArticuloEntity art inner join fetch art.idea as ide where ide.id = :idIdea "),
         @NamedQuery(name = "ArticuloEntity.getArticulosByUser",
                 query = "from ArticuloEntity art inner join art.idea as ide inner join ide.usuario as usu where usu.id = :idUser ")
 })
@@ -42,8 +42,19 @@ public class ArticuloEntity extends Auditable<String>{
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_idea", nullable = false)
     private IdeaEntity idea;
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo", orphanRemoval = true)
     private List<ControlLecturaEntity> controlLecturas = new ArrayList<>();
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo", orphanRemoval = true)
     private List<ParrafoEntity> parrafos = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo", orphanRemoval = true)
+    private List<ComentarioArticuloEntity> comentarios = new ArrayList<>();
+
+    @Column(name = "introduccion",columnDefinition = "text" )
+    private String introduccion;
+    @Column(name = "conclusion",columnDefinition = "text" )
+    private String conclusion;
+
 }

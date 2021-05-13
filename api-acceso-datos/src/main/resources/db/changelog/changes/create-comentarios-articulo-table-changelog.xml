@@ -5,32 +5,28 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="admin" id="1">
-        <createTable tableName="articulo">
-            <column name="id" type="INT">
+        <createTable tableName="comentario_articulo">
+            <column name="id" type="INT" >
                 <constraints primaryKey="true"/>
             </column>
-            <column name="id_idea" type="INT">
+            <column name="tipo_comentario" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="titulo" type="VARCHAR(255)">
+            <column name="id_usuario" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="resumen_ingles" type="VARCHAR(255)">
+            <column name="id_articulo" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="resumen" type="VARCHAR(255)">
+            <column name="comentario" type="clob">
                 <constraints nullable="false"/>
             </column>
-            <column name="contenido" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+            <column name="respuesta_comentario" type="clob">
             </column>
-            <column name="estado" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+            <column name="historico" type="clob">
             </column>
-            <column name="introduccion" type="clob"/>
-            <column name="conclusion" type="clob"/>
-
-
+            <column name="id_llave" type="INT" >
+            </column>
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -45,10 +41,10 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="articulo"/>
+            <dropTable tableName="comentario"/>
         </rollback>
     </changeSet>
     <changeSet id="2" author="admin">
-        <createSequence sequenceName="articulo_seq" startValue="1" incrementBy="1" />
+        <createSequence sequenceName="comentario_art_seq" startValue="1" incrementBy="1" />
     </changeSet>
 </databaseChangeLog>

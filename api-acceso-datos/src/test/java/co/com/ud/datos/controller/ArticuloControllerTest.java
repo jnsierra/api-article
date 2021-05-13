@@ -105,4 +105,13 @@ public class ArticuloControllerTest {
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
+    @Test
+    public void testUpdateArticuloEMPTY(){
+        Mockito.doReturn(Optional.empty()).when(articuloService).updateArticulo(Mockito.any());
+
+        ResponseEntity<ArticuloDto> response = articuloController.updateArticulo(ArticuloDto.builder().build());
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
 }
