@@ -3,9 +3,11 @@ package co.com.ud.datos.service.impl;
 import co.com.ud.datos.entity.ComentarioArticuloEntity;
 import co.com.ud.datos.repository.IComentarioArticuloRepository;
 import co.com.ud.datos.service.ComentarioArticuloService;
+import co.com.ud.utiles.enumeracion.TYPE_COMMENTS_ARTICLE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,5 +24,10 @@ public class ComentarioArticuloServiceImpl implements ComentarioArticuloService 
     public Optional<ComentarioArticuloEntity> save(ComentarioArticuloEntity comentario) {
         ComentarioArticuloEntity entity = comentarioArticuloRepository.save(comentario);
         return Optional.of(entity);
+    }
+
+    @Override
+    public List<ComentarioArticuloEntity> findByTypeAndArt(TYPE_COMMENTS_ARTICLE type, Long idArt) {
+        return comentarioArticuloRepository.findByTypeComentarioArtAndArticulo(type, idArt);
     }
 }

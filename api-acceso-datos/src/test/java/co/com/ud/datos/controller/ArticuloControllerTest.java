@@ -114,4 +114,26 @@ public class ArticuloControllerTest {
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
+    @Test
+    public void testUpdateEstadoArticuloEMPTY(){
+        Mockito.doReturn(Optional.empty()).when(articuloService).updateEstadoArt(Mockito.any(), Mockito.any());
+
+        ResponseEntity<ArticuloDto> response = articuloController.updateEstadoArticulo(1L, "ESTADO_ARTICULO");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testUpdateEstadoArticuloSUCCESS(){
+        ArticuloDto entityResponse = ArticuloDto.builder()
+                .id(1L)
+                .contenido("Este es el contenido")
+                .build();
+        Mockito.doReturn(Optional.of(entityResponse)).when(articuloService).updateEstadoArt(Mockito.any(), Mockito.any());
+
+        ResponseEntity<ArticuloDto> response = articuloController.updateEstadoArticulo(1L, "ESTADO_ARTICULO");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
 }

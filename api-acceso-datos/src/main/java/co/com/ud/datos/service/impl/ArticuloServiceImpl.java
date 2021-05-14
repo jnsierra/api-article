@@ -56,5 +56,15 @@ public class ArticuloServiceImpl implements ArticuloService {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<ArticuloEntity> updateEstadoArt(Long id, String estado) {
+        Optional<ArticuloEntity> entity = articuloRepository.findById(id);
+        if(entity.isPresent()){
+            entity.get().setEstado(estado);
+            ArticuloEntity art = articuloRepository.save(entity.get());
+            return Optional.of(art);
+        }
+        return Optional.empty();
+    }
 
 }

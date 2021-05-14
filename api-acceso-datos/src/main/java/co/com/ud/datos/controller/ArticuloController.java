@@ -71,4 +71,13 @@ public class ArticuloController {
         return new ResponseEntity<>(map.map(articulo.get(), ArticuloDto.class) ,HttpStatus.OK);
 
     }
+    @PutMapping(value = "/cambiarestado/")
+    public ResponseEntity<ArticuloDto> updateEstadoArticulo(@RequestParam("idArticulo") Long idArt,@RequestParam("estado") String estado){
+        Optional<ArticuloEntity> articulos = articuloService.updateEstadoArt(idArt, estado);
+        if(articulos.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(map.map(articulos.get(), ArticuloDto.class), HttpStatus.OK);
+
+    }
 }

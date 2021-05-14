@@ -18,4 +18,6 @@ public interface ArticuloService {
 
     Optional<ArticuloEntity> updateArticulo(ArticuloDto articuloDto);
 
+    Optional<ArticuloEntity> updateEstadoArt(Long id, String estado);
+
 }

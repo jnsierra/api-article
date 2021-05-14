@@ -130,4 +130,32 @@ public class ArticuloServiceImplTest {
         Assert.assertTrue(response.isPresent());
     }
 
+    @Test
+    public void testUpdateEstadoArt(){
+        ArticuloEntity entity = ArticuloEntity.builder()
+                .id(1L)
+                .titulo("titulo")
+                .resumen("Este es el resumen")
+                .resumen_ingles("This is in english")
+                .build();
+
+        Mockito.doReturn(Optional.of(entity)).when(articuloRepository).findById(Mockito.any());
+
+        ArticuloEntity entityResp = ArticuloEntity.builder()
+                .id(1L)
+                .titulo("titulo")
+                .resumen("Este es el resumen")
+                .resumen_ingles("This is in english")
+                .estado("ESTADO")
+                .build();
+
+        Mockito.doReturn(entityResp).when(articuloRepository).save(Mockito.any());
+
+        Optional<ArticuloEntity> response = articuloService.updateEstadoArt(1L, "ESTADO");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+
+
+    }
+
 }

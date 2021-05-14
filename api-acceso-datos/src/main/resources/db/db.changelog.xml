@@ -18,6 +18,7 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <include file="/db/changelog/changes/create-tipo-user-table-changelog.xml" />
     <include file="/db/changelog/changes/create-user-table-changelog.xml" />
     <include file="/db/changelog/changes/create-permiso-table-changelog.xml" />
+    <include file="/db/changelog/changes/create-comentarios-articulo-table-changelog.xml" />
     <include file="/db/changelog/changes/create-role-table-changelog.xml" />
     <include file="/db/changelog/changes/create-user-role-table-changelog.xml" />
     <include file="/db/changelog/changes/create-idea-table-changelog.xml" />
