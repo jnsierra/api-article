@@ -26,15 +26,6 @@ public class ArticuloController {
         this.map = map;
     }
 
-    @GetMapping(value = "/idea/{id}/")
-    public ResponseEntity<ArticuloDto> getByIdeaId(@PathVariable("id") Long idIdea){
-        Optional<ArticuloEntity> articulo = articuloService.findByIdIdea(idIdea);
-        if(articulo.isPresent()){
-            ArticuloDto responseObj = map.map(articulo.get(), ArticuloDto.class);
-            return new ResponseEntity<>(responseObj, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArticuloDto> save(@RequestBody ArticuloDto articuloDto){
         Optional<ArticuloEntity> response = articuloService.save(map.map(articuloDto, ArticuloEntity.class));
@@ -42,24 +33,6 @@ public class ArticuloController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>( map.map(response.get(), ArticuloDto.class) , HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/idea/user/{idUser}/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArticuloDto[]> getArticulosByUser(@PathVariable("idUser") Long idUser){
-        List<ArticuloEntity> response = articuloService.getArticulosByUser(idUser);
-        if(!response.isEmpty()){
-            return new ResponseEntity<>(map.map(response,ArticuloDto[].class), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @GetMapping(value = "/by/{idArt}/")
-    public ResponseEntity<ArticuloDto> getById(@PathVariable Long idArt){
-        Optional<ArticuloEntity> articulo = articuloService.getById(idArt);
-        if (articulo.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(map.map(articulo.get(), ArticuloDto.class), HttpStatus.OK);
     }
 
     @PutMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -79,5 +52,41 @@ public class ArticuloController {
         }
         return new ResponseEntity<>(map.map(articulos.get(), ArticuloDto.class), HttpStatus.OK);
 
+    }
+    @GetMapping(value = "/idea/user/{idUser}/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ArticuloDto[]> getArticulosByUser(@PathVariable("idUser") Long idUser){
+        List<ArticuloEntity> response = articuloService.getArticulosByUser(idUser);
+        if(!response.isEmpty()){
+            return new ResponseEntity<>(map.map(response,ArticuloDto[].class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/by/{idArt}/")
+    public ResponseEntity<ArticuloDto> getById(@PathVariable Long idArt){
+        Optional<ArticuloEntity> articulo = articuloService.getById(idArt);
+        if (articulo.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(map.map(articulo.get(), ArticuloDto.class), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/idea/{id}/")
+    public ResponseEntity<ArticuloDto> getByIdeaId(@PathVariable("id") Long idIdea){
+        Optional<ArticuloEntity> articulo = articuloService.findByIdIdea(idIdea);
+        if(articulo.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        ArticuloDto responseObj = map.map(articulo.get(), ArticuloDto.class);
+        return new ResponseEntity<>(responseObj, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/profesor/{idTutor}/{estado}/")
+    public ResponseEntity<ArticuloDto[]> getArticulosPorProfesorAndEstado(@PathVariable("idTutor")Long idTutor, @PathVariable("estado") String estado ){
+        List<ArticuloEntity> lista = articuloService.getArticulosByTutorAndEstado(idTutor, estado);
+        if(lista.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>( map.map(lista, ArticuloDto[].class) ,HttpStatus.OK);
     }
 }

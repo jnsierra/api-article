@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +29,7 @@ public class ComentarioArticuloController {
     }
 
     @PostMapping(value = "/" , consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ComentarioArticuloDto> save(ComentarioArticuloDto comentarioArticuloDto){
+    public ResponseEntity<ComentarioArticuloDto> save(@RequestBody ComentarioArticuloDto comentarioArticuloDto){
         Optional<ComentarioArticuloEntity> response = comentarioArticuloService.save(map.map(comentarioArticuloDto, ComentarioArticuloEntity.class));
         if(response.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

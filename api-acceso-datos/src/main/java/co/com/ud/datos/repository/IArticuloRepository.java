@@ -14,4 +14,6 @@ public interface IArticuloRepository extends JpaRepository<ArticuloEntity, Long>
     Optional<ArticuloEntity> findByIdIdea(Long idIdea);
 
     List<ArticuloEntity> getArticulosByUser(Long idUser);
+
+    List<ArticuloEntity> getArticulosByTutorAndEstado(Long idTutor, String estado);
 }

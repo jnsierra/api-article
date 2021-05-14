@@ -67,4 +67,9 @@ public class ArticuloServiceImpl implements ArticuloService {
         return Optional.empty();
     }
 
+    @Override
+    public List<ArticuloEntity> getArticulosByTutorAndEstado(Long idTutor, String estado) {
+        return articuloRepository.getArticulosByTutorAndEstado(idTutor, estado);
+    }
+
 }

@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -132,6 +133,26 @@ public class ArticuloControllerTest {
         Mockito.doReturn(Optional.of(entityResponse)).when(articuloService).updateEstadoArt(Mockito.any(), Mockito.any());
 
         ResponseEntity<ArticuloDto> response = articuloController.updateEstadoArticulo(1L, "ESTADO_ARTICULO");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetArticulosPorProfesorAndEstadoEMPTY(){
+
+        ArticuloEntity item = ArticuloEntity.builder()
+                .id(1L)
+                .estado("REVISAR_PROFESOR")
+                .resumen_ingles("this")
+                .resumen("estado")
+                .build();
+
+        List<ArticuloEntity> lista = new ArrayList<>();
+        lista.add(item);
+
+        Mockito.doReturn(lista).when(articuloService).getArticulosByTutorAndEstado(Mockito.any(), Mockito.any());
+
+        ResponseEntity<ArticuloDto[]> response = articuloController.getArticulosPorProfesorAndEstado(1L, "REVISAR_PROFESOR");
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }

@@ -20,4 +20,6 @@ public interface ArticuloService {
 
     Optional<ArticuloEntity> updateEstadoArt(Long id, String estado);
 
+    List<ArticuloEntity> getArticulosByTutorAndEstado(Long idTutor, String estado);
+
 }

@@ -14,6 +14,8 @@ public class ComentarioArticuloDto {
 
     private Long id;
 
+    private Long idArticulo;
+
     private TYPE_COMMENTS_ARTICLE typeComentarioArt;
 
     private Long idUsuario;
