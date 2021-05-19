@@ -1,7 +1,9 @@
 package co.com.ud.datos.controller;
 
+import co.com.ud.datos.entity.ComentarioArticuloEntity;
 import co.com.ud.datos.service.ComentarioArticuloService;
 import co.com.ud.utiles.dto.ComentarioArticuloDto;
+import co.com.ud.utiles.enumeracion.TYPE_COMMENTS_ARTICLE;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -51,6 +55,15 @@ public class ComentarioArticuloControllerTest {
         ResponseEntity<ComentarioArticuloDto> response = this.comentarioArticuloController.save(entity);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode() );
+    }
+
+    @Test
+    public void testGetComentariosByTypeAndArtEMPTY(){
+        Mockito.doReturn(new ArrayList<>()).when(comentarioArticuloService).findByTypeAndArt(Mockito.any(), Mockito.any());
+
+        ResponseEntity<ComentarioArticuloDto[]> response = comentarioArticuloController.getComentariosByTypeAndArt(1L, TYPE_COMMENTS_ARTICLE.TITULO);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
 }

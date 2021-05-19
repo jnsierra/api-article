@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -27,4 +29,6 @@ public class ComentarioArticuloDto {
     private String historico;
 
     private Long llave;
+
+    private Date createdDate;
 }

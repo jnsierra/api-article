@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "comentario_articulo")
 @NamedQueries({
         @NamedQuery(name = "ComentarioArticuloEntity.findByTypeComentarioArtAndArticulo",
-        query = "from ComentarioArticuloEntity com inner join fetch com.articulo art where art.id = :idArt and com.typeComentarioArt = :typeCommentsArticle")
+        query = "from ComentarioArticuloEntity com inner join fetch com.articulo art where art.id = :idArt and com.typeComentarioArt = :typeCommentsArticle order by com.id")
 })
 @Data
 @Builder
