@@ -2,9 +2,11 @@ package co.com.ud.business.service.impl;
 
 import co.com.ud.business.rest.client.ArticuloCliente;
 import co.com.ud.business.rest.client.ComentarioArticuloClient;
+import co.com.ud.business.rest.client.ControlLecturaClient;
 import co.com.ud.business.rest.client.IdeaCliente;
 import co.com.ud.utiles.dto.ArticuloDto;
 import co.com.ud.utiles.dto.ComentarioArticuloDto;
+import co.com.ud.utiles.dto.ControlLecturaDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,11 +29,13 @@ public class ArticuloServiceImplTest {
     private IdeaCliente ideaCliente;
     @Mock
     private ComentarioArticuloClient comentarioArticuloClient;
+    @Mock
+    private ControlLecturaClient controlLecturaClient;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.articuloService = new ArticuloServiceImpl(articuloCliente, ideaCliente, comentarioArticuloClient);
+        this.articuloService = new ArticuloServiceImpl(articuloCliente, ideaCliente, comentarioArticuloClient, controlLecturaClient);
     }
 
     @Test
@@ -81,6 +85,13 @@ public class ArticuloServiceImplTest {
                 .build();
 
         Mockito.doReturn(new ResponseEntity<>(responseComentarios, HttpStatus.OK)).when(comentarioArticuloClient).getComentariosByArtId(Mockito.any(), Mockito.any());
+
+        ControlLecturaDto[] responseControl = new ControlLecturaDto[1];
+        responseControl[0] = ControlLecturaDto.builder()
+                .id(1L)
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(responseControl, HttpStatus.OK)).when(controlLecturaClient).getByArticuloId(Mockito.any(), Mockito.any());
 
         ArticuloDto responseUpd = ArticuloDto.builder()
                 .id(1L)

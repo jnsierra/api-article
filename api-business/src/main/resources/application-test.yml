@@ -15,6 +15,10 @@ endpoint:
     host: localhost
     port: 5003
     base: /api-datos
+    controlLectura:
+      version: /v.1
+      url: /controllectura
+      name: controlLecturaCliente
     comentariosArt:
       version: /v.1
       url: /comentarioarticulo
