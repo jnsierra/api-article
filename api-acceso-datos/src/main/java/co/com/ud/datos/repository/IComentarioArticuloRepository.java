@@ -12,4 +12,6 @@ import java.util.List;
 public interface IComentarioArticuloRepository extends JpaRepository<ComentarioArticuloEntity, Long>, CrudRepository<ComentarioArticuloEntity, Long> {
 
     List<ComentarioArticuloEntity> findByTypeComentarioArtAndArticulo(TYPE_COMMENTS_ARTICLE typeCommentsArticle, Long idArt);
+
+    List<ComentarioArticuloEntity> findByArticulo(Long idArt);
 }

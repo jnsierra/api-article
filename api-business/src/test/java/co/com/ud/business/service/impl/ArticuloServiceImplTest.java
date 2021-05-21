@@ -1,8 +1,10 @@
 package co.com.ud.business.service.impl;
 
 import co.com.ud.business.rest.client.ArticuloCliente;
+import co.com.ud.business.rest.client.ComentarioArticuloClient;
 import co.com.ud.business.rest.client.IdeaCliente;
 import co.com.ud.utiles.dto.ArticuloDto;
+import co.com.ud.utiles.dto.ComentarioArticuloDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,11 +25,13 @@ public class ArticuloServiceImplTest {
     private ArticuloCliente articuloCliente;
     @Mock
     private IdeaCliente ideaCliente;
+    @Mock
+    private ComentarioArticuloClient comentarioArticuloClient;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.articuloService = new ArticuloServiceImpl(articuloCliente, ideaCliente);
+        this.articuloService = new ArticuloServiceImpl(articuloCliente, ideaCliente, comentarioArticuloClient);
     }
 
     @Test
@@ -48,6 +52,43 @@ public class ArticuloServiceImplTest {
                 .build();
 
         Optional<ArticuloDto> response = articuloService.save("1354gag", artEntity);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testSaveEMPTY(){
+        ArticuloDto artEntity = ArticuloDto.builder()
+                .id(1L)
+                .contenido("Este es el contenido de la idea")
+                .estado("PRUEBA")
+                .ideaId(1L)
+                .build();
+        Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(articuloCliente).save(Mockito.any(), Mockito.any());
+
+
+        Optional<ArticuloDto> response = articuloService.save("1354gag", artEntity);
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isPresent());
+    }
+
+    @Test
+    public void testRevisionArticuloSUCCESS(){
+        ComentarioArticuloDto[] responseComentarios = new ComentarioArticuloDto[1];
+        responseComentarios[0] = ComentarioArticuloDto.builder()
+                .id(1L)
+                .respuestaComentario("Esta es la respuesta")
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(responseComentarios, HttpStatus.OK)).when(comentarioArticuloClient).getComentariosByArtId(Mockito.any(), Mockito.any());
+
+        ArticuloDto responseUpd = ArticuloDto.builder()
+                .id(1L)
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(responseUpd,HttpStatus.OK)).when(articuloCliente).updateEstadoArticulo(Mockito.any(), Mockito.any(), Mockito.any());
+
+        Optional<ArticuloDto> response = articuloService.revisionArticulo("sdgfjkahjg84327", 1L);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
     }

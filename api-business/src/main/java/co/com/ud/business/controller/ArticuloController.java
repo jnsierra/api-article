@@ -22,12 +22,21 @@ public class ArticuloController {
     }
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity<ArticuloDto> save(@RequestHeader("Authorization")String autenticacion, @RequestBody ArticuloDto articuloDto){
+    public ResponseEntity<ArticuloDto> save(@RequestHeader("Authorization")String autenticacion, @RequestBody ArticuloDto articuloDto) {
         Optional<ArticuloDto> response = articulosService.save(autenticacion, articuloDto);
-        if(response.isPresent()){
+        if (response.isPresent()) {
             return new ResponseEntity<>(response.get(), HttpStatus.OK);
 
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping(value = "/revisonarticulo/{idArt}/")
+    public ResponseEntity<ArticuloDto> enviaArticuloRevision(@RequestHeader("Authorization")String autenticacion,@PathVariable("idArt") Long idArt){
+        Optional<ArticuloDto> response = articulosService.revisionArticulo(autenticacion, idArt);
+        if(response.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(response.get(), HttpStatus.OK);
     }
 }

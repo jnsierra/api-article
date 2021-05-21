@@ -30,4 +30,20 @@ public class ComentarioArticuloServiceImpl implements ComentarioArticuloService 
     public List<ComentarioArticuloEntity> findByTypeAndArt(TYPE_COMMENTS_ARTICLE type, Long idArt) {
         return comentarioArticuloRepository.findByTypeComentarioArtAndArticulo(type, idArt);
     }
+
+    @Override
+    public List<ComentarioArticuloEntity> findByArtId(Long idArt) {
+        return comentarioArticuloRepository.findByArticulo(idArt);
+    }
+
+    @Override
+    public Optional<Boolean> updateRespuestaComentario(Long id, String respuesta) {
+        Optional<ComentarioArticuloEntity> comentario = comentarioArticuloRepository.findById(id);
+        if(comentario.isPresent()){
+            comentario.get().setRespuestaComentario(respuesta);
+            comentarioArticuloRepository.save(comentario.get());
+            return Optional.of(Boolean.TRUE);
+        }
+        return Optional.of(Boolean.FALSE);
+    }
 }

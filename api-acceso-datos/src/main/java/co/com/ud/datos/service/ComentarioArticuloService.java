@@ -11,4 +11,8 @@ public interface ComentarioArticuloService {
     Optional<ComentarioArticuloEntity> save(ComentarioArticuloEntity comentario);
 
     List<ComentarioArticuloEntity> findByTypeAndArt(TYPE_COMMENTS_ARTICLE type, Long idArt);
+
+    List<ComentarioArticuloEntity> findByArtId(Long idArt);
+
+    Optional<Boolean> updateRespuestaComentario(Long id, String respuesta);
 }

@@ -44,4 +44,22 @@ public class ComentarioArticuloController {
         }
         return new ResponseEntity<>(map.map(response, ComentarioArticuloDto[].class), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/ariculo/{idArt}/")
+    public ResponseEntity<ComentarioArticuloDto[]> getComentariosByArtId(@PathVariable("idArt") Long idArticulo){
+        List<ComentarioArticuloEntity> response = comentarioArticuloService.findByArtId(idArticulo);
+        if(response.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(map.map(response, ComentarioArticuloDto[].class), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/responder/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> updateResponderComentario(@RequestBody ComentarioArticuloDto comentarioArticuloDto){
+        Optional<Boolean> response = comentarioArticuloService.updateRespuestaComentario(comentarioArticuloDto.getId(), comentarioArticuloDto.getRespuestaComentario());
+        if (response.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(response.get(), HttpStatus.OK);
+    }
 }

@@ -47,4 +47,26 @@ public class ArticuloControllerTest {
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+
+    @Test
+    public void testEnviaArticuloRevisionEMPTY(){
+        ResponseEntity<ArticuloDto> response = articuloController.enviaArticuloRevision("1231564s",1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT,response.getStatusCode());
+    }
+
+    @Test
+    public void testEnviaArticuloRevisionSUCCESS(){
+        ArticuloDto entity = ArticuloDto.builder()
+                .id(1L)
+                .contenido("Este es el contenido")
+                .conclusion("Esta es la conclusion")
+                .build();
+
+        Mockito.doReturn(Optional.of(entity)).when(articulosService).revisionArticulo(Mockito.any(), Mockito.any());
+
+        ResponseEntity<ArticuloDto> response = articuloController.enviaArticuloRevision("1231564s",1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
 }
