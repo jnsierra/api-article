@@ -62,7 +62,7 @@ public class ArticuloController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(value = "/by/{idArt}/")
+    @GetMapping(value = "/by/{idArt}/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArticuloDto> getById(@PathVariable Long idArt){
         Optional<ArticuloEntity> articulo = articuloService.getById(idArt);
         if (articulo.isEmpty()) {

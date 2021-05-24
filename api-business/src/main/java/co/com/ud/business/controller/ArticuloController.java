@@ -39,4 +39,13 @@ public class ArticuloController {
         }
         return new ResponseEntity<>(response.get(), HttpStatus.OK);
     }
+
+    @PostMapping(value = "/aprobararticulo/{idArt}/")
+    public ResponseEntity<ArticuloDto> aprobarArticulo(@RequestHeader("Authorization")String autenticacion,@PathVariable("idArt") Long idArt){
+        Optional<ArticuloDto> response = articulosService.aprobacionArticulo(autenticacion, idArt);
+        if(response.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(response.get(), HttpStatus.OK);
+    }
 }

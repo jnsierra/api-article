@@ -69,4 +69,11 @@ public class ArticuloControllerTest {
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
     }
+
+    @Test
+    public void testAprobarArticuloEMPTY(){
+        ResponseEntity<ArticuloDto> response = articuloController.aprobarArticulo("dkgjdsfp79", 1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
 }

@@ -9,4 +9,6 @@ public interface ArticulosService {
     Optional<ArticuloDto> save(String token, ArticuloDto articuloDto);
 
     Optional<ArticuloDto> revisionArticulo(String token,Long idArt);
+
+    Optional<ArticuloDto> aprobacionArticulo(String token, Long idArt);
 }

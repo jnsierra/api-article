@@ -12,5 +12,7 @@ public interface DescargaFormatoService {
 
     Optional<DocumentDownloadDto> descargarDocumento(String ubicacion);
 
+    Optional<DocumentDownloadDto> descargaFormatoArticulo(Long idArt);
+
 
 }

@@ -49,8 +49,12 @@ endpoint:
       name: usuariosCliente
 
 repositorio:
+  formatoArt:
+    ubicacion: C:\\repository\\documentos\\formatos\\formato_002.docx
+    docDestino: /repository/documentos/articulos/
   formato:
     ubicacion: C:\\repository\\documentos\\formatos\\formato_001.docx
+
 
 path:
   repo:

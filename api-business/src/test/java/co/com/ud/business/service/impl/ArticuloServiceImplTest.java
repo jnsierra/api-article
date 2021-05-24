@@ -104,4 +104,25 @@ public class ArticuloServiceImplTest {
         Assert.assertTrue(response.isPresent());
     }
 
+    @Test
+    public void testAprobacionArticuloSUCCESS(){
+        ComentarioArticuloDto[] responseComentarios = new ComentarioArticuloDto[1];
+        responseComentarios[0] = ComentarioArticuloDto.builder()
+                .id(1L)
+                .respuestaComentario("Esta es la respuesta")
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(responseComentarios, HttpStatus.OK)).when(comentarioArticuloClient).getComentariosByArtId(Mockito.any(), Mockito.any());
+
+        ArticuloDto responseUpd = ArticuloDto.builder()
+                .id(1L)
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(responseUpd,HttpStatus.OK)).when(articuloCliente).updateEstadoArticulo(Mockito.any(), Mockito.any(), Mockito.any());
+
+        Optional<ArticuloDto> response = articuloService.aprobacionArticulo("sdgfjkahjg84327", 1L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+    }
+
 }

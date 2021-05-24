@@ -1,5 +1,6 @@
 package co.com.ud.business.exceptions;
 
+import co.com.ud.utiles.dto.BusinessResponse;
 import co.com.ud.utiles.dto.ExceptionValidatorDto;
 import co.com.ud.utiles.validators.exception.MailConstraintException;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                 .mensaje("Correo Electronico con formato invalido")
                 .tipoError("VALIDADOR")
                 .campo(ex.getCampo())
+                .build(), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public final ResponseEntity<Object> handlerException(IllegalArgumentException exception, WebRequest request){
+
+        return new ResponseEntity<>(BusinessResponse.builder()
+                .status("error")
+                .message(exception.getMessage())
                 .build(), HttpStatus.OK);
     }
 }

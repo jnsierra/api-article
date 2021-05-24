@@ -48,24 +48,33 @@ public class ArticuloServiceImpl implements ArticulosService {
 
     @Override
     public Optional<ArticuloDto> revisionArticulo(String token,Long idArt) {
-        Assert.isTrue(!this.comentariosArticuloSinRespuesta(token,idArt), "Existen comentarios sin respuesta");
-        //TODO Se revisa si tiene al menos 20 controles de lectura.
+        Optional<String> comentarios = this.comentariosArticuloSinRespuesta(token, idArt);
+        Assert.isTrue(comentarios.isEmpty(), "Existen comentarios sin respuesta en: " + (comentarios.isPresent() ? comentarios.get() : ""));
         Assert.isTrue(this.cuentaControlesLectura(token,idArt), "Articulo sin bibliografia minima requerida");
-        Optional<ArticuloDto> responseUpdate = this.actualizarEstadoArticulo(token, idArt);
+        Optional<ArticuloDto> responseUpdate = this.actualizarEstadoArticulo(token, idArt, "REVISAR_PROFESOR");
         Assert.isTrue(responseUpdate.isPresent(), "No fue posible actualizar el estado del articulo");
         return responseUpdate;
     }
 
-    private Boolean comentariosArticuloSinRespuesta(String token, Long idArt){
+    @Override
+    public Optional<ArticuloDto> aprobacionArticulo(String token, Long idArt) {
+        Optional<String> comentarios = this.comentariosArticuloSinRespuesta(token, idArt);
+        Assert.isTrue(comentarios.isEmpty(), "Haz realizado un comentario en " + (comentarios.isPresent() ? comentarios.get() : "") + " el cual debe ser respondido por el alumno. No es posible aprobar el documento");
+        Optional<ArticuloDto> responseUpdate = this.actualizarEstadoArticulo(token, idArt, "ARTICULO_APROBADO");
+        Assert.isTrue(responseUpdate.isPresent(), "No fue posible actualizar el estado del articulo");
+        return responseUpdate;
+    }
+
+    private Optional<String> comentariosArticuloSinRespuesta(String token, Long idArt){
         ResponseEntity<ComentarioArticuloDto[]> response = comentarioArticuloClient.getComentariosByArtId(token, idArt);
         if(HttpStatus.OK.equals(response.getStatusCode()) && Objects.nonNull(response.getBody())){
             for(ComentarioArticuloDto item : response.getBody()){
-                if(Objects.isNull(item.getRespuestaComentario())){
-                    return Boolean.TRUE;
+                if(Objects.isNull(item.getRespuestaComentario()) || "".equals(item.getRespuestaComentario())){
+                    return Optional.of(item.getTypeComentarioArt().toString());
                 }
             }
         }
-        return Boolean.FALSE;
+        return Optional.empty();
     }
 
     private Boolean cuentaControlesLectura(String token, Long idArt){
@@ -76,8 +85,8 @@ public class ArticuloServiceImpl implements ArticulosService {
         return Boolean.FALSE;
     }
 
-    private Optional<ArticuloDto> actualizarEstadoArticulo(String token, Long idArt){
-        ResponseEntity<ArticuloDto> response = articuloCliente.updateEstadoArticulo(token, idArt, "REVISAR_PROFESOR");
+    private Optional<ArticuloDto> actualizarEstadoArticulo(String token, Long idArt, String estado){
+        ResponseEntity<ArticuloDto> response = articuloCliente.updateEstadoArticulo(token, idArt, estado);
         if(HttpStatus.OK.equals(response.getStatusCode()) && Objects.nonNull(response.getBody())){
             return Optional.of(response.getBody());
         }

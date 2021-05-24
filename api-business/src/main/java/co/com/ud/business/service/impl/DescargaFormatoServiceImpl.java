@@ -24,11 +24,15 @@ public class DescargaFormatoServiceImpl implements DescargaFormatoService {
 
     private String urlFormato;
     private final FormatoIdeaCliente formatoIdeaCliente;
+    private String urlFormatoArt;
 
     @Autowired
-    public DescargaFormatoServiceImpl(@Value("${repositorio.formato.ubicacion}")String urlFormato, FormatoIdeaCliente formatoIdeaCliente) {
+    public DescargaFormatoServiceImpl(@Value("${repositorio.formato.ubicacion}")String urlFormato
+            , FormatoIdeaCliente formatoIdeaCliente
+            , @Value("${repositorio.formatoArt.ubicacion}")String urlFormatoArt) {
         this.urlFormato = urlFormato;
         this.formatoIdeaCliente = formatoIdeaCliente;
+        this.urlFormatoArt = urlFormatoArt;
     }
 
     @Override
@@ -58,6 +62,11 @@ public class DescargaFormatoServiceImpl implements DescargaFormatoService {
             name += "docx";
         }
         return obtenerDoc(ubicacion, name);
+    }
+
+    @Override
+    public Optional<DocumentDownloadDto> descargaFormatoArticulo(Long idArt) {
+        return obtenerDoc(urlFormatoArt, "formato_002.docx");
     }
 
     private static byte[] loadFile(File file) throws IOException {

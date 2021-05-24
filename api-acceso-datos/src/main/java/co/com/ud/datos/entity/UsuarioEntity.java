@@ -50,6 +50,12 @@ public class UsuarioEntity extends Auditable<String> {
     @NotNull
     @NotBlank
     @NotEmpty
+    @Column(name = "codigo")
+    private String codigo;
+
+    @NotNull
+    @NotBlank
+    @NotEmpty
     @Column(name = "password")
     private String contrasena;
 

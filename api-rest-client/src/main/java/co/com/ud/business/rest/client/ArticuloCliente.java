@@ -16,4 +16,7 @@ public interface ArticuloCliente {
     @PutMapping(value = "/cambiarestado/")
     ResponseEntity<ArticuloDto> updateEstadoArticulo(@RequestHeader("Authorization") String token, @RequestParam("idArticulo") Long idArt, @RequestParam("estado") String estado);
 
+    @GetMapping(value = "/by/{idArt}/", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<ArticuloDto> getById(@RequestHeader("Authorization") String token, @PathVariable Long idArt);
+
 }

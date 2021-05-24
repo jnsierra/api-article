@@ -63,6 +63,7 @@
         <insert tableName="usuario">
             <column name="id" valueComputed="${sequence.usuario}"></column>
             <column name="email" value="jnsierrac@gmail.com"></column>
+            <column name="codigo" value="20172678021"></column>
             <column name="password" value="12345678"></column>
             <column name="name" value="jesus"></column>
             <column name="tipo_usuario_id" value="1"></column>

@@ -25,7 +25,9 @@ public class DescargaFormatoServiceImplTest {
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.descargaFormatoService = new DescargaFormatoServiceImpl("src/test/resources/document/formato_001.docx", formatoIdeaCliente);
+        this.descargaFormatoService = new DescargaFormatoServiceImpl("src/test/resources/document/formato_001.docx"
+                , formatoIdeaCliente
+                , "src/test/resources/document/");
     }
 
     @Test

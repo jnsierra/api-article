@@ -15,6 +15,7 @@ public class UsuarioDto {
     private Long id;
     @MailConstraint(campo = "correo")
     private String correo;
+    private String codigo;
     private String contrasena;
     private String nombre;
     private String cambioContra;
