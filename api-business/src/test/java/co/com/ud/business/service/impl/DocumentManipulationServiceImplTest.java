@@ -3,11 +3,9 @@ package co.com.ud.business.service.impl;
 
 import co.com.ud.business.rest.client.ArticuloCliente;
 import co.com.ud.business.service.IdeaService;
+import co.com.ud.business.service.ParrafoService;
 import co.com.ud.business.service.UsuarioService;
-import co.com.ud.utiles.dto.ArticuloDto;
-import co.com.ud.utiles.dto.IdeaDto;
-import co.com.ud.utiles.dto.PersonaDto;
-import co.com.ud.utiles.dto.UsuarioDto;
+import co.com.ud.utiles.dto.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -31,6 +31,8 @@ public class DocumentManipulationServiceImplTest {
     private IdeaService ideaService;
     @Mock
     private UsuarioService usuarioService;
+    @Mock
+    private ParrafoService parrafoService;
 
     @Before
     public void setUp(){
@@ -39,6 +41,7 @@ public class DocumentManipulationServiceImplTest {
                 ,"/repository/documentos/articulos/"
                 , ideaService
                 , usuarioService
+                , parrafoService
                 , articuloCliente);
     }
 
@@ -76,6 +79,14 @@ public class DocumentManipulationServiceImplTest {
                 .build();
 
         Mockito.doReturn(Optional.of(usuario)).when(usuarioService).getUserById(Mockito.any());
+
+        ParrafoDto parrafo = ParrafoDto.builder()
+                .id(1L)
+                .contenido("Este es el contenido")
+                .build();
+        List lista = new ArrayList();
+        lista.add(parrafo);
+        Mockito.doReturn(Optional.of(lista)).when(parrafoService).obtenerParrafosByIdArt(Mockito.any(), Mockito.any());
 
         Optional<String> response = documentManipulationService.generateFormatArt("13216584baf",1L);
         Assert.assertNotNull(response);

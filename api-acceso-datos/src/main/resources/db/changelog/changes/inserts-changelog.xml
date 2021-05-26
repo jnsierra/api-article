@@ -47,7 +47,7 @@
     </changeSet>
     <changeSet author="admin" id="1" >
         <insert tableName="persona">
-            <column name="id" value="0"></column>
+            <column name="id" valueComputed="${sequence.persona}"></column>
             <column name="nombres" value="Jesus Nicolas"></column>
             <column name="apellidos" value="Jesus Nicolas"></column>
             <column name="fecha_nacimiento" value="${now}"></column>
@@ -58,7 +58,58 @@
             <column name="last_modified_date" valueDate="${now}"></column>
             <column name="documento" valueDate="1030585312"></column>
         </insert>
+        <insert tableName="persona">
+            <column name="id" valueComputed="${sequence.persona}"></column>
+            <column name="nombres" value="Luisa Maria"></column>
+            <column name="apellidos" value="Cañon Mora"></column>
+            <column name="fecha_nacimiento" value="${now}"></column>
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+            <column name="documento" valueDate="1018460254"></column>
+        </insert>
+        <insert tableName="persona">
+            <column name="id" valueComputed="${sequence.persona}"></column>
+            <column name="nombres" value="Jesion"></column>
+            <column name="apellidos" value="Sierra"></column>
+            <column name="fecha_nacimiento" value="${now}"></column>
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+            <column name="documento" valueDate="1016460254"></column>
+        </insert>
+        <insert tableName="persona">
+            <column name="id" valueComputed="${sequence.persona}"></column>
+            <column name="nombres" value="Jairo"></column>
+            <column name="apellidos" value="Hernandez Gutierrez"></column>
+            <column name="fecha_nacimiento" value="${now}"></column>
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+            <column name="documento" valueDate="41725896"></column>
+        </insert>
+        <insert tableName="persona">
+            <column name="id" valueComputed="${sequence.persona}"></column>
+            <column name="nombres" value="Nicole Sofia"></column>
+            <column name="apellidos" value="Sierra Chaparro"></column>
+            <column name="fecha_nacimiento" value="${now}"></column>
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+            <column name="documento" valueDate="89561235"></column>
+        </insert>
     </changeSet>
+
+
+
     <changeSet author="admin" id="3" >
         <insert tableName="usuario">
             <column name="id" valueComputed="${sequence.usuario}"></column>
@@ -67,7 +118,79 @@
             <column name="password" value="12345678"></column>
             <column name="name" value="jesus"></column>
             <column name="tipo_usuario_id" value="1"></column>
-            <column name="persona_id" value="0"></column>
+            <column name="persona_id" value="1"></column>
+            <column name="cambio_contra" value="N"></column>
+            <column name="intentos" value="0"></column>
+            <column name="estado" value="ACTIVO"></column>
+
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+        <insert tableName="usuario">
+            <column name="id" valueComputed="${sequence.usuario}"></column>
+            <column name="email" value="lmcanon@gmail.com"></column>
+            <column name="codigo" value="20172678022"></column>
+            <column name="password" value="12345678"></column>
+            <column name="name" value="Luisa Maria"></column>
+            <column name="tipo_usuario_id" value="1"></column>
+            <column name="persona_id" value="2"></column>
+            <column name="cambio_contra" value="N"></column>
+            <column name="intentos" value="0"></column>
+            <column name="estado" value="ACTIVO"></column>
+
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+        <insert tableName="usuario">
+            <column name="id" valueComputed="${sequence.usuario}"></column>
+            <column name="email" value="jesierra@gmail.com"></column>
+            <column name="codigo" value="20172678023"></column>
+            <column name="password" value="12345678"></column>
+            <column name="name" value="Jeison Sierra"></column>
+            <column name="tipo_usuario_id" value="1"></column>
+            <column name="persona_id" value="3"></column>
+            <column name="cambio_contra" value="N"></column>
+            <column name="intentos" value="0"></column>
+            <column name="estado" value="ACTIVO"></column>
+
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+        <insert tableName="usuario">
+            <column name="id" valueComputed="${sequence.usuario}"></column>
+            <column name="email" value="jhernandez@gmail.com"></column>
+            <column name="codigo" value="20172678024"></column>
+            <column name="password" value="12345678"></column>
+            <column name="name" value="Jairo Hernandez"></column>
+            <column name="tipo_usuario_id" value="1"></column>
+            <column name="persona_id" value="4"></column>
+            <column name="cambio_contra" value="N"></column>
+            <column name="intentos" value="0"></column>
+            <column name="estado" value="ACTIVO"></column>
+
+
+            <column name="created_by" value="jsierra"></column>
+            <column name="created_date" valueDate="${now}"></column>
+            <column name="last_modified_by" value="jsierra"></column>
+            <column name="last_modified_date" valueDate="${now}"></column>
+        </insert>
+        <insert tableName="usuario">
+            <column name="id" valueComputed="${sequence.usuario}"></column>
+            <column name="email" value="sofia@gmail.com"></column>
+            <column name="codigo" value="20172678025"></column>
+            <column name="password" value="12345678"></column>
+            <column name="name" value="Sofia Sierra"></column>
+            <column name="tipo_usuario_id" value="1"></column>
+            <column name="persona_id" value="5"></column>
             <column name="cambio_contra" value="N"></column>
             <column name="intentos" value="0"></column>
             <column name="estado" value="ACTIVO"></column>

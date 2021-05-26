@@ -15,10 +15,10 @@
             <column name="titulo" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="resumen_ingles" type="VARCHAR(255)">
+            <column name="resumen_ingles" type="clob">
                 <constraints nullable="false"/>
             </column>
-            <column name="resumen" type="VARCHAR(255)">
+            <column name="resumen" type="clob">
                 <constraints nullable="false"/>
             </column>
             <column name="contenido" type="VARCHAR(255)">

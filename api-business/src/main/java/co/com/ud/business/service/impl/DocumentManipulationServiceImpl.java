@@ -3,9 +3,11 @@ package co.com.ud.business.service.impl;
 import co.com.ud.business.rest.client.ArticuloCliente;
 import co.com.ud.business.service.DocumentManipulationService;
 import co.com.ud.business.service.IdeaService;
+import co.com.ud.business.service.ParrafoService;
 import co.com.ud.business.service.UsuarioService;
 import co.com.ud.utiles.dto.ArticuloDto;
 import co.com.ud.utiles.dto.IdeaDto;
+import co.com.ud.utiles.dto.ParrafoDto;
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -33,6 +35,7 @@ public class DocumentManipulationServiceImpl implements DocumentManipulationServ
     private final ArticuloCliente articuloCliente;
     private final IdeaService ideaService;
     private final UsuarioService usuarioService;
+    private final ParrafoService parrafoService;
 
 
     @Autowired
@@ -40,6 +43,7 @@ public class DocumentManipulationServiceImpl implements DocumentManipulationServ
                                            @Value("${repositorio.formatoArt.docDestino}")String urlDestino,
                                            IdeaService ideaService,
                                            UsuarioService usuarioService,
+                                           ParrafoService parrafoService,
                                            ArticuloCliente articuloCliente) {
         this.urlFormato = urlFormatoArt;
         this.templateName = "formato_002.docx";
@@ -47,6 +51,7 @@ public class DocumentManipulationServiceImpl implements DocumentManipulationServ
         this.articuloCliente = articuloCliente;
         this.ideaService = ideaService;
         this.usuarioService = usuarioService;
+        this.parrafoService = parrafoService;
     }
 
     @Override
@@ -131,9 +136,26 @@ public class DocumentManipulationServiceImpl implements DocumentManipulationServ
         if(texto.contains("#ingles#")){
             texto = texto.replace("#ingles#", articulo.getResumen_ingles());
         }
-        if(texto.contains("#conclusión#")){
-            texto = texto.replace("#conclusión#", articulo.getConclusion());
+        if(texto.contains("#conclusion#")){
+            texto = texto.replace("#conclusion#", articulo.getConclusion());
+        }
+        if(texto.contains("#contenido#")){
+            Optional<String> temp = generarContenidoParrafos(token, articulo.getId());
+            texto = temp.isPresent() ? temp.get() : "";
         }
         return texto;
+    }
+
+    private Optional<String> generarContenidoParrafos(String token, Long id){
+        StringBuilder responseString = new StringBuilder();
+        Optional<List<ParrafoDto>> response = parrafoService.obtenerParrafosByIdArt(token, id);
+        if(response.isPresent() && !response.get().isEmpty()){
+            for(ParrafoDto item : response.get()){
+                responseString.append(item.getContenido());
+                responseString.append("\n");
+            }
+            return Optional.of(responseString.toString());
+        }
+        return Optional.empty();
     }
 }

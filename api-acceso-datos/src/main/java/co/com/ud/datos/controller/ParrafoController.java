@@ -35,7 +35,7 @@ public class ParrafoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(value = "/articulo/{idArticulo}")
+    @GetMapping(value = "/articulo/{idArticulo}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ParrafoDto[]> getParrafoByArticulo(@PathVariable("idArticulo") Long idArt){
         List<ParrafoEntity> listParrafo = parrafoService.getParrafoByArticulo(idArt);
         if(!listParrafo.isEmpty()){

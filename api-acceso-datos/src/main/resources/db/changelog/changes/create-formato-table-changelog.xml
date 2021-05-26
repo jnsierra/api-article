@@ -12,19 +12,16 @@
             <column name="id_articulo" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="descripcion" type="VARCHAR(255)">
+            <column name="ubicacion" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="estado" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="nombre" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="formato" type="VARCHAR(255)"/>
-            <column name="persona_id" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="extencion" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>

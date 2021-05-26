@@ -10,6 +10,9 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <property name="sequence.usuario" value="(select usuario_seq.nextval from dual)" dbms="h2"/>
     <property name="sequence.usuario" value="(SELECT nextval('usuario_seq'))" dbms="postgresql"/>
 
+    <property name="sequence.persona" value="(select persona_seq.nextval from dual)" dbms="h2"/>
+    <property name="sequence.persona" value="(SELECT nextval('persona_seq'))" dbms="postgresql"/>
+
     <property name="sequence.tipo_usuario" value="(select tipo_usuario_seq.nextval from dual)" dbms="h2"/>
     <property name="sequence.tipo_usuario" value="(SELECT nextval('tipo_usuario_seq'))" dbms="postgresql"/>
 

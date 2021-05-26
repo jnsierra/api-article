@@ -33,9 +33,9 @@ public class ArticuloEntity extends Auditable<String>{
     private Long id;
     @Column(name="titulo")
     private String titulo;
-    @Column(name="resumen_ingles")
+    @Column(name="resumen_ingles" ,columnDefinition = "text")
     private String resumen_ingles;
-    @Column(name="resumen")
+    @Column(name="resumen" ,columnDefinition = "text")
     private String resumen;
     @Column(name="contenido")
     private String contenido;
@@ -53,6 +53,9 @@ public class ArticuloEntity extends Auditable<String>{
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo", orphanRemoval = true)
     private List<ComentarioArticuloEntity> comentarios = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articulo", orphanRemoval = true)
+    private List<FormatoEntity> formatos = new ArrayList<>();
 
     @Column(name = "introduccion",columnDefinition = "text" )
     private String introduccion;
