@@ -51,8 +51,8 @@ public class ArticuloController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(map.map(articulos.get(), ArticuloDto.class), HttpStatus.OK);
-
     }
+
     @GetMapping(value = "/idea/user/{idUser}/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArticuloDto[]> getArticulosByUser(@PathVariable("idUser") Long idUser){
         List<ArticuloEntity> response = articuloService.getArticulosByUser(idUser);

@@ -4,7 +4,6 @@ import co.com.ud.datos.entity.ComentarioArticuloEntity;
 import co.com.ud.datos.repository.IComentarioArticuloRepository;
 import co.com.ud.datos.service.ComentarioArticuloService;
 import co.com.ud.utiles.enumeracion.TYPE_COMMENTS_ARTICLE;
-import org.checkerframework.checker.nullness.Opt;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

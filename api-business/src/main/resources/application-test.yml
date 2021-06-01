@@ -15,6 +15,10 @@ endpoint:
     host: localhost
     port: 5003
     base: /api-datos
+    formato:
+      version: /v.1
+      url: /formato
+      name: formatoCliente
     parrafos:
       version: /v.1
       url: /parrafo
@@ -64,3 +68,4 @@ path:
   repo:
     idea: /repository/documentos/usuario/
     comentarios: /repository/documentos/comentario/
+    articulos: /repository/documentos/articulos_usuario/

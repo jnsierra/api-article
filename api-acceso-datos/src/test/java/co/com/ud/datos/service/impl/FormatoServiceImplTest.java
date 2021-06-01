@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -46,6 +48,29 @@ public class FormatoServiceImplTest {
         Optional<FormatoEntity> response = formatoService.save(entity);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testFindByIdArtEMPTY(){
+        Mockito.doReturn(new ArrayList<>()).when(formatoRepository).findByIdArt(Mockito.any());
+        List<FormatoEntity> response = formatoService.findByIdArt(1L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isEmpty());
+    }
+
+    @Test
+    public void testFindByIdArtSUCCESS(){
+        List<FormatoEntity> list = new ArrayList<>();
+        FormatoEntity formato = FormatoEntity.builder()
+                .id(1L)
+                .nombre("FORMATO.DOCX")
+                .build();
+        list.add(formato);
+
+        Mockito.doReturn(list).when(formatoRepository).findByIdArt(Mockito.any());
+        List<FormatoEntity> response = formatoService.findByIdArt(1L);
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isEmpty());
     }
 
 }

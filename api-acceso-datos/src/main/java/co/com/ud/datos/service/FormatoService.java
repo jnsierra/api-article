@@ -11,4 +11,6 @@ public interface FormatoService {
     Optional<FormatoEntity> save(FormatoEntity formato);
 
     List<FormatoEntity> findFormatoByFormatoAndEstadoAndArtId(Long idArt, String estado, TYPE_FORMATO_ARTICULO formato);
+
+    List<FormatoEntity> findByIdArt(Long idArt);
 }

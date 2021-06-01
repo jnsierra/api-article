@@ -15,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -50,6 +52,30 @@ public class FormatoControllerTest {
         Mockito.doReturn(Optional.of(entity)).when(formatoService).save(Mockito.any());
 
         ResponseEntity<FormatoDto> response = formatoController.save(dto);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+    @Test
+    public void testGetFormatoByIdArtEMPTY(){
+
+        Mockito.doReturn(new ArrayList<>()).when(formatoService).findByIdArt(Mockito.any());
+
+        ResponseEntity<FormatoDto[]> response = formatoController.getFormatoByIdArt(1l);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetFormatoByIdArtSUCCESS(){
+        List<FormatoEntity> lista = new ArrayList<>();
+        lista.add(FormatoEntity.builder()
+                .id(1L)
+                .formato(TYPE_FORMATO_ARTICULO.ARTICULO_POR_CORREGIR)
+                .nombre("DOCUMENTO.DOCX")
+                .build());
+        Mockito.doReturn(lista).when(formatoService).findByIdArt(Mockito.any());
+
+        ResponseEntity<FormatoDto[]> response = formatoController.getFormatoByIdArt(1l);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }

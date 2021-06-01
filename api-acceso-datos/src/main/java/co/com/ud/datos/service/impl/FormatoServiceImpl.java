@@ -30,4 +30,9 @@ public class FormatoServiceImpl implements FormatoService {
     public List<FormatoEntity> findFormatoByFormatoAndEstadoAndArtId(Long idArt, String estado, TYPE_FORMATO_ARTICULO formato) {
         return null;
     }
+
+    @Override
+    public List<FormatoEntity> findByIdArt(Long idArt) {
+        return formatoRepository.findByIdArt(idArt);
+    }
 }

@@ -11,6 +11,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "formato")
+@NamedQueries({
+        @NamedQuery(name = "FormatoEntity.findByIdArt", query = "from FormatoEntity for where for.articulo.id = :idArt ")
+})
 @Data
 @Builder
 @AllArgsConstructor

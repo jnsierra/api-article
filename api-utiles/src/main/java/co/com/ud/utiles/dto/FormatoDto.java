@@ -23,4 +23,6 @@ public class FormatoDto {
     private TYPE_FORMATO_ARTICULO formato;
 
     private Long idArticulo;
+
+    private String base64;
 }
