@@ -48,10 +48,15 @@ public class ArticuloServiceImpl implements ArticuloService {
     public Optional<ArticuloEntity> updateArticulo(ArticuloDto articuloDto) {
         Optional<ArticuloEntity> entity = articuloRepository.findById(articuloDto.getId());
         if(entity.isPresent()){
-            ArticuloEntity articulo = entity.get();
-            articulo = mapper.map(articuloDto, ArticuloEntity.class);
-            articuloRepository.save(articulo);
-            return Optional.of(articulo);
+            Integer update = articuloRepository.updateArticulo(articuloDto.getId()
+                    , articuloDto.getResumen_ingles()
+                    , articuloDto.getResumen()
+                    , articuloDto.getTitulo()
+                    , articuloDto.getIntroduccion()
+                    , articuloDto.getConclusion());
+            if(update > 0){
+                return articuloRepository.findById(articuloDto.getId());
+            }
         }
         return Optional.empty();
     }
