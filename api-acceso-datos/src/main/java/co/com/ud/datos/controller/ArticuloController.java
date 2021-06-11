@@ -52,6 +52,14 @@ public class ArticuloController {
         }
         return new ResponseEntity<>(map.map(articulos.get(), ArticuloDto.class), HttpStatus.OK);
     }
+    @PutMapping(value = "/cambiarUbicFormato/")
+    public ResponseEntity<ArticuloDto> updateUbicacionFormato(@RequestParam("idArticulo") Long idArt,@RequestParam("ubicacionFormato") String ubicacionFormato){
+        Optional<ArticuloEntity> articulos = articuloService.updateUbicacionFormato(idArt, ubicacionFormato);
+        if(articulos.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(map.map(articulos.get(), ArticuloDto.class), HttpStatus.OK);
+    }
 
     @GetMapping(value = "/idea/user/{idUser}/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArticuloDto[]> getArticulosByUser(@PathVariable("idUser") Long idUser){

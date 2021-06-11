@@ -135,7 +135,7 @@
             <column name="codigo" value="20172678022"></column>
             <column name="password" value="12345678"></column>
             <column name="name" value="Luisa Maria"></column>
-            <column name="tipo_usuario_id" value="1"></column>
+            <column name="tipo_usuario_id" value="3"></column>
             <column name="persona_id" value="2"></column>
             <column name="cambio_contra" value="N"></column>
             <column name="intentos" value="0"></column>
@@ -153,7 +153,7 @@
             <column name="codigo" value="20172678023"></column>
             <column name="password" value="12345678"></column>
             <column name="name" value="Jeison Sierra"></column>
-            <column name="tipo_usuario_id" value="1"></column>
+            <column name="tipo_usuario_id" value="2"></column>
             <column name="persona_id" value="3"></column>
             <column name="cambio_contra" value="N"></column>
             <column name="intentos" value="0"></column>
@@ -171,7 +171,7 @@
             <column name="codigo" value="20172678024"></column>
             <column name="password" value="12345678"></column>
             <column name="name" value="Jairo Hernandez"></column>
-            <column name="tipo_usuario_id" value="1"></column>
+            <column name="tipo_usuario_id" value="2"></column>
             <column name="persona_id" value="4"></column>
             <column name="cambio_contra" value="N"></column>
             <column name="intentos" value="0"></column>
@@ -189,7 +189,7 @@
             <column name="codigo" value="20172678025"></column>
             <column name="password" value="12345678"></column>
             <column name="name" value="Sofia Sierra"></column>
-            <column name="tipo_usuario_id" value="1"></column>
+            <column name="tipo_usuario_id" value="4"></column>
             <column name="persona_id" value="5"></column>
             <column name="cambio_contra" value="N"></column>
             <column name="intentos" value="0"></column>

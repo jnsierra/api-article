@@ -29,4 +29,11 @@ public class FormatoController {
         }
         return new ResponseEntity<>(response.get(), HttpStatus.OK);
     }
+
+    @PostMapping(value = "/formatoBase/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<FormatoDto> saveFormatoBase(){
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
 }

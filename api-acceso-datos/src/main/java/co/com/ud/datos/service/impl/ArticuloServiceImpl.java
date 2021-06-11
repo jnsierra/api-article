@@ -77,4 +77,13 @@ public class ArticuloServiceImpl implements ArticuloService {
         return articuloRepository.getArticulosByTutorAndEstado(idTutor, estado);
     }
 
+    @Override
+    public Optional<ArticuloEntity> updateUbicacionFormato(Long id, String ubFormato) {
+        Integer update = articuloRepository.updateUbicacionFormato(id, ubFormato);
+        if(update > 0){
+            return articuloRepository.findById(id);
+        }
+        return Optional.empty();
+    }
+
 }

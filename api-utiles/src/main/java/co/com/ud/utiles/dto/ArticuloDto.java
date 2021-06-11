@@ -29,4 +29,6 @@ public class ArticuloDto {
 
     private String conclusion;
 
+    private String ubicacion_formato;
+
 }

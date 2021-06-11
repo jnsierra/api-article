@@ -5,10 +5,8 @@ import co.com.ud.business.rest.client.FormatoClient;
 import co.com.ud.business.service.FormatoService;
 import co.com.ud.utiles.dto.ArticuloDto;
 import co.com.ud.utiles.dto.FormatoDto;
-import co.com.ud.utiles.dto.FormatoIdeaDto;
 import co.com.ud.utiles.enumeracion.TYPE_FORMATO_ARTICULO;
 import co.com.ud.utiles.service.UtilesBase64;
-import com.netflix.client.IResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -63,6 +61,11 @@ public class FormatoServiceImpl implements FormatoService {
         if(HttpStatus.OK.equals(response.getStatusCode()) && Objects.nonNull(response.getBody())){
             return Optional.of(response.getBody());
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<FormatoDto> guardarFormatoBaseArt(String token, FormatoDto formato) {
         return Optional.empty();
     }
 

@@ -9,4 +9,6 @@ public interface FormatoService {
     Optional<FormatoDto> guardarFormatoArt(String token, FormatoDto formato);
 
     Optional<FormatoDto> save(String token, FormatoDto formato);
+
+    Optional<FormatoDto> guardarFormatoBaseArt(String token, FormatoDto formato);
 }

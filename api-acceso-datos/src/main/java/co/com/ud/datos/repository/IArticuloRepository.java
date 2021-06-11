@@ -27,4 +27,8 @@ public interface IArticuloRepository extends JpaRepository<ArticuloEntity, Long>
             , @Param("titulo") String titulo
             , @Param("introduccion") String introduccion
             , @Param("conclusion") String conclusion);
+
+    @Modifying
+    @Transactional
+    Integer updateUbicacionFormato(@Param("idArt") Long id, @Param("ubFormato") String ubFormato);
 }

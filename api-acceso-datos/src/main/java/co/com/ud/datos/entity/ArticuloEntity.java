@@ -20,7 +20,9 @@ import java.util.List;
         @NamedQuery(name = "ArticuloEntity.getArticulosByTutorAndEstado",
                 query = "from ArticuloEntity art inner join fetch art.idea as ide where art.estado = :estado and ide.id_profesor = :idTutor "),
         @NamedQuery(name = "ArticuloEntity.updateArticulo",
-                query = "Update ArticuloEntity art  set art.resumen_ingles = :ingles, art.resumen = :resumen, art.titulo = :titulo, art.introduccion = :introduccion, art.conclusion = :conclusion where art.id = :idArt " )
+                query = "Update ArticuloEntity art  set art.resumen_ingles = :ingles, art.resumen = :resumen, art.titulo = :titulo, art.introduccion = :introduccion, art.conclusion = :conclusion where art.id = :idArt " ),
+        @NamedQuery(name = "ArticuloEntity.updateUbicacionFormato",
+                query = "Update ArticuloEntity art set art.ubicacion_formato = :ubFormato where art.id = :idArt ")
 })
 @Data
 @Builder
@@ -63,5 +65,7 @@ public class ArticuloEntity extends Auditable<String>{
     private String introduccion;
     @Column(name = "conclusion",columnDefinition = "text" )
     private String conclusion;
+    @Column(name = "ubicacion_formato")
+    private String ubicacion_formato;
 
 }

@@ -157,4 +157,15 @@ public class ArticuloControllerTest {
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+    @Test
+    public void testUpdateUbicacionFormatoSUCCESS(){
+        ArticuloEntity responseEntity = ArticuloEntity.builder().build();
+
+        Mockito.doReturn(Optional.of(responseEntity)).when(articuloService).updateUbicacionFormato(Mockito.any(), Mockito.any());
+
+        ResponseEntity<ArticuloDto> response = articuloController.updateUbicacionFormato(1L, "/opt/");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
 }

@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.Format;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -71,6 +70,27 @@ public class FormatoServiceImplTest {
         Optional<FormatoDto> response = formatoService.guardarFormatoArt("kfsdcnjgñsldfkgj543096754", entity);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testGuardarFormatoArtWITHOUT_NAME()throws FileNotFoundException {
+        Mockito.doReturn(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR)).when(formatoClient).getFormatoByIdArt(Mockito.any(), Mockito.any());
+
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        File file = new File(classLoader.getResource("base64Text.txt").getFile());
+        Scanner sc = new Scanner(file);
+        String base64 = sc.next();
+
+        FormatoDto entity = FormatoDto.builder()
+                .idArticulo(1L)
+                .formato(TYPE_FORMATO_ARTICULO.ARTICULO_POR_CORREGIR)
+                .nombre("docx")
+                .base64(base64)
+                .build();
+
+        Optional<FormatoDto> response = formatoService.guardarFormatoArt("kfsdcnjgñsldfkgj543096754", entity);
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isPresent());
     }
 
 }

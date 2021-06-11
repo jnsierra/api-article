@@ -117,6 +117,7 @@ public class ArticuloServiceImplTest {
 
         Mockito.doReturn(Optional.of(entity)).when(articuloRepository).findById(Mockito.any());
 
+        Mockito.doReturn(Integer.valueOf(1)).when(articuloRepository).updateArticulo(Mockito.any(),Mockito.any(),Mockito.any(),Mockito.any(),Mockito.any(),Mockito.any());
 
         Optional<ArticuloEntity> response = articuloService.updateArticulo(ArticuloDto.builder()
                 .id(1L)
@@ -156,6 +157,34 @@ public class ArticuloServiceImplTest {
         Assert.assertTrue(response.isPresent());
 
 
+    }
+    @Test
+    public void testGetArticulosByTutorAndEstado(){
+        List<ArticuloEntity> responseList = new ArrayList<>();
+        ArticuloEntity item = ArticuloEntity.builder().build();
+        responseList.add(item);
+
+        Mockito.doReturn(responseList).when(articuloRepository).getArticulosByTutorAndEstado(Mockito.any(), Mockito.any());
+
+
+        List<ArticuloEntity> response = articuloService.getArticulosByTutorAndEstado(1L, "ESTADO");
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isEmpty());
+    }
+
+    @Test
+    public void testUpdateUbicacionFormatoSUCCESS(){
+        Mockito.doReturn(1).when(articuloRepository).updateUbicacionFormato(Mockito.any(), Mockito.any());
+
+        ArticuloEntity entity = ArticuloEntity.builder()
+                .id(1L)
+                .build();
+        Mockito.doReturn(Optional.of(entity)).when(articuloRepository).findById(1L);
+
+
+        Optional<ArticuloEntity> response = articuloService.updateUbicacionFormato(1L, "/opt/");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
     }
 
 }

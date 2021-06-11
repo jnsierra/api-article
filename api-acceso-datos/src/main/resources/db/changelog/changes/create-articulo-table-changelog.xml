@@ -29,7 +29,8 @@
             </column>
             <column name="introduccion" type="clob"/>
             <column name="conclusion" type="clob"/>
-
+            <column name="ubicacion_formato" type="VARCHAR(255)">
+            </column>
 
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>

@@ -22,4 +22,6 @@ public interface ArticuloService {
 
     List<ArticuloEntity> getArticulosByTutorAndEstado(Long idTutor, String estado);
 
+    Optional<ArticuloEntity> updateUbicacionFormato(Long id, String ubFormato);
+
 }
