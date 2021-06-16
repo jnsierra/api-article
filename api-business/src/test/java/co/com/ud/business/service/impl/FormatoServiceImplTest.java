@@ -2,6 +2,7 @@ package co.com.ud.business.service.impl;
 
 import co.com.ud.business.rest.client.ArticuloCliente;
 import co.com.ud.business.rest.client.FormatoClient;
+import co.com.ud.business.service.DocumentManipulationService;
 import co.com.ud.business.service.FormatoService;
 import co.com.ud.utiles.dto.ArticuloDto;
 import co.com.ud.utiles.dto.FormatoDto;
@@ -29,11 +30,13 @@ public class FormatoServiceImplTest {
     private FormatoClient formatoClient;
     @Mock
     private ArticuloCliente articuloCliente;
+    @Mock
+    private DocumentManipulationService documentManipulationService;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.formatoService = new FormatoServiceImpl(formatoClient, "/opt/", articuloCliente);
+        this.formatoService = new FormatoServiceImpl(formatoClient, "/opt/", articuloCliente, documentManipulationService);
     }
 
     @Test
@@ -91,6 +94,28 @@ public class FormatoServiceImplTest {
         Optional<FormatoDto> response = formatoService.guardarFormatoArt("kfsdcnjgñsldfkgj543096754", entity);
         Assert.assertNotNull(response);
         Assert.assertFalse(response.isPresent());
+    }
+
+    @Test
+    public void testGuardarFormatoBaseArtSUCCESS() throws FileNotFoundException {
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        File file = new File(classLoader.getResource("base64_formato.txt").getFile());
+        Scanner sc = new Scanner(file);
+        String base64 = sc.next();
+
+        FormatoDto entity = FormatoDto.builder()
+                .idArticulo(1L)
+                .formato(TYPE_FORMATO_ARTICULO.ARTICULO_POR_CORREGIR)
+                .nombre("docx")
+                .base64FormatoBase(base64)
+                .build();
+
+        Mockito.doReturn(new ResponseEntity<>(HttpStatus.OK)).when(articuloCliente).updateUbicacionFormato(Mockito.any(), Mockito.any());
+
+
+        Optional<FormatoDto> response = formatoService.guardarFormatoBaseArt("sdgfdgh35465fdg", entity);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
     }
 
 }

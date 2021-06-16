@@ -93,4 +93,11 @@ public class DocumentManipulationServiceImplTest {
         Assert.assertTrue(response.isPresent());
     }
 
+    @Test
+    public void testValidaEtiquetasFormatoSUCCESS() throws IOException {
+        Optional<String> response = documentManipulationService.validaEtiquetasFormato("13216546", "src/test/resources/document/formato_002.docx");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isEmpty());
+    }
+
 }

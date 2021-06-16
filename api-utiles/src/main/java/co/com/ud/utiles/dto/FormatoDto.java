@@ -27,4 +27,6 @@ public class FormatoDto {
     private String base64;
 
     private String base64FormatoBase;
+
+    private String mensaje;
 }

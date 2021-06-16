@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -63,6 +64,43 @@ public class DocumentManipulationServiceImpl implements DocumentManipulationServ
         return writeDocument(idArt, data.get(), token);
     }
 
+    @Override
+    public Optional<String> validaEtiquetasFormato(String token, String ubicacion) throws IOException {
+        List<String> etiquetas = new ArrayList<>();
+        etiquetas.add("#titulo#");
+        etiquetas.add("#nombre#");
+        etiquetas.add("#estudiante#");
+        etiquetas.add("#director#");
+        etiquetas.add("#resumen#");
+        etiquetas.add("#ingles#");
+        etiquetas.add("#introducción#");
+        etiquetas.add("#contenido#");
+        etiquetas.add("#conclusion#");
+        for(String item : etiquetas){
+            Optional<Boolean> valida = this.validoEtiqueta(ubicacion,item);
+            if(valida.isPresent() && Boolean.FALSE.equals(valida.get())){
+                return Optional.of(item);
+            }
+        }
+        return Optional.empty();
+    }
+
+    private Optional<Boolean> validoEtiqueta(String ubicacion, String etiqueta)throws IOException{
+        try (XWPFDocument doc = new XWPFDocument(Files.newInputStream(Paths.get(ubicacion)))){
+            List<XWPFParagraph> xwpfParagraphList = doc.getParagraphs();
+            //Iterate over paragraph list and check for the replaceable text in each paragraph
+            for (XWPFParagraph xwpfParagraph : xwpfParagraphList) {
+                for (XWPFRun xwpfRun : xwpfParagraph.getRuns()) {
+                    String docText = xwpfRun.getText(0);
+                    if(Objects.nonNull(docText) && docText.contains(etiqueta) ){
+                        return Optional.of(Boolean.TRUE);
+                    }
+                }
+            }
+        }
+        return Optional.of(Boolean.FALSE);
+    }
+
     private Optional<ArticuloDto> getDataArticulo(String token,Long idArt){
         ResponseEntity<ArticuloDto> response = articuloCliente.getById(token, idArt);
         if(HttpStatus.OK.equals(response.getStatusCode()) && Objects.nonNull(response.getBody())){
@@ -86,8 +124,6 @@ public class DocumentManipulationServiceImpl implements DocumentManipulationServ
             for (XWPFParagraph xwpfParagraph : xwpfParagraphList) {
                 for (XWPFRun xwpfRun : xwpfParagraph.getRuns()) {
                     String docText = xwpfRun.getText(0);
-                    System.out.println(docText);
-
                     docText = evaluateText(docText, art, token);
                     xwpfRun.setText(docText, 0);
                 }

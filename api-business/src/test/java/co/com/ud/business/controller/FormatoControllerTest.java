@@ -55,4 +55,17 @@ public class FormatoControllerTest {
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+    @Test
+    public void testSaveFormatoBaseSUCCESS(){
+        FormatoDto entity = FormatoDto.builder()
+                .id(1L)
+                .build();
+
+        Mockito.doReturn(Optional.of(entity)).when(formatoService).guardarFormatoBaseArt(Mockito.any(), Mockito.any());
+
+        ResponseEntity<FormatoDto> response = formatoController.saveFormatoBase("agfdag4564ewrfd", entity);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
 }

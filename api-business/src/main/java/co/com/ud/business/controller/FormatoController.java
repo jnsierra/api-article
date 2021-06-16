@@ -31,9 +31,11 @@ public class FormatoController {
     }
 
     @PostMapping(value = "/formatoBase/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
-    public ResponseEntity<FormatoDto> saveFormatoBase(){
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<FormatoDto> saveFormatoBase(@RequestHeader("Authorization")String autenticacion, @RequestBody FormatoDto formato){
+        Optional<FormatoDto> response = formatoService.guardarFormatoBaseArt(autenticacion, formato);
+        if(response.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(response.get(), HttpStatus.OK);
     }
-
-
 }

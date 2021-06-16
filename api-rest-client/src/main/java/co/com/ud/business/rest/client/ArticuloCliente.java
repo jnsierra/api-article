@@ -21,7 +21,6 @@ public interface ArticuloCliente {
 
     @PutMapping(value = "/cambiarUbicFormato/")
     ResponseEntity<ArticuloDto> updateUbicacionFormato(@RequestHeader("Authorization") String token,
-                                                       @RequestParam("idArticulo") Long idArt,
-                                                       @RequestParam("ubicacionFormato") String ubicacionFormato);
+                                                       @RequestBody ArticuloDto articuloDto);
 
 }

@@ -2,6 +2,7 @@ package co.com.ud.business.service.impl;
 
 import co.com.ud.business.rest.client.ArticuloCliente;
 import co.com.ud.business.rest.client.FormatoClient;
+import co.com.ud.business.service.DocumentManipulationService;
 import co.com.ud.business.service.FormatoService;
 import co.com.ud.utiles.dto.ArticuloDto;
 import co.com.ud.utiles.dto.FormatoDto;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -21,16 +23,20 @@ public class FormatoServiceImpl implements FormatoService {
 
     private final FormatoClient formatoClient;
     private final ArticuloCliente articuloCliente;
+    private final DocumentManipulationService documentManipulationService;
 
     private final String pathRepo;
 
 
 
     @Autowired
-    public FormatoServiceImpl(FormatoClient formatoClient,@Value("${path.repo.articulos}")  String pathRepo, ArticuloCliente articuloCliente) {
+    public FormatoServiceImpl(FormatoClient formatoClient,@Value("${path.repo.articulos}")  String pathRepo
+            , ArticuloCliente articuloCliente
+            , DocumentManipulationService documentManipulationService) {
         this.formatoClient = formatoClient;
         this.pathRepo = pathRepo;
         this.articuloCliente = articuloCliente;
+        this.documentManipulationService = documentManipulationService;
     }
 
     @Override
@@ -66,6 +72,29 @@ public class FormatoServiceImpl implements FormatoService {
 
     @Override
     public Optional<FormatoDto> guardarFormatoBaseArt(String token, FormatoDto formato) {
+        String nombre = "formato_" + formato.getIdArticulo() + ".docx";
+        Boolean guardar = UtilesBase64.builder().build().saveFile(formato.getBase64FormatoBase(),pathRepo, nombre);
+        if(guardar){
+            Optional<String> responseVal = Optional.empty();
+            //Valido si tiene las etiquetas el formato
+            try {
+                responseVal = documentManipulationService.validaEtiquetasFormato(token, pathRepo + nombre);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(responseVal.isPresent()){
+                formato.setMensaje("Falta la etiqueta obligatoria " + responseVal.get() + ", adicionala y vuelve a intentar cargar el formato ");
+                return Optional.of(formato);
+            }
+            ResponseEntity<ArticuloDto> response = articuloCliente.updateUbicacionFormato(token, ArticuloDto.builder()
+                    .id(formato.getIdArticulo())
+                    .ubicacion_formato( pathRepo + nombre)
+            .build());
+            if(HttpStatus.OK.equals(response.getStatusCode())){
+                formato.setMensaje("OK");
+                return Optional.of(formato);
+            }
+        }
         return Optional.empty();
     }
 
