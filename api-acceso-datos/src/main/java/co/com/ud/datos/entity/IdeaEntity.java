@@ -21,7 +21,8 @@ import java.util.List;
         @NamedQuery(name = "IdeaEntity.modificarIdProfAutorizaAndEstadoAndFechaAutoriza", query = "Update IdeaEntity idea set idea.idProfesorAutoriza = :idProf, idea.estado = :estado, id.fechaAprobacion = :fechaApro where idea.id = :idIdea"),
         @NamedQuery(name = "IdeaEntity.modificarIdea", query = "update IdeaEntity idea set idea.id_profesor = :idProf, idea.estado = :estado, idea.contenido = :ideaContenido, idea.titulo = :ideaTitulo where idea.id = :idIdea"),
         @NamedQuery(name = "IdeaEntity.modificarEstado", query = "update IdeaEntity idea set idea.estado = :estado where idea.id = :idIdea"),
-        @NamedQuery(name = "IdeaEntity.modificarJurado", query = "update IdeaEntity idea set idea.idProfesorJurado = :idProfesorJurado where idea.id = :idIdea")
+        @NamedQuery(name = "IdeaEntity.modificarJurado", query = "update IdeaEntity idea set idea.idProfesorJurado = :idProfesorJurado where idea.id = :idIdea"),
+        @NamedQuery(name = "IdeaEntity.conteoByEstado", query = "select new  co.com.ud.utiles.dto.CountStateDto( idea.estado, count(idea) ) from IdeaEntity idea group by idea.estado")
 })
 @Data
 @Builder

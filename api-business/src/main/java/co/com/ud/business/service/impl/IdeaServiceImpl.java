@@ -3,6 +3,7 @@ package co.com.ud.business.service.impl;
 import co.com.ud.business.rest.client.IdeaCliente;
 import co.com.ud.business.rest.client.UsuarioCliente;
 import co.com.ud.business.service.IdeaService;
+import co.com.ud.utiles.dto.CountStateDto;
 import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.dto.ProfesoresIdeaDto;
 import co.com.ud.utiles.dto.UsuarioDto;
@@ -134,6 +135,15 @@ public class IdeaServiceImpl implements IdeaService {
                     .nombreProJurado(nombreProfJur.orElse(""))
                     .build();
             return Optional.of(profesor);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<CountStateDto[]> getIdeasNumIdeasByEstado(String token) {
+        ResponseEntity<CountStateDto[]> response = ideaCliente.getIdeasNumIdeasByEstado(token);
+        if(Objects.nonNull(response) && HttpStatus.OK.equals(response.getStatusCode())){
+            return Optional.of(response.getBody());
         }
         return Optional.empty();
     }

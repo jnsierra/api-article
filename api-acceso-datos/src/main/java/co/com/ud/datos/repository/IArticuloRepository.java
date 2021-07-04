@@ -1,6 +1,7 @@
 package co.com.ud.datos.repository;
 
 import co.com.ud.datos.entity.ArticuloEntity;
+import co.com.ud.utiles.dto.CountStateDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
@@ -19,6 +20,8 @@ public interface IArticuloRepository extends JpaRepository<ArticuloEntity, Long>
     List<ArticuloEntity> getArticulosByUser(Long idUser);
 
     List<ArticuloEntity> getArticulosByTutorAndEstado(Long idTutor, String estado);
+
+    List<CountStateDto> conteoByEstado();
 
     @Modifying
     @Transactional

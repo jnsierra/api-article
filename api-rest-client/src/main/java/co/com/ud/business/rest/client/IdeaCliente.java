@@ -1,5 +1,6 @@
 package co.com.ud.business.rest.client;
 
+import co.com.ud.utiles.dto.CountStateDto;
 import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -28,4 +29,7 @@ public interface IdeaCliente {
 
     @GetMapping(value = "/by/")
     ResponseEntity<IdeaDto[]> getIdeasByEstado(@RequestHeader("Authorization") String token, @RequestParam(name = "estado")String estado);
+
+    @GetMapping(value = "/by/estado/")
+    ResponseEntity<CountStateDto[]> getIdeasNumIdeasByEstado(@RequestHeader("Authorization") String token);
 }

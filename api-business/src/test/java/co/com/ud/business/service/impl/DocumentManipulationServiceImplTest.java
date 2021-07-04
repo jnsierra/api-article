@@ -58,6 +58,7 @@ public class DocumentManipulationServiceImplTest {
                         "El funcionario también ha dicho que además de componentes que tienen que ver con la gestión integral del riesgo en salud, la territorialización y la forma como se prestan los servicios, se recogen los aprendizajes de la pandemia con el objeto de preparar al país bajo el concepto de una salubridad completa.\n" +
                         "\n" +
                         "El proyecto, además, tiene los tiempos contados, ya que si no se le da al menos un debate antes del próximo 20 de junio será archivada en el Congreso.")
+                .ubicacion_formato("src/test/resources/document/formato_002.docx")
                 .build();
         Mockito.doReturn(new ResponseEntity<>(entity, HttpStatus.OK)).when(articuloCliente).getById(Mockito.any(), Mockito.any());
 

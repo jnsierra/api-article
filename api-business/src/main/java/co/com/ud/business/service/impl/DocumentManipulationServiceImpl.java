@@ -118,7 +118,7 @@ public class DocumentManipulationServiceImpl implements DocumentManipulationServ
     }
 
     private Optional<String> writeDocument(Long idArt, ArticuloDto art, String token) throws IOException{
-        try (XWPFDocument doc = new XWPFDocument(Files.newInputStream(Paths.get(urlFormato+templateName)))){
+        try (XWPFDocument doc = new XWPFDocument(Files.newInputStream(Paths.get(art.getUbicacion_formato())))){
             List<XWPFParagraph> xwpfParagraphList = doc.getParagraphs();
             //Iterate over paragraph list and check for the replaceable text in each paragraph
             for (XWPFParagraph xwpfParagraph : xwpfParagraphList) {

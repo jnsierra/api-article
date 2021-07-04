@@ -3,6 +3,7 @@ package co.com.ud.datos.controller;
 import co.com.ud.datos.entity.ArticuloEntity;
 import co.com.ud.datos.service.ArticuloService;
 import co.com.ud.utiles.dto.ArticuloDto;
+import co.com.ud.utiles.dto.CountStateDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -96,5 +98,14 @@ public class ArticuloController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>( map.map(lista, ArticuloDto[].class) ,HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by/estado/")
+    public ResponseEntity<CountStateDto[]> getIdeasNumIdeasByEstado() {
+        List<CountStateDto> lista = articuloService.conteoByEstado();
+        if(Objects.isNull(lista) || lista.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>( map.map(lista, CountStateDto[].class ),HttpStatus.OK);
     }
 }

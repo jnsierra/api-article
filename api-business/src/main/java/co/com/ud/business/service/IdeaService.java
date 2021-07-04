@@ -1,5 +1,6 @@
 package co.com.ud.business.service;
 
+import co.com.ud.utiles.dto.CountStateDto;
 import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.dto.ProfesoresIdeaDto;
 import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
@@ -20,4 +21,8 @@ public interface IdeaService {
     List<IdeaDto> findByEstado(String token, String estado);
 
     Optional<ProfesoresIdeaDto> getProfesoresByIdIdea(String token, Long idIdea);
+
+    Optional<CountStateDto[]> getIdeasNumIdeasByEstado(String token);
+
+
 }

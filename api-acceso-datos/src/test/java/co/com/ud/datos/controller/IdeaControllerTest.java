@@ -3,6 +3,7 @@ package co.com.ud.datos.controller;
 import co.com.ud.datos.entity.IdeaEntity;
 import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.service.impl.IdeaServiceImpl;
+import co.com.ud.utiles.dto.CountStateDto;
 import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.junit.Assert;
@@ -225,5 +226,33 @@ public class IdeaControllerTest {
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getBody());
         Assert.assertTrue(response.getBody());
+    }
+
+    @Test
+    public void testGetIdeasNumIdeasByEstadoSUCCESS(){
+
+        List<CountStateDto> responseEntity = new ArrayList<>();
+        CountStateDto obj = new CountStateDto("CREADA", 5l);
+        responseEntity.add(obj);
+
+        Mockito.doReturn(responseEntity).when(ideaServiceImpl).conteoByEstado();
+        ResponseEntity<CountStateDto[]> response = ideaControler.getIdeasNumIdeasByEstado();
+        Assert.assertNotNull(response);
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
+
+
+    }
+
+    @Test
+    public void testGetIdeasNumIdeasByEstadoEMPTY(){
+
+        List<CountStateDto> responseEntity = new ArrayList<>();
+
+        Mockito.doReturn(responseEntity).when(ideaServiceImpl).conteoByEstado();
+        ResponseEntity<CountStateDto[]> response = ideaControler.getIdeasNumIdeasByEstado();
+        Assert.assertNotNull(response);
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.NO_CONTENT);
+
+
     }
 }

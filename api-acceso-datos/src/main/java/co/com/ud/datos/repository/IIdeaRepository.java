@@ -1,6 +1,7 @@
 package co.com.ud.datos.repository;
 
 import co.com.ud.datos.entity.IdeaEntity;
+import co.com.ud.utiles.dto.CountStateDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;
@@ -21,6 +22,8 @@ public interface IIdeaRepository extends JpaRepository<IdeaEntity, Long>, CrudRe
     List<IdeaEntity> findByProfesorIdAndEstadoJurado(@Param("idProfesor") Long idProfesor,@Param("estadoIdea") String estadoIdea );
 
     List<IdeaEntity> findByEstado(@Param("estadoIdea") String estadoIdea );
+
+    List<CountStateDto> conteoByEstado();
 
     @Modifying
     @Transactional

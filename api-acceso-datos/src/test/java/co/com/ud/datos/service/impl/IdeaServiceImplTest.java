@@ -196,4 +196,20 @@ public class IdeaServiceImplTest {
         Assert.assertFalse(response.get());
     }
 
+    @Test
+    public void testModificarJuradoSUCCESS(){
+        Mockito.doReturn(1).when(ideaRepository).modificarJurado(Mockito.any(), Mockito.any());
+        Optional<Boolean> response = ideaService.modificarJurado(1L, 1L);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.get());
+    }
+
+    @Test
+    public void testModificarJuradoEMPTY(){
+        Mockito.doReturn(0).when(ideaRepository).modificarJurado(Mockito.any(), Mockito.any());
+        Optional<Boolean> response = ideaService.modificarJurado(1L, 1L);
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.get());
+    }
+
 }

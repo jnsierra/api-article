@@ -6,6 +6,7 @@ import co.com.ud.datos.entity.UsuarioEntity;
 import co.com.ud.datos.repository.IArticuloRepository;
 import co.com.ud.datos.service.ArticuloService;
 import co.com.ud.utiles.dto.ArticuloDto;
+import co.com.ud.utiles.dto.CountStateDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -185,6 +186,19 @@ public class ArticuloServiceImplTest {
         Optional<ArticuloEntity> response = articuloService.updateUbicacionFormato(1L, "/opt/");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testConteoByEstadoSUCCESS(){
+
+        CountStateDto item = new CountStateDto("ARTICULO_EN_PROCESO", 1L);
+        List<CountStateDto> list = new ArrayList();
+        list.add(item);
+        Mockito.doReturn(list).when(articuloRepository).conteoByEstado();
+
+        List<CountStateDto> response = articuloService.conteoByEstado();
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isEmpty());
     }
 
 }

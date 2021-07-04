@@ -1,6 +1,7 @@
 package co.com.ud.datos.service;
 
 import co.com.ud.datos.entity.IdeaEntity;
+import co.com.ud.utiles.dto.CountStateDto;
 import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface IdeaService {
     Optional<Boolean> modificarEstado(Long idIdea, String estado);
 
     Optional<Boolean> modificarJurado(Long idIdea, Long idJurado);
+
+    List<CountStateDto> conteoByEstado();
 }

@@ -4,6 +4,7 @@ import co.com.ud.datos.entity.ArticuloEntity;
 import co.com.ud.datos.repository.IArticuloRepository;
 import co.com.ud.datos.service.ArticuloService;
 import co.com.ud.utiles.dto.ArticuloDto;
+import co.com.ud.utiles.dto.CountStateDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -84,6 +85,11 @@ public class ArticuloServiceImpl implements ArticuloService {
             return articuloRepository.findById(id);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public List<CountStateDto> conteoByEstado() {
+        return articuloRepository.conteoByEstado();
     }
 
 }

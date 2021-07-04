@@ -3,6 +3,7 @@ package co.com.ud.datos.service.impl;
 import co.com.ud.datos.entity.IdeaEntity;
 import co.com.ud.datos.repository.IIdeaRepository;
 import co.com.ud.datos.service.IdeaService;
+import co.com.ud.utiles.dto.CountStateDto;
 import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,6 +78,11 @@ public class IdeaServiceImpl implements IdeaService {
     public Optional<Boolean> modificarJurado(Long idIdea, Long idJurado) {
         Integer response = ideaRepository.modificarJurado(idIdea, idJurado);
         return response > 0 ? Optional.of(Boolean.TRUE) : Optional.of(Boolean.FALSE) ;
+    }
+
+    @Override
+    public List<CountStateDto> conteoByEstado() {
+        return ideaRepository.conteoByEstado();
     }
 
 }

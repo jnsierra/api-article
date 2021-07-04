@@ -2,6 +2,7 @@ package co.com.ud.datos.controller;
 
 import co.com.ud.datos.entity.IdeaEntity;
 import co.com.ud.datos.service.IdeaService;
+import co.com.ud.utiles.dto.CountStateDto;
 import co.com.ud.utiles.dto.IdeaDto;
 import co.com.ud.utiles.enumeracion.TYPE_PROFESOR;
 import org.modelmapper.ModelMapper;
@@ -29,36 +30,44 @@ public class IdeaController {
     }
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<IdeaDto> save(@RequestBody IdeaDto idea){
+    public ResponseEntity<IdeaDto> save(@RequestBody IdeaDto idea) {
         Optional<IdeaEntity> ideaEntity = ideaService.save(mapper.map(idea, IdeaEntity.class));
         if (ideaEntity.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>( mapper.map(ideaEntity.get(), IdeaDto.class),   HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.map(ideaEntity.get(), IdeaDto.class), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/by/usuarios/")
-    public ResponseEntity<IdeaDto[]> getIdeasByUsuario(@RequestParam(name = "id", required = false) Long idUsuario){
+    public ResponseEntity<IdeaDto[]> getIdeasByUsuario(@RequestParam(name = "id", required = false) Long idUsuario) {
         List<IdeaEntity> ideas = ideaService.findByUsuarioId(idUsuario);
-        if(Objects.nonNull(ideas) && !ideas.isEmpty())
+        if (Objects.nonNull(ideas) && !ideas.isEmpty())
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(value = "/by/estado/")
+    public ResponseEntity<CountStateDto[]> getIdeasNumIdeasByEstado() {
+        List<CountStateDto> response = ideaService.conteoByEstado();
+        if (Objects.isNull(response) || response.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(mapper.map(response, CountStateDto[].class), HttpStatus.OK);
     }
 
     @GetMapping(value = "/by/profesor/{idProfesor}/")
     public ResponseEntity<IdeaDto[]> getIdeasByProfesorAndEstado(@PathVariable(name = "idProfesor", required = false) Long idProfesor
             , @RequestParam(name = "estado", required = false) String estado
-            , @RequestParam(name = "rolIdea", required = false) TYPE_PROFESOR typeProfesor){
-        List<IdeaEntity> ideas = ideaService.findByProfesorIdAndEstado(idProfesor, estado,typeProfesor);
-        if(Objects.nonNull(ideas) && !ideas.isEmpty())
+            , @RequestParam(name = "rolIdea", required = false) TYPE_PROFESOR typeProfesor) {
+        List<IdeaEntity> ideas = ideaService.findByProfesorIdAndEstado(idProfesor, estado, typeProfesor);
+        if (Objects.nonNull(ideas) && !ideas.isEmpty())
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping(value = "/by/")
-    public ResponseEntity<IdeaDto[]> getIdeasByEstado(@RequestParam(name = "estado")String estado){
+    public ResponseEntity<IdeaDto[]> getIdeasByEstado(@RequestParam(name = "estado") String estado) {
         List<IdeaEntity> ideas = ideaService.findByEstado(estado);
-        if(Objects.nonNull(ideas) && !ideas.isEmpty()){
+        if (Objects.nonNull(ideas) && !ideas.isEmpty()) {
             return new ResponseEntity<>(mapper.map(ideas, IdeaDto[].class), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -67,7 +76,7 @@ public class IdeaController {
     @PutMapping(value = "/estado/{idIdea}/{estado}/{idUsuario}/")
     public ResponseEntity<Boolean> updateStatusIdeaByIdAndUsuario(@PathVariable(name = "idIdea") Long id
             , @PathVariable(name = "estado") String estado
-            , @PathVariable(name = "idUsuario") Long idUsuario){
+            , @PathVariable(name = "idUsuario") Long idUsuario) {
         Optional<Boolean> rta = ideaService.modificarIdProfAutorizaAndEstadoAndFechaAutoriza(id, idUsuario, estado);
         if (rta.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -77,7 +86,7 @@ public class IdeaController {
 
     @PutMapping(value = "/estado/{idIdea}/{estado}/")
     public ResponseEntity<Boolean> updateStatusIdea(@PathVariable(name = "idIdea") Long id
-            , @PathVariable(name = "estado") String estado){
+            , @PathVariable(name = "estado") String estado) {
         Optional<Boolean> rta = ideaService.modificarEstado(id, estado);
         if (rta.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -86,17 +95,17 @@ public class IdeaController {
     }
 
     @PutMapping(value = "/jurado/{idIdea}/{idJurado}")
-    public ResponseEntity<Boolean> updateJuradoIdea(@PathVariable(name = "idIdea")Long idIdea,
-                                                    @PathVariable(name = "idJurado")Long idJurado){
+    public ResponseEntity<Boolean> updateJuradoIdea(@PathVariable(name = "idIdea") Long idIdea,
+                                                    @PathVariable(name = "idJurado") Long idJurado) {
         Optional<Boolean> rta = ideaService.modificarJurado(idIdea, idJurado);
-        if (rta.isEmpty()){
+        if (rta.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(rta.get(),HttpStatus.OK);
+        return new ResponseEntity<>(rta.get(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}/")
-    public ResponseEntity<IdeaDto> getById(@PathVariable(name = "id") Long idIdea){
+    public ResponseEntity<IdeaDto> getById(@PathVariable(name = "id") Long idIdea) {
         Optional<IdeaEntity> idea = ideaService.findById(idIdea);
         if (idea.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -105,7 +114,7 @@ public class IdeaController {
     }
 
     @PutMapping(value = "/")
-    public ResponseEntity<Boolean> updateIdea(@RequestBody IdeaDto idea){
+    public ResponseEntity<Boolean> updateIdea(@RequestBody IdeaDto idea) {
         Optional<Boolean> response = ideaService.modificaIdea(mapper.map(idea, IdeaEntity.class));
         if (response.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

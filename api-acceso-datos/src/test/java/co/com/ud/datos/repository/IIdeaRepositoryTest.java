@@ -2,6 +2,7 @@ package co.com.ud.datos.repository;
 
 import co.com.ud.datos.entity.IdeaEntity;
 import co.com.ud.datos.entity.UsuarioEntity;
+import co.com.ud.utiles.dto.CountStateDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,6 +75,26 @@ public class IIdeaRepositoryTest {
         List<IdeaEntity> list = ideaRepository.findByEstado("CREADA");
         Assert.assertNotNull(list);
         Assert.assertFalse(list.isEmpty());
+
+    }
+    @Test
+    public void testConteoByEstado(){
+        IdeaEntity ideaEntity = IdeaEntity.builder()
+                .contenido("Esta es una prueba de contendio")
+                .titulo("Titulo de prueba")
+                .id_profesor(3L)
+                .estado("CREADA")
+                .usuario(UsuarioEntity.builder()
+                        .id(1L)
+                        .build())
+                .build();
+        IdeaEntity response = ideaRepository.save(ideaEntity);
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getId());
+
+        List<CountStateDto> responseCon = ideaRepository.conteoByEstado();
+        Assert.assertNotNull(responseCon);
+        Assert.assertFalse(responseCon.isEmpty());
 
     }
 }

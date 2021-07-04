@@ -3,6 +3,7 @@ package co.com.ud.datos.controller;
 import co.com.ud.datos.entity.ArticuloEntity;
 import co.com.ud.datos.service.impl.ArticuloServiceImpl;
 import co.com.ud.utiles.dto.ArticuloDto;
+import co.com.ud.utiles.dto.CountStateDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -169,6 +170,30 @@ public class ArticuloControllerTest {
                 .build());
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetIdeasNumIdeasByEstadoSUCCESS(){
+        List<CountStateDto> lista = new ArrayList<>();
+        lista.add(new CountStateDto("ARTICULO_EN_PROCESO", 2L));
+
+        Mockito.doReturn(lista).when(articuloService).conteoByEstado();
+
+        ResponseEntity<CountStateDto[]> response = articuloController.getIdeasNumIdeasByEstado();
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getBody());
+        Assert.assertTrue(response.getBody().length > 0);
+    }
+
+    @Test
+    public void testGetIdeasNumIdeasByEstadoEMPTY(){
+        List<CountStateDto> lista = null;
+
+        Mockito.doReturn(lista).when(articuloService).conteoByEstado();
+
+        ResponseEntity<CountStateDto[]> response = articuloController.getIdeasNumIdeasByEstado();
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
 }
