@@ -1,5 +1,6 @@
 package co.com.ud.business.controller;
 
+import co.com.ud.business.service.ArticulosService;
 import co.com.ud.business.service.IdeaService;
 import co.com.ud.utiles.dto.CountStateDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,12 @@ public class EstadisticasController {
 
 
     private final IdeaService ideaService;
+    private final ArticulosService articulosService;
 
     @Autowired
-    public EstadisticasController(IdeaService ideaService) {
+    public EstadisticasController(IdeaService ideaService, ArticulosService articulosService) {
         this.ideaService = ideaService;
+        this.articulosService = articulosService;
     }
 
     @RequestMapping(value = "/ideas/estado/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,10 +38,12 @@ public class EstadisticasController {
         return new ResponseEntity<>(response.get(), HttpStatus.OK);
     }
 
-   /* @RequestMapping(value = "/articulo/estado/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Long>> obtenerArticuloByEstado(){
-        Map<String, Long> response = new HashMap<>();
-        response.put("CREADA",1l);
-        return new ResponseEntity<>(response,HttpStatus.OK);
-    }*/
+    @RequestMapping(value = "/articulo/estado/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CountStateDto[]> obtenerArticuloByEstado(@RequestHeader("Authorization")String autenticacion){
+        Optional<CountStateDto[]> response = articulosService.getNumArticulosByEstado(autenticacion);
+        if(response.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(response.get(), HttpStatus.OK);
+    }
 }

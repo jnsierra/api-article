@@ -8,6 +8,7 @@ import co.com.ud.business.service.ArticulosService;
 import co.com.ud.utiles.dto.ArticuloDto;
 import co.com.ud.utiles.dto.ComentarioArticuloDto;
 import co.com.ud.utiles.dto.ControlLecturaDto;
+import co.com.ud.utiles.dto.CountStateDto;
 import io.jsonwebtoken.lang.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,6 +64,15 @@ public class ArticuloServiceImpl implements ArticulosService {
         Optional<ArticuloDto> responseUpdate = this.actualizarEstadoArticulo(token, idArt, "ARTICULO_APROBADO");
         Assert.isTrue(responseUpdate.isPresent(), "No fue posible actualizar el estado del articulo");
         return responseUpdate;
+    }
+
+    @Override
+    public Optional<CountStateDto[]> getNumArticulosByEstado(String token) {
+        ResponseEntity<CountStateDto[]> response = articuloCliente.getNumArticulosByEstado(token);
+        if(Objects.nonNull(response) && HttpStatus.OK.equals(response.getStatusCode())){
+            return Optional.of(response.getBody());
+        }
+        return Optional.empty();
     }
 
     private Optional<String> comentariosArticuloSinRespuesta(String token, Long idArt){

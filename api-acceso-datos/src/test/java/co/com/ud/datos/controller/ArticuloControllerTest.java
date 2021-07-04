@@ -173,25 +173,25 @@ public class ArticuloControllerTest {
     }
 
     @Test
-    public void testGetIdeasNumIdeasByEstadoSUCCESS(){
+    public void testGetNumArticulosByEstadoSUCCESS(){
         List<CountStateDto> lista = new ArrayList<>();
         lista.add(new CountStateDto("ARTICULO_EN_PROCESO", 2L));
 
         Mockito.doReturn(lista).when(articuloService).conteoByEstado();
 
-        ResponseEntity<CountStateDto[]> response = articuloController.getIdeasNumIdeasByEstado();
+        ResponseEntity<CountStateDto[]> response = articuloController.getNumArticulosByEstado();
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getBody());
         Assert.assertTrue(response.getBody().length > 0);
     }
 
     @Test
-    public void testGetIdeasNumIdeasByEstadoEMPTY(){
+    public void testGetNumArticulosByEstadoEMPTY(){
         List<CountStateDto> lista = null;
 
         Mockito.doReturn(lista).when(articuloService).conteoByEstado();
 
-        ResponseEntity<CountStateDto[]> response = articuloController.getIdeasNumIdeasByEstado();
+        ResponseEntity<CountStateDto[]> response = articuloController.getNumArticulosByEstado();
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }

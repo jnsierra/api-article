@@ -7,6 +7,7 @@ import co.com.ud.business.rest.client.IdeaCliente;
 import co.com.ud.utiles.dto.ArticuloDto;
 import co.com.ud.utiles.dto.ComentarioArticuloDto;
 import co.com.ud.utiles.dto.ControlLecturaDto;
+import co.com.ud.utiles.dto.CountStateDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -123,6 +124,29 @@ public class ArticuloServiceImplTest {
         Optional<ArticuloDto> response = articuloService.aprobacionArticulo("sdgfjkahjg84327", 1L);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testGetNumArticulosByEstadoSUCCESS(){
+
+        CountStateDto[] list = new CountStateDto[1];
+        list[0] = new CountStateDto("POR_REVISAR",2L);
+
+        Mockito.doReturn(new ResponseEntity<>(list, HttpStatus.OK)).when(articuloCliente).getNumArticulosByEstado(Mockito.any());
+
+
+        Optional<CountStateDto[]> response = articuloService.getNumArticulosByEstado("asfgfdsg45tgszdfvd");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testGetNumArticulosByEstadoEMPTY(){
+        Mockito.doReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT)).when(articuloCliente).getNumArticulosByEstado(Mockito.any());
+
+        Optional<CountStateDto[]> response = articuloService.getNumArticulosByEstado("asfgfdsg45tgszdfvd");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isEmpty());
     }
 
 }

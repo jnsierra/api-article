@@ -101,7 +101,7 @@ public class ArticuloController {
     }
 
     @GetMapping(value = "/by/estado/")
-    public ResponseEntity<CountStateDto[]> getIdeasNumIdeasByEstado() {
+    public ResponseEntity<CountStateDto[]> getNumArticulosByEstado() {
         List<CountStateDto> lista = articuloService.conteoByEstado();
         if(Objects.isNull(lista) || lista.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

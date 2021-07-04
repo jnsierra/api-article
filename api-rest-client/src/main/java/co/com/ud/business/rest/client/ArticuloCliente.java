@@ -1,6 +1,7 @@
 package co.com.ud.business.rest.client;
 
 import co.com.ud.utiles.dto.ArticuloDto;
+import co.com.ud.utiles.dto.CountStateDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,5 +23,8 @@ public interface ArticuloCliente {
     @PutMapping(value = "/cambiarUbicFormato/")
     ResponseEntity<ArticuloDto> updateUbicacionFormato(@RequestHeader("Authorization") String token,
                                                        @RequestBody ArticuloDto articuloDto);
+
+    @GetMapping(value = "/by/estado/")
+    ResponseEntity<CountStateDto[]> getNumArticulosByEstado(@RequestHeader("Authorization") String token);
 
 }
