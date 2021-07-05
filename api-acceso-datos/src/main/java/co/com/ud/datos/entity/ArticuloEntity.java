@@ -69,5 +69,7 @@ public class ArticuloEntity extends Auditable<String>{
     private String conclusion;
     @Column(name = "ubicacion_formato")
     private String ubicacion_formato;
+    @Column(name = "ubicacion_carta_publicacion")
+    private String ubicacion_carta_publicacion;
 
 }

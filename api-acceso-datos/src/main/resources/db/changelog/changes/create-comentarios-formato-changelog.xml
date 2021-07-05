@@ -5,35 +5,22 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="admin" id="1">
-        <createTable tableName="articulo">
-            <column name="id" type="INT">
+        <createTable tableName="comentario_formato_articulo">
+            <column name="id" type="INT" >
                 <constraints primaryKey="true"/>
             </column>
-            <column name="id_idea" type="INT">
+            <column name="tipo_comentario" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="titulo" type="VARCHAR(255)">
+            <column name="id_usuario" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="resumen_ingles" type="clob">
+            <column name="id_formato" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="resumen" type="clob">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contenido" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="estado" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="introduccion" type="clob"/>
-            <column name="conclusion" type="clob"/>
-            <column name="ubicacion_formato" type="VARCHAR(255)">
-            </column>
-            <column name="ubicacion_carta_publicacion" type="VARCHAR(255)">
-            </column>
-
+            <column name="comentario" type="VARCHAR(255)"/>
+            <column name="respuesta_alumno" type="VARCHAR(255)"/>
+            <column name="ubicacion" type="VARCHAR(255)"/>
             <column name="created_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -48,10 +35,15 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="articulo"/>
+            <dropTable tableName="comentario_formato_articulo"/>
         </rollback>
     </changeSet>
     <changeSet id="2" author="admin">
-        <createSequence sequenceName="articulo_seq" startValue="1" incrementBy="1" />
+        <createSequence sequenceName="comentario_formato_articulo" startValue="1" incrementBy="1" />
     </changeSet>
+    <changeSet id="3" author="admin">
+        <addForeignKeyConstraint baseTableName="comentario_formato_articulo" baseColumnNames="id_formato" constraintName="fk_comentario_formato_articulo" referencedTableName="formato"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
 </databaseChangeLog>

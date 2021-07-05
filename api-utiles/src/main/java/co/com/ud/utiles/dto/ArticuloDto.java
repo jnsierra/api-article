@@ -31,4 +31,6 @@ public class ArticuloDto {
 
     private String ubicacion_formato;
 
+    private String ubicacion_carta_publicacion;
+
 }
