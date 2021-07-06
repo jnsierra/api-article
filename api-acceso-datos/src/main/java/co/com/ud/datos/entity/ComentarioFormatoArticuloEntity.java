@@ -10,6 +10,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "comentario_formato_articulo")
+@NamedQueries({
+        @NamedQuery(name = "ComentarioFormatoArticuloEntity.getByFormato"
+                , query = "from ComentarioFormatoArticuloEntity comFor inner join fetch comFor.formato formato WHERE formato.id = :idFormato ")
+})
 @Audited
 @Data
 @Builder

@@ -11,6 +11,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -40,5 +42,20 @@ public class ComentarioFormatoArticuloServiceImplTest {
         Optional<ComentarioFormatoArticuloEntity> response = this.comentarioFormatoArticuloService.save(entity);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testGetByFormato(){
+
+        List<ComentarioFormatoArticuloEntity> listEntity = new ArrayList<>();
+        listEntity.add(ComentarioFormatoArticuloEntity.builder()
+                .id(1L)
+                .build());
+
+        Mockito.doReturn(listEntity).when(comentarioFormatoArticuloRepository).getByFormato(Mockito.any());
+
+        List<ComentarioFormatoArticuloEntity> response = this.comentarioFormatoArticuloService.getByFormato(1L);
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isEmpty());
     }
 }

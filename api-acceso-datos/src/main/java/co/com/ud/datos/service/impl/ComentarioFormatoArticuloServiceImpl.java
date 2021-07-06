@@ -6,6 +6,7 @@ import co.com.ud.datos.service.ComentarioFormatoArticuloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,5 +23,10 @@ public class ComentarioFormatoArticuloServiceImpl implements ComentarioFormatoAr
     public Optional<ComentarioFormatoArticuloEntity> save(ComentarioFormatoArticuloEntity comentarioFormatoArticulo) {
         ComentarioFormatoArticuloEntity response = comentarioFormatoArticuloRepository.save(comentarioFormatoArticulo);
         return Optional.of(response);
+    }
+
+    @Override
+    public List<ComentarioFormatoArticuloEntity> getByFormato(Long idFormato) {
+        return comentarioFormatoArticuloRepository.getByFormato(idFormato);
     }
 }

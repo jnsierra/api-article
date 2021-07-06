@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -36,5 +34,14 @@ public class ComentarioFormatoArticuloController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(this.mapper.map(response.get(), ComentarioFormatoArticuloDto.class), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by/formato/{idFormato}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ComentarioFormatoArticuloDto[]> getByFormato(@PathVariable(name = "idFormato", required = false)Long idFormato){
+        List<ComentarioFormatoArticuloEntity> response = comentarioFormatoArticuloService.getByFormato(idFormato);
+        if(Objects.isNull(response) || (Objects.nonNull(response) && response.isEmpty()) ){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(this.mapper.map(response,ComentarioFormatoArticuloDto[].class), HttpStatus.OK);
     }
 }

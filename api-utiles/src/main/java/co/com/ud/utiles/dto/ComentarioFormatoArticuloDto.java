@@ -23,4 +23,6 @@ public class ComentarioFormatoArticuloDto {
 
     private String ubicacion;
 
+    private Long idFormato;
+
 }
