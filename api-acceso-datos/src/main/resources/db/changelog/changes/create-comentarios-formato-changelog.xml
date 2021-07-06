@@ -39,7 +39,7 @@
         </rollback>
     </changeSet>
     <changeSet id="2" author="admin">
-        <createSequence sequenceName="comentario_formato_articulo" startValue="1" incrementBy="1" />
+        <createSequence sequenceName="comentario_formato_articulo_seq" startValue="1" incrementBy="1" />
     </changeSet>
     <changeSet id="3" author="admin">
         <addForeignKeyConstraint baseTableName="comentario_formato_articulo" baseColumnNames="id_formato" constraintName="fk_comentario_formato_articulo" referencedTableName="formato"

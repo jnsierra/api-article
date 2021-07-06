@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "formato")
@@ -43,5 +45,8 @@ public class FormatoEntity extends Auditable<String> {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_articulo", nullable = false)
     private ArticuloEntity articulo;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "formato", orphanRemoval = true)
+    private List<ComentarioFormatoArticuloEntity> comentarioFormatos = new ArrayList<>();
 
 }
