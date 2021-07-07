@@ -38,7 +38,7 @@ public class DocumentManipulationServiceImplTest {
     public void setUp(){
         MockitoAnnotations.initMocks(this);
         this.documentManipulationService = new DocumentManipulationServiceImpl("src/test/resources/document/"
-                ,"/repository/documentos/articulos/"
+                ,"src/test/resources/result/"
                 , ideaService
                 , usuarioService
                 , parrafoService
