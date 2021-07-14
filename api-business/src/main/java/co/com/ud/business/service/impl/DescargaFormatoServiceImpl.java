@@ -37,7 +37,7 @@ public class DescargaFormatoServiceImpl implements DescargaFormatoService {
 
     @Override
     public Optional<DocumentDownloadDto> descargarFormatoIdea() {
-        return obtenerDoc(urlFormato, "formato");
+        return obtenerDoc(urlFormato, "formato.docx");
     }
 
     @Override
