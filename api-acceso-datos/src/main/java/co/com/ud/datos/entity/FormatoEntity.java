@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "formato")
 @NamedQueries({
-        @NamedQuery(name = "FormatoEntity.findByIdArt", query = "from FormatoEntity for where for.articulo.id = :idArt ")
+        @NamedQuery(name = "FormatoEntity.findByIdArt", query = "from FormatoEntity for where for.articulo.id = :idArt order by for.id desc ")
 })
 @Data
 @Builder
