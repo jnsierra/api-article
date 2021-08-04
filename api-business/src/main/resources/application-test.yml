@@ -60,6 +60,7 @@ repositorio:
   formatoArt:
     ubicacion: C:\\repository\\documentos\\formatos\\
     docDestino: /repository/documentos/articulos/
+    cartaPublicacion: /repository/documentos/carta/
   formato:
     ubicacion: C:\\repository\\documentos\\formatos\\formato_001.docx
 

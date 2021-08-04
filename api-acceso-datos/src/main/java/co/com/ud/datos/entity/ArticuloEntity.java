@@ -23,6 +23,8 @@ import java.util.List;
                 query = "Update ArticuloEntity art  set art.resumen_ingles = :ingles, art.resumen = :resumen, art.titulo = :titulo, art.introduccion = :introduccion, art.conclusion = :conclusion where art.id = :idArt " ),
         @NamedQuery(name = "ArticuloEntity.updateUbicacionFormato",
                 query = "Update ArticuloEntity art set art.ubicacion_formato = :ubFormato where art.id = :idArt "),
+        @NamedQuery(name = "ArticuloEntity.updateUbicacionCartaPublicacion",
+                query = "Update ArticuloEntity art set art.ubicacion_carta_publicacion = :ubCarta where art.id = :idArt "),
         @NamedQuery(name = "ArticuloEntity.conteoByEstado",
                 query = "select new  co.com.ud.utiles.dto.CountStateDto( art.estado, count(art) ) from ArticuloEntity art group by art.estado")
 })

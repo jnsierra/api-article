@@ -24,6 +24,10 @@ public interface ArticuloCliente {
     ResponseEntity<ArticuloDto> updateUbicacionFormato(@RequestHeader("Authorization") String token,
                                                        @RequestBody ArticuloDto articuloDto);
 
+    @PutMapping(value = "/cambiarUbicCartaPubliacion/")
+    ResponseEntity<ArticuloDto> updateUbicacionCartaPublicacion(@RequestHeader("Authorization") String token,
+                                                                @RequestBody ArticuloDto articuloDto);
+
     @GetMapping(value = "/by/estado/")
     ResponseEntity<CountStateDto[]> getNumArticulosByEstado(@RequestHeader("Authorization") String token);
 

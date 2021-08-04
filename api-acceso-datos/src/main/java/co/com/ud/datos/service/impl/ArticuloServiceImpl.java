@@ -88,6 +88,15 @@ public class ArticuloServiceImpl implements ArticuloService {
     }
 
     @Override
+    public Optional<ArticuloEntity> updateUbicacionCartaPublicacion(Long id, String ubFormato) {
+        Integer update = articuloRepository.updateUbicacionCartaPublicacion(id, ubFormato);
+        if(update > 0){
+            return articuloRepository.findById(id);
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public List<CountStateDto> conteoByEstado() {
         return articuloRepository.conteoByEstado();
     }

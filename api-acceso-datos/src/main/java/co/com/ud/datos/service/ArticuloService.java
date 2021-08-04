@@ -25,6 +25,8 @@ public interface ArticuloService {
 
     Optional<ArticuloEntity> updateUbicacionFormato(Long id, String ubFormato);
 
+    Optional<ArticuloEntity> updateUbicacionCartaPublicacion(Long id, String ubFormato);
+
     List<CountStateDto> conteoByEstado();
 
 }
