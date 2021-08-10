@@ -8,7 +8,7 @@ import lombok.Data;
 public class DocumentoUploadDto {
 
     private String nombre;
-    private String extencion;
+    private String extension;
     private String base64;
     private String ubicacion;
 }

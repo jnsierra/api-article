@@ -196,4 +196,29 @@ public class ArticuloControllerTest {
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
+    @Test
+    public void testGetArticulosByEstadoSUCCESS(){
+        List<ArticuloEntity> lista = new ArrayList<>();
+        lista.add(ArticuloEntity.builder()
+                .id(1L)
+                .build());
+
+        Mockito.doReturn(lista).when(articuloService).getArticulosByEstado("ARTICULO_EN_PROCESO");
+
+        ResponseEntity<ArticuloDto[]> response = articuloController.getArticulosByEstado("ARTICULO_EN_PROCESO");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testGetArticulosByEstadoEMPTY(){
+        List<ArticuloEntity> lista = new ArrayList<>();
+
+        Mockito.doReturn(lista).when(articuloService).getArticulosByEstado("ARTICULO_EN_PROCESO");
+
+        ResponseEntity<ArticuloDto[]> response = articuloController.getArticulosByEstado("ARTICULO_EN_PROCESO");
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
 }

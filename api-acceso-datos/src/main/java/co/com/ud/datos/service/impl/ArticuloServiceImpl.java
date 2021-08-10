@@ -101,4 +101,9 @@ public class ArticuloServiceImpl implements ArticuloService {
         return articuloRepository.conteoByEstado();
     }
 
+    @Override
+    public List<ArticuloEntity> getArticulosByEstado(String estado) {
+        return articuloRepository.findByEstado(estado);
+    }
+
 }

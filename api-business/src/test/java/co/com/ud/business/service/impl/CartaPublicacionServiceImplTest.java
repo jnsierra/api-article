@@ -40,7 +40,7 @@ public class CartaPublicacionServiceImplTest {
         String base64 = sc.next();
 
         DocumentoUploadDto documento = DocumentoUploadDto.builder()
-                .extencion("pdf")
+                .extension("pdf")
                 .ubicacion("/opt/CARTA_PUBLICAICON")
                 .base64(base64)
                 .build();

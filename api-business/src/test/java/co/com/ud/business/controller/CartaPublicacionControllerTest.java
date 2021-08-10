@@ -32,7 +32,7 @@ public class CartaPublicacionControllerTest {
         DocumentoUploadDto responseObj = DocumentoUploadDto.builder()
                 .nombre("CARTA_PUBLICACION")
                 .ubicacion("/opt/")
-                .extencion("pdf")
+                .extension("pdf")
                 .build();
         Mockito.doReturn(Optional.of(responseObj)).when(cartaPublicacionService).persistirCarta(Mockito.any(), Mockito.any(), Mockito.any());
 

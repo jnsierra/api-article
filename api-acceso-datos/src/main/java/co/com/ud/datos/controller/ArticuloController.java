@@ -65,7 +65,7 @@ public class ArticuloController {
 
     @PutMapping(value = "/cambiarUbicCartaPubliacion/")
     public ResponseEntity<ArticuloDto> updateUbicacionCartaPublicacion(@RequestBody ArticuloDto articuloDto){
-        Optional<ArticuloEntity> articulos = articuloService.updateUbicacionCartaPublicacion(articuloDto.getId(), articuloDto.getUbicacion_formato());
+        Optional<ArticuloEntity> articulos = articuloService.updateUbicacionCartaPublicacion(articuloDto.getId(), articuloDto.getUbicacion_carta_publicacion());
         if(articulos.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -116,5 +116,14 @@ public class ArticuloController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>( map.map(lista, CountStateDto[].class ),HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/by/")
+    public ResponseEntity<ArticuloDto[]> getArticulosByEstado(@RequestParam("estado") String estado){
+        List<ArticuloEntity> lista = articuloService.getArticulosByEstado(estado);
+        if(Objects.isNull(lista) || lista.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(map.map(lista, ArticuloDto[].class), HttpStatus.OK);
     }
 }

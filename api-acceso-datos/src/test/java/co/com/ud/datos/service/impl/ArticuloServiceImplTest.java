@@ -201,4 +201,20 @@ public class ArticuloServiceImplTest {
         Assert.assertFalse(response.isEmpty());
     }
 
+    @Test
+    public void testGetArticulosByEstadoSUCCESS(){
+        ArticuloEntity entity = ArticuloEntity.builder()
+                .id(1L)
+                .estado("POR_REVISAR")
+                .build();
+        ArrayList<ArticuloEntity> lista = new ArrayList<>();
+        lista.add(entity);
+        Mockito.doReturn(lista).when(articuloRepository).findByEstado(Mockito.any());
+
+
+        List<ArticuloEntity> response = articuloService.getArticulosByEstado("POR_REVISAR");
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isEmpty());
+    }
+
 }

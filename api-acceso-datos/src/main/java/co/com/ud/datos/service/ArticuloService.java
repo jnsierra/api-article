@@ -29,4 +29,6 @@ public interface ArticuloService {
 
     List<CountStateDto> conteoByEstado();
 
+    List<ArticuloEntity> getArticulosByEstado(String estado);
+
 }

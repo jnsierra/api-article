@@ -28,7 +28,7 @@ public class CartaPublicacionServiceImpl implements CartaPublicacionService {
 
     @Override
     public Optional<DocumentoUploadDto> persistirCarta(String token, Long idArt, DocumentoUploadDto documento) {
-        String nombre = this.generoNombreCartaPublicacion(idArt);
+        String nombre = this.generoNombreCartaPublicacion(idArt, documento.getExtension());
         Boolean guardar = UtilesBase64.builder().build().saveFile(documento.getBase64(),pathRepo, nombre);
         if(guardar){
             //Actualizar el articulo con la ubicacion del formato
@@ -45,8 +45,8 @@ public class CartaPublicacionServiceImpl implements CartaPublicacionService {
         return Optional.empty();
     }
 
-    private String generoNombreCartaPublicacion (Long idArt){
-        String nombre = "CARTA_PUBLICACION_" + idArt;
+    private String generoNombreCartaPublicacion (Long idArt, String extension){
+        String nombre = "CARTA_PUBLICACION_" + idArt + "." + extension;
         return nombre;
     }
 }

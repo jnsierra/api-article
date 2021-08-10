@@ -38,4 +38,6 @@ public interface IArticuloRepository extends JpaRepository<ArticuloEntity, Long>
     @Modifying
     @Transactional
     Integer updateUbicacionCartaPublicacion(@Param("idArt") Long id, @Param("ubCarta") String ubCarta);
+
+    List<ArticuloEntity> findByEstado(String estado);
 }
