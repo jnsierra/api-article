@@ -1,5 +1,6 @@
 package co.com.ud.business.service.impl;
 
+import co.com.ud.business.rest.client.MailCliente;
 import co.com.ud.business.rest.client.UsuarioCliente;
 import co.com.ud.utiles.dto.UsuarioDto;
 import org.junit.Assert;
@@ -23,12 +24,14 @@ public class UsuarioServiceImplTest {
     private UsuarioServiceImpl usuarioService;
     @Mock
     private UsuarioCliente usuarioCliente;
+    @Mock
+    private MailCliente mailCliente;
     private ModelMapper map;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        usuarioService = new UsuarioServiceImpl(usuarioCliente);
+        usuarioService = new UsuarioServiceImpl(usuarioCliente, mailCliente);
         this.map = new ModelMapper();
     }
 

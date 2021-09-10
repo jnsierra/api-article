@@ -16,4 +16,6 @@ public interface UsuarioService {
     Optional<UsuarioDto> save(UsuarioDto usuario);
 
     void updateIntentosLoginUser(String correo);
+
+    Boolean recuperarContrasenia(String token,String correo);
 }

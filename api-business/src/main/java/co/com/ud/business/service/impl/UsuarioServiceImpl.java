@@ -1,28 +1,30 @@
 package co.com.ud.business.service.impl;
 
+import co.com.ud.business.rest.client.MailCliente;
 import co.com.ud.business.rest.client.UsuarioCliente;
 import co.com.ud.business.service.UsuarioService;
+import co.com.ud.utiles.dto.EmailDto;
 import co.com.ud.utiles.dto.TipoUsuarioDto;
 import co.com.ud.utiles.dto.UsuarioDto;
 import co.com.ud.utiles.enumeracion.USER_STATE;
+import co.com.ud.utiles.service.PasswordUtiles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioCliente usuarioCliente;
+    private final MailCliente mailCliente;
 
     @Autowired
-    public UsuarioServiceImpl(UsuarioCliente usuarioCliente) {
+    public UsuarioServiceImpl(UsuarioCliente usuarioCliente, MailCliente mailCliente) {
         this.usuarioCliente = usuarioCliente;
+        this.mailCliente = mailCliente;
     }
 
     @Override
@@ -68,6 +70,21 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void updateIntentosLoginUser(String correo) {
         usuarioCliente.updateIntentosUser(correo);
+    }
+
+    @Override
+    public Boolean recuperarContrasenia(String token, String correo) {
+        //Genero contraseña aletoria
+        String password = PasswordUtiles.builder().build().generateRandomPassword(10);
+        ResponseEntity<Boolean> response = mailCliente.enviarMail(token, EmailDto.builder()
+                .subject("RECUPERAR CONTRASEÑA")
+                .to(correo)
+                .text("Clave temporal de acceso al sistema: " + password)
+                .build());
+        if(Objects.nonNull(response) && HttpStatus.OK.equals(response.getStatusCode()) && Objects.nonNull(response.getBody()) && response.getBody()){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 
 }

@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: api-mail
+  cloud:
+    config:
+      uri: http://server-config:8888
+  profiles:
+    active: dev

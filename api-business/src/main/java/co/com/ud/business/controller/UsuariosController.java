@@ -67,4 +67,9 @@ public class UsuariosController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PostMapping(value = "/recuperarPass/{correo}/")
+    public ResponseEntity<Boolean> generatePasswordTemporal(@RequestHeader("Authorization")String autenticacion, @PathVariable("correo")String correo){
+        Boolean response = usuarioService.recuperarContrasenia(autenticacion, correo);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

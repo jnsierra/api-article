@@ -10,6 +10,15 @@ spring:
       enabled: false
 
 endpoint:
+  ms-acceso-mail:
+    protocol: http://
+    host: localhost
+    port: 5004
+    base: /api-mail
+    mail:
+      version: /v.1
+      url: /mail
+      name: mailCliente
   ms-acceso-datos:
     protocol: http://
     host: localhost
