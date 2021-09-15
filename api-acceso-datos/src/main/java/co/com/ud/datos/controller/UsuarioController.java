@@ -90,4 +90,14 @@ public class UsuarioController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PutMapping(value = "/modifcarPasswordTemporal/")
+    public ResponseEntity<Boolean> updatePasswordTemporal(UsuarioDto usuarioDto){
+        Optional<Boolean> response = usuarioService.modifyPasswordTemporal(usuarioDto.getCorreo(),usuarioDto.getContrasena());
+
+        if(response.isPresent() && Boolean.TRUE.equals(response.get()))
+            return new ResponseEntity<>(response.get(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+    }
+
 }

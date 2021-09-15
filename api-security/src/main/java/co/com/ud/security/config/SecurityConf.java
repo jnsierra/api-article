@@ -25,7 +25,7 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .addFilterAfter(getJwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/login/","/v.1/usuarios/")
+                .antMatchers(HttpMethod.POST, "/login/","/v.1/usuarios/**")
                 .permitAll()
                 .antMatchers( "/v.1/usuarios/**")
                 .permitAll()

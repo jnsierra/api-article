@@ -121,4 +121,29 @@ public class UsuarioServiceImplTest {
         Assert.assertTrue(response.isPresent());
 
     }
+
+    @Test
+    public void recuperarContraseniaSUCCESS(){
+        UsuarioDto[] array = new UsuarioDto[1];
+        array[0] = UsuarioDto.builder().id(1L).build();
+        Mockito.doReturn(new ResponseEntity<>( array, HttpStatus.OK)).when(usuarioCliente).getUserByEmail(Mockito.any());
+
+        Mockito.doReturn(new ResponseEntity<>(Boolean.TRUE,HttpStatus.OK)).when(mailCliente).enviarMail(Mockito.any(), Mockito.any());
+
+        Boolean response = usuarioService.recuperarContrasenia("sgadlkghfdkñgh0", "jnsierrac@gmail.com");
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response);
+    }
+
+    @Test
+    public void recuperarContraseniaFAILED(){
+
+
+
+        Mockito.doReturn(new ResponseEntity<>(Boolean.FALSE,HttpStatus.OK)).when(mailCliente).enviarMail(Mockito.any(), Mockito.any());
+
+        Boolean response = usuarioService.recuperarContrasenia("sgadlkghfdkñgh0", "jnsierrac@gmail.com");
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response);
+    }
 }

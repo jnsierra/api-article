@@ -91,6 +91,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public Optional<Boolean> modifyPasswordTemporal(String correo, String password) {
+        Integer actulizados = usuarioRepository.modificarPasswordTeporal(correo, password, "S");
+        if(actulizados == 0){
+            return Optional.of(Boolean.FALSE);
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public List<UsuarioEntity> getUserByTipoUsuario(String tipoUsuario) {
         return usuarioRepository.findByTipoUsuario(tipoUsuario);
     }

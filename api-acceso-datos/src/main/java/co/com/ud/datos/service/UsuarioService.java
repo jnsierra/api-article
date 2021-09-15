@@ -22,5 +22,7 @@ public interface UsuarioService {
 
     Optional<Boolean> modifyEstadoTipoUsuario(Long id, USER_STATE estado, Long idTipoUsuario);
 
+    Optional<Boolean> modifyPasswordTemporal(String correo, String password);
+
     List<UsuarioEntity> getUserByTipoUsuario(String tipoUsuario);
 }

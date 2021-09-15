@@ -42,4 +42,8 @@ public interface IUsuarioRepository extends JpaRepository<UsuarioEntity, Long>, 
     Integer modificarEstadoUsuario(@Param("id") Long id,@Param("estado") USER_STATE estado);
 
     List<UsuarioEntity> findByTipoUsuario(@Param("tipoUsuario") String tipoUsuario);
+
+    @Modifying
+    @Transactional
+    Integer modificarPasswordTeporal(@Param("correo") String correo, @Param("contra") String contra, @Param("cambioContra") String cambioContra );
 }

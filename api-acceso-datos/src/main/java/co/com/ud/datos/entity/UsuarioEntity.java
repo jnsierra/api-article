@@ -30,6 +30,8 @@ import java.util.Set;
                 query = "update UsuarioEntity usu set usu.estado = 'INACTIVO' WHERE usu.id = :id "),
         @NamedQuery(name = "UsuarioEntity.modificarEstadoUsuario",
                 query = "update UsuarioEntity usu set usu.estado = :estado where usu.id = :id "),
+        @NamedQuery(name = "UsuarioEntity.modificarPasswordTeporal",
+                query = "update UsuarioEntity usu set usu.contrasena = :contra, usu.cambioContra = :cambioContra where usu.correo = :correo "),
         @NamedQuery(name = "UsuarioEntity.findByTipoUsuario",
                 query = "from UsuarioEntity usuario inner join usuario.tipoUsuario as tipoU WHERE tipoU.tipo = :tipoUsuario")
 })

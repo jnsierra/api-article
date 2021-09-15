@@ -74,6 +74,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Boolean recuperarContrasenia(String token, String correo) {
+        //Valido Si el usuario existe
+        ResponseEntity<UsuarioDto[]> responseValidate = usuarioCliente.getUserByEmail(correo);
+        if(Objects.isNull(responseValidate) || (Objects.nonNull(responseValidate) && !HttpStatus.OK.equals(responseValidate.getStatusCode()) )  ){
+            return Boolean.FALSE;
+        }
         //Genero contraseña aletoria
         String password = PasswordUtiles.builder().build().generateRandomPassword(10);
         ResponseEntity<Boolean> response = mailCliente.enviarMail(token, EmailDto.builder()
@@ -82,6 +87,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .text("Clave temporal de acceso al sistema: " + password)
                 .build());
         if(Objects.nonNull(response) && HttpStatus.OK.equals(response.getStatusCode()) && Objects.nonNull(response.getBody()) && response.getBody()){
+            //Actualizo la contraseña y
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
